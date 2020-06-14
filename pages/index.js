@@ -1,7 +1,8 @@
 import Head from 'next/head'
-import { getAllPostIds } from '../lib/posts'
+import PropTypes from 'prop-types'
+import { buildPostManifest, } from '../lib/posts'
 
-export default function Home({ params }) {
+export default function Home({ postData, }) {
   return (
     <div className="container">
       <Head>
@@ -21,37 +22,16 @@ export default function Home({ params }) {
           Blog
         </h1>
 
-        {params.map((obj) => (
+        {postData.map((obj) => (
           <>
             <h2>
-              {obj.params.slug}
+              <a href={`/blog/${obj.category}/${obj.slug}`}>{obj.title}</a>
             </h2>
             <p>
-              other content here...
+              {obj.subtitle}
             </p>
           </>
         ))}
-        {/* <h2>
-          Next.js Setup & Config for Testing, Linting, and Absolute Imports
-        </h2>
-        <p>
-          05/29/20 | A comprehensive step-by-step guide to configuring Jest, React Testing Library, ESLint, and Path Aliases in a Next.js project.
-        </p>
-
-        <h2>
-          Creating a React Component Library by Abstracting a React Component Library
-        </h2>
-        <p>
-          05/17/20 | Using Rollup, Babel, and React we’ll look at why & how you might abstract a third-party component library to create your own component...
-        </p>
-
-        <h2>
-          Share state between screens with custom navigators in React Navigation
-        </h2>
-        <p>
-          04/19/19 | Expose your React Navigation navigators for simple state sharing between any child screens in React Native.
-        </p> */}
-
       </main>
 
       <footer>
@@ -61,14 +41,17 @@ export default function Home({ params }) {
   )
 }
 
-export const getStaticProps = ({ params }) => {
-  // Const postData = getPostData(params.slug)
-  console.log('HELLO')
-  console.log(params)
+export const getStaticProps = ({ params, }) => {
+  const postData = buildPostManifest()
 
   return {
     props: {
-      params
-    }
+      params: params || null,
+      postData,
+    },
   }
+}
+
+Home.propTypes = {
+  postData: PropTypes.object.isRequired,
 }

@@ -24,6 +24,13 @@
     "max-len": 0,
     "require-await": 0,
     "no-extra-parens": 0,
+    "comma-dangle": ["error", {
+      "arrays": "always",
+      "objects": "always",
+      "imports": "always",
+      "exports": "always",
+      "functions": "never"
+    }],
     "max-lines-per-function": 0,
     "space-before-function-paren": ["error", {
       "anonymous": "never",
@@ -47,7 +54,8 @@
     "react/react-in-jsx-scope": 0,
     "react/jsx-no-literals": 0,
     "react/jsx-one-expression-per-line": 0,
-    "react/jsx-max-depth": 0
+    "react/jsx-max-depth": 0,
+    "react/forbid-prop-types": 0
   },
   "ignorePatterns": ["node_modules/", ".next/"],
   "settings": {
