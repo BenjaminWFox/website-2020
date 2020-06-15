@@ -1,5 +1,7 @@
-import { getAllPostIds, getPostData, } from '../../../lib/posts'
+import { getPostData, getStaticPathsForCategory, } from '../../../lib/posts'
 import React from 'react'
+
+const CATEGORY = 'other'
 
 export default function PostTemplate({ postData, }) {
   return (
@@ -14,7 +16,7 @@ export default function PostTemplate({ postData, }) {
 }
 
 export const getStaticPaths = async () => {
-  const paths = getAllPostIds()
+  const paths = getStaticPathsForCategory(CATEGORY)
 
   return {
     fallback: false,
@@ -23,7 +25,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = ({ params, }) => {
-  const postData = getPostData(params.slug)
+  const postData = getPostData(CATEGORY, params.slug)
 
   return {
     props: {
