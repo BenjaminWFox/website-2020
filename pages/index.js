@@ -1,8 +1,19 @@
+import { createUseStyles, useTheme } from 'react-jss'
 import Head from 'next/head'
 import PropTypes from 'prop-types'
-import { buildPostManifest, } from '../lib/posts'
+import { buildPostManifest } from '../lib/posts'
 
-export default function Home({ postData, }) {
+const useStyles = createUseStyles((theme) => ({
+  text: {
+    color: theme.colorPrimary,
+  },
+}))
+
+export default function Home({ swapTheme, postData }) {
+  const classes = useStyles(useTheme())
+
+  console.log(swapTheme(1))
+
   return (
     <div className="container">
       <Head>
@@ -23,14 +34,17 @@ export default function Home({ postData, }) {
         </h1>
 
         {postData.map((obj) => (
-          <>
+          <div
+            className={classes.text}
+            key={obj.slug}
+          >
             <h2>
               <a href={`/blog/${obj.category}/${obj.slug}`}>{obj.title}</a>
             </h2>
             <p>
               {obj.subtitle}
             </p>
-          </>
+          </div>
         ))}
       </main>
 
@@ -41,7 +55,7 @@ export default function Home({ postData, }) {
   )
 }
 
-export const getStaticProps = ({ params, }) => {
+export const getStaticProps = ({ params }) => {
   const postData = buildPostManifest()
 
   return {
@@ -53,5 +67,5 @@ export const getStaticProps = ({ params, }) => {
 }
 
 Home.propTypes = {
-  postData: PropTypes.object.isRequired,
+  postData: PropTypes.array.isRequired,
 }
