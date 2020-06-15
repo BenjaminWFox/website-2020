@@ -12,8 +12,6 @@ const useStyles = createUseStyles((theme) => ({
 export default function Home({ swapTheme, postData }) {
   const classes = useStyles(useTheme())
 
-  console.log(swapTheme(1))
-
   return (
     <div className="container">
       <Head>
@@ -27,6 +25,12 @@ export default function Home({ swapTheme, postData }) {
       <main>
         <h3>
           Hi, I&apos;m Ben.
+          <button
+            onClick={swapTheme}
+            type="button"
+          >
+            Change Theme
+          </button>
         </h3>
 
         <h1>
