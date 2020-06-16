@@ -1,5 +1,6 @@
 import { createUseStyles, useTheme } from 'react-jss'
 import Head from 'next/head'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { buildPostManifest } from '../lib/posts'
 
@@ -43,7 +44,11 @@ export default function Home({ swapTheme, postData }) {
             key={obj.slug}
           >
             <h2>
-              <a href={`/blog/${obj.category}/${obj.slug}`}>{obj.title}</a>
+              <Link
+                as={`/blog/${obj.category}/${obj.slug}`}
+                href={`/blog/${obj.category}/[slug]`}
+              ><a>{obj.title}</a>
+              </Link>
             </h2>
             <p>
               {obj.subtitle}
