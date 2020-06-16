@@ -1,7 +1,7 @@
 import { createUseStyles, useTheme } from 'react-jss'
 import Head from 'next/head'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
-import { buildPostManifest } from '../lib/posts'
 
 const useStyles = createUseStyles((theme) => ({
   text: {
@@ -9,11 +9,11 @@ const useStyles = createUseStyles((theme) => ({
   },
 }))
 
-export default function Home({ swapTheme, postData }) {
+export default function Home({ swapTheme }) {
   const classes = useStyles(useTheme())
 
   return (
-    <div className="container">
+    <div className={classes.text}>
       <Head>
         <title>Benjamin W Fox</title>
         <link
@@ -34,42 +34,18 @@ export default function Home({ swapTheme, postData }) {
         </h3>
 
         <h1>
-          Blog
+          Page 2: <Link href="/blog/tech/blog-page"><a>Blog Page!</a></Link>
         </h1>
-
-        {postData.map((obj) => (
-          <div
-            className={classes.text}
-            key={obj.slug}
-          >
-            <h2>
-              <a href={`/blog/${obj.category}/${obj.slug}`}>{obj.title}</a>
-            </h2>
-            <p>
-              {obj.subtitle}
-            </p>
-          </div>
-        ))}
       </main>
 
-      <footer>
-        <sub>&copy; 2020 Benjamin W Fox</sub>
-      </footer>
     </div>
   )
 }
 
-export const getStaticProps = ({ params }) => {
-  const postData = buildPostManifest()
+export const getStaticProps = ({ params }) => ({
+  props: {
+    params: params || null,
+  },
+})
 
-  return {
-    props: {
-      params: params || null,
-      postData,
-    },
-  }
-}
-
-Home.propTypes = {
-  postData: PropTypes.array.isRequired,
-}
+Home.propTypes = {}

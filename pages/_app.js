@@ -1,6 +1,6 @@
 // import App from 'next/app'
-import { ThemeProvider } from 'react-jss'
 import React from 'react'
+import { ThemeProvider } from 'react-jss'
 
 const myThemeOne = {
   _id: 1,
@@ -40,7 +40,7 @@ export default function App({ Component, pageProps }) {
     if (style) {
       style.parentNode.removeChild(style)
     }
-  }, [])
+  })
 
   return (
     <ThemeProvider theme={theme}>
