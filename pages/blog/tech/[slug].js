@@ -16,11 +16,14 @@ export default function PostTemplate({ postData }) {
         />
       </Head>
 
-      {postData.title}
-      <br />
-      {postData.id}
+      <Link href="/"><a>&lt; Home</a></Link>
       <br />
       {postData.date}
+      <br />
+      <div
+        className="markdown-body"
+        dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+      />
       <br />
       <Link href="/"><a>&lt; Home</a></Link>
     </div>
@@ -36,8 +39,8 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = ({ params }) => {
-  const postData = getPostData(CATEGORY, params.slug)
+export const getStaticProps = async ({ params }) => {
+  const postData = await getPostData(CATEGORY, params.slug)
 
   return {
     props: {

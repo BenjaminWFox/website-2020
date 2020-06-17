@@ -1,28 +1,20 @@
 // import App from 'next/app'
-import { ThemeProvider } from 'react-jss'
+
+import 'github-markdown-css'
+import GlobalStyles from '../styles/globals.js'
 import React from 'react'
-
-const myThemeOne = {
-  _id: 1,
-  colorPrimary: 'green',
-  colorSecondary: 'red',
-}
-
-const myThemeTwo = {
-  _id: 2,
-  colorPrimary: 'red',
-  colorSecondary: 'green',
-}
+import { ThemeProvider } from 'react-jss'
+import { themes } from '../styles/theme'
 
 export default function App({ Component, pageProps }) {
-  const [theme, setTheme] = React.useState(myThemeOne)
+  const [theme, setTheme] = React.useState(themes.light)
 
   const handleChangeTheme = () => {
     if (theme._id === 1) {
-      setTheme(myThemeTwo)
+      setTheme(themes.dark)
     }
     else {
-      setTheme(myThemeOne)
+      setTheme(themes.light)
     }
   }
 
@@ -44,6 +36,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyles />
       <Component
         swapTheme={handleChangeTheme}
         {...pageProps}

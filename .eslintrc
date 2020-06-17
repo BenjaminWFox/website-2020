@@ -26,6 +26,7 @@
     "no-extra-parens": 0,
     "brace-style": ["error", "stroustrup"],
     "array-element-newline": 0,
+    "dot-location": ["error", "property"],
     "comma-dangle": ["error", {
       "arrays": "only-multiline",
       "objects": "only-multiline",
