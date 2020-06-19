@@ -105,10 +105,10 @@ Now that we know what we’re aiming to build, we can initialize the project. Ge
 
 Make one change to your `package.json` file:
 
-```diff
+~~~diff
 - "main": "index.js",
 + "main": "lib/index.js",
-```
+~~~
 
 ^ This **main **property is the file any consuming application will use to import from your package. Since the library package is currently called ‘**component-library**,’ when we eventually install the package in a project and try to:
 
@@ -119,7 +119,7 @@ the **lib/index.js** file specified by the **main** property is where that proje
 ### Folder structure & files
 
 You now have a **package.json **file — create some additional folder structure and some files:
-
+~~~
     /src
       - /components
         - /button
@@ -132,6 +132,7 @@ You now have a **package.json **file — create some additional folder structure
       - carbon.scss
     .gitignore
     rollup.config.js
+~~~
 
 If you don’t want to create these from scratch & you’re on a *nix shell, you can try the following command. Sorry Windows users, I don’t have a machine to translate on 😕
 
@@ -181,7 +182,23 @@ It’s a React library, so this next one is pretty straight froward…
 
 …or so you thought! Since this *is* a React library we can reasonably expect any consuming application to *also* have React installed. To avoid bundling the entirety of React with our package, we can add **react** and **react-dom** to the **peerDependencies** in package.json as shown below. It’s the same format as dependencies/devDependencies. Make sure you use your current version of React if the gist is out of date:
 
-<iframe src="https://medium.com/media/c261ea39e62dc4ac9da7c153a8b9991c" frameborder=0></iframe>
+~~~json
+    "...": "...",
+  },
+  "dependencies": {
+    "@carbon/icons-react": "^10.10.2",
+    "carbon-components": "^10.11.2",
+    "carbon-components-react": "^7.11.3",
+    "carbon-icons": "^7.0.7",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
+~~~
 
 ## Library: Install Carbon
 
@@ -207,7 +224,61 @@ If you’ve used Webpack the functionality should be somewhat familiar. When we 
 
 1. Write the final code to the path/file referenced at `output`
 
-<iframe src="https://medium.com/media/a640a9eb68428dafcbdf59d7353fddd6" frameborder=0></iframe>
+~~~javascript
+import resolve from '@rollup/plugin-node-resolve'
+import babel from '@rollup/plugin-babel'
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
+import commonjs from '@rollup/plugin-commonjs'
+import sass from 'node-sass'
+import postcss from 'rollup-plugin-postcss'
+import autoprefixer from 'autoprefixer'
+import packageJson from './package.json'
+
+export default {
+  input: 'src/index.js', // All of your library files will be named exports from here
+  output: [ 
+    {
+      // This is an easy way to keep your `main` in sync between rollup & the package
+      file: packageJson.main,
+      format: 'cjs',
+      sourcemap: true,
+    },
+  ],
+  plugins: [
+    // This prevents needing an additional `external` prop in this config file by automaticall excluding peer dependencies
+    peerDepsExternal(),
+    // Convert CommonJS modules to ES6
+    commonjs({ 
+      include: 'node_modules/**',
+      // This was required to fix some random errors while building
+      namedExports: {
+        'react-is': ['isForwardRef', 'isValidElementType'],
+      },
+    }),
+    // "...locates modules using the Node resolution algorithm"
+    resolve(),
+    // Do Babel transpilation
+    babel({
+      exclude: 'node_modules/**',
+      babelHelpers: 'bundled',
+    }),
+    // Does a number of things; Compiles sass, run autoprefixer, creates a sourcemap, and saves a .css file
+    postcss({
+      preprocessor: (content, id) => new Promise((res) => {
+        const result = sass.renderSync({ file: id })
+
+        res({ code: result.css.toString() })
+      }),
+      plugins: [autoprefixer],
+      modules: {
+        scopeBehaviour: 'global',
+      },
+      sourceMap: true,
+      extract: true,
+    }),
+  ],
+}
+~~~
 
 ## Library: Configure Babel
 
