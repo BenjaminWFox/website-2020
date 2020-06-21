@@ -11,20 +11,20 @@ const light = {
   }
 }
 
-const dark = {
-  _id: 2,
-  name: 'dark',
-  colors: {
-    body: {
-      primary: '#000000',
-    },
-    text: {
-      primary: '#FFFFFF',
-    }
-  }
-}
+// const dark = {
+//   _id: 2,
+//   name: 'dark',
+//   colors: {
+//     body: {
+//       primary: '#000000',
+//     },
+//     text: {
+//       primary: '#FFFFFF',
+//     }
+//   }
+// }
 
 export const themes = {
-  dark,
+  // dark,
   light,
 }

@@ -27,6 +27,8 @@
     "brace-style": ["error", "stroustrup"],
     "array-element-newline": 0,
     "dot-location": ["error", "property"],
+    "sort-keys": 0,
+    "class-methods-use-this": 0,
     "comma-dangle": ["error", {
       "arrays": "only-multiline",
       "objects": "only-multiline",

@@ -2,6 +2,8 @@
 
 // import 'github-markdown-css'
 import 'highlight.js/styles/a11y-dark.css'
+// import 'prismjs/themes/prism.css'
+// import 'prism-themes/themes/prism-a11y-dark.css'
 import GlobalStyles from '../styles/globals.js'
 import React from 'react'
 import { ThemeProvider } from 'react-jss'

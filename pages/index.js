@@ -26,12 +26,12 @@ export default function Home({ swapTheme, postData }) {
       <main>
         <h3>
           Hi, I&apos;m Ben.
-          <button
+          {/* <button
             onClick={swapTheme}
             type="button"
           >
             Change Theme
-          </button>
+          </button> */}
         </h3>
 
         <h1>

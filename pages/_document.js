@@ -1,5 +1,5 @@
+import Document, { Head, Html, Main, NextScript } from 'next/document'
 import { JssProvider, SheetsRegistry, createGenerateId } from 'react-jss'
-import Document from 'next/document'
 import React from 'react'
 
 /**
@@ -10,7 +10,7 @@ import React from 'react'
  * This solves the `className` mistmatch issue on page refresh during development
  */
 
-export default class JssDocument extends Document {
+export default class CustomDocument extends Document {
   static async getInitialProps(ctx) {
     const registry = new SheetsRegistry()
     const generateId = createGenerateId()
@@ -39,4 +39,23 @@ export default class JssDocument extends Document {
       ),
     }
   }
+
+  // render() {
+  //   return (
+  //     <Html lang="en">
+  //       <Head>
+  //         <link
+  //           as="font"
+  //           crossOrigin=""
+  //           href="/fonts/Lato-Regular.ttf"
+  //           rel="preload"
+  //         />
+  //       </Head>
+  //       <body>
+  //         <Main />
+  //         <NextScript />
+  //       </body>
+  //     </Html>
+  //   )
+  // }
 }
