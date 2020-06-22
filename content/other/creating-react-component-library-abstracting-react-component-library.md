@@ -33,11 +33,11 @@ When might you want to do this?
 
 ## Some things to consider before going this route:
 
-* Documentation becomes challenging — The original implementation details live in the original library, but any new functionality needs to be documented in the abstracting library.
+1. Documentation becomes challenging — The original implementation details live in the original library, but any new functionality needs to be documented in the abstracting library.
 
-* Complexity is added when maintaining an additional service consumed by multiple applications/clients.
+2. Complexity is added when maintaining an additional service consumed by multiple applications/clients.
 
-* There is a trap in thinking that, because you are abstracting the third-party library, that you might easily swap it for a different one later on. Don’t fall for it! In this scenario, you should be exposing all the underlying props of any abstracted components. As soon as applications start implementing *your *library you’re locked in to your choice.
+3. There is a trap in thinking that, because you are abstracting the third-party library, that you might easily swap it for a different one later on. Don’t fall for it! In this scenario, you should be exposing all the underlying props of any abstracted components. As soon as applications start implementing *your *library you’re locked in to your choice.
 
 ## A quick definition of Abstraction
 > Regarding the word ‘abstract[ion]/[ing]/[ed]’ — I’m going to use it a lot, and essentially what I mean in this context is ‘wrapping’. I’m going to ‘wrap’ a 3rd-party component library with my own component library, specifically by ‘wrapping’ any components from that library with my own components.
@@ -93,7 +93,7 @@ If you’re going down this route chances are you’re not the only stakeholder 
 There are so many component libraries out there that the ‘right’ choice will be one that offers the greatest benefit for any particular needs you may have as a developer, team, or organization.
 
 I’m going to use the React component library from the Carbon Design System by IBM. The design team I work with recently chose it as the foundation for our in-house design system because it offers a relatively straight-forward, opinionated guidance and strong integration support for Figma. It’s got some good things going for it for developers too, including a React component library with first-class* support of the design system, great documentation, and attention to important & often-overlooked details like accessibility.
-> * by ‘first-class’ support I mean that the React implementation is a direct subset of the Carbon Design System & maintained in-house. Compare that to Material-UI (full disclosure, I also like MUI and it was a strong 2nd contender), which is a 3rd party implementation of the Material Design System.
+> \* by ‘first-class’ support I mean that the React implementation is a direct subset of the Carbon Design System & maintained in-house. Compare that to Material-UI (full disclosure, I also like MUI and it was a strong 2nd contender), which is a 3rd party implementation of the Material Design System.
 
 ## Library: Initial Setup
 

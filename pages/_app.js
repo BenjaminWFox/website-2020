@@ -1,10 +1,15 @@
 // import App from 'next/app'
 
 // import 'github-markdown-css'
-import 'highlight.js/styles/a11y-dark.css'
 // import 'prismjs/themes/prism.css'
 // import 'prism-themes/themes/prism-a11y-dark.css'
-import GlobalStyles from '../styles/globals.js'
+import 'highlight.js/styles/a11y-dark.css'
+
+/**
+ * ResetStyles MUST be imported before GlobalStyles
+ */
+import ResetStyles from '../styles/reset'
+import GlobalStyles from '../styles/globals'
 import React from 'react'
 import { ThemeProvider } from 'react-jss'
 import { themes } from '../styles/theme'
@@ -39,6 +44,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ThemeProvider theme={theme}>
+      <ResetStyles />
       <GlobalStyles />
       <Component
         swapTheme={handleChangeTheme}
