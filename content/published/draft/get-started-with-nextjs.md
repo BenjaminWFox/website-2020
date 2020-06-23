@@ -1,13 +1,13 @@
 ---
-title: "A quick & condensed introduction to a Next.jS codebase"
+title: "Reference cheatsheet for Next.js"
 date: "2020-06-19"
-subtitle: "A guide to Next.js idiosyncracies."
+subtitle: "A quick and dirty cheatsheet guide to Next.js idiosyncracies - what are they, and where you can read more about them."
 category: "draft"
 ---
 
-# Get starged with Next.js
+# Reference cheatsheet for Next.js
 
-A guide to Next.js - what it is, and it's good for, and framework-specific idiosyncracies.
+A quick and dirty cheatsheet guide to Next.js idiosyncracies - what are they, and where you can read more about them.
 
 ## What is Next.js?
 
@@ -28,7 +28,7 @@ Understanding the folders and files with explicit responsibilities in a Next.js 
 
 ### What is pages/
 
-All `.js` files under the `pages/` directory **that export a react component** (excluding `api/`, `_app.js` and `) will be turned into a route based on its path/file name.
+All `.js` files under the `pages/` directory **that export a react component** (excluding `api/`, `_app.js` and `_document.js`) will be turned into a route based on its path/file name.
 
 [Page-based routing](https://nextjs.org/docs/basic-features/pages)
 

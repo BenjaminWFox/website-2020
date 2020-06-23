@@ -21,7 +21,14 @@ const light = {
       primary: '#FFFFFF',
     },
     text: {
-      primary: '#000000',
+      primary: '#112e51',
+      secondary: '#323a45',
+      lighter: '#494440',
+      lightest: '#5b616b',
+      highlight: '#0071bc',
+      active: '#046b99',
+      accent: '#205493',
+      danger: '#cd2026',
     }
   },
   spacing: {

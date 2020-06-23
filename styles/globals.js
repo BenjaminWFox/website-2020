@@ -7,35 +7,35 @@ const useStyles = createUseStyles((theme) => ({
       {
         fontFamily: 'Lato',
         src: 'url(\'/fonts/Lato-Italic.ttf\')',
-        fontWeight: 'normal',
+        fontWeight: '400',
         fontStyle: 'italic',
         fontDisplay: 'swap',
       },
       {
         fontFamily: 'Lato',
         src: 'url(\'/fonts/Lato-Regular.ttf\')',
-        fontWeight: 'normal',
+        fontWeight: '400',
         fontStyle: 'normal',
         fontDisplay: 'swap',
       },
       {
         fontFamily: 'Lato',
         src: 'url(\'/fonts/Lato-Bold.ttf\')',
-        fontWeight: 'bold',
+        fontWeight: '700',
         fontStyle: 'normal',
         fontDisplay: 'swap',
       },
       {
         fontFamily: 'Lato',
         src: 'url(\'/fonts/Lato-Light.ttf\')',
-        fontWeight: 'light',
+        fontWeight: '300',
         fontStyle: 'normal',
         fontDisplay: 'swap',
       },
       {
         fontFamily: 'Lato',
         src: 'url(\'/fonts/Lato-LightItalic.ttf\')',
-        fontWeight: 'light',
+        fontWeight: '300',
         fontStyle: 'italic',
         fontDisplay: 'swap',
       },
@@ -45,8 +45,9 @@ const useStyles = createUseStyles((theme) => ({
     },
     body: {
       backgroundColor: theme.colors.body.primary,
-      color: theme.colors.text.primary,
+      color: theme.colors.text.secondary,
       fontSize: '1.125rem',
+      fontWeight: 400,
       lineHeight: '1.5rem',
     },
     '.markdown-body': {
@@ -55,11 +56,20 @@ const useStyles = createUseStyles((theme) => ({
       maxWidth: '680px',
       minWidth: '320px',
       padding: '45px',
+      '& h1, & h2, & h3': {
+        // fontWeight: 'bold',
+      },
+      '& h1 + p': {
+        fontSize: '1.5rem',
+        fontStyle: 'italic',
+        color: theme.colors.text.lightest,
+      }
     },
     'h1, h2, h3': {
-      fontWeight: 'bold',
+      fontWeight: 400,
       lineHeight: theme.spacing.xl,
       marginBottom: theme.spacing.base,
+      color: '#000'
     },
     // 'h1, h2, p': {
     //   '& + ul, & + ol': {
@@ -68,6 +78,20 @@ const useStyles = createUseStyles((theme) => ({
     // },
     'p, ul, ol': {
       marginBottom: theme.spacing.base,
+    },
+    a: {
+      color: theme.colors.text.highlight,
+      textDecoration: 'none',
+      '&:visited': {
+        color: theme.colors.text.accent,
+      },
+      '&:hover': {
+        textDecoration: 'underline',
+        color: theme.colors.text.active,
+      },
+      '&:active': {
+        color: theme.colors.text.active,
+      },
     },
 
     /* image caption */
