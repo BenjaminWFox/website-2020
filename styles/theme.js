@@ -9,7 +9,8 @@ const tokens = {
     xl: '2rem',
     '2xl': '2.5rem',
     '3xl': '3rem'
-  }
+  },
+  typography: {}
 }
 
 const light = {

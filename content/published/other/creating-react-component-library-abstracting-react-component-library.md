@@ -140,7 +140,9 @@ If you don’t want to create these from scratch & you’re on a *nix shell, you
 
 For the first file update, open the **.gitignore** file and add:
 
-<iframe src="https://medium.com/media/3500c7685d109e05e15e9359c68da3ad" frameborder=0></iframe>
+```
+    node_modules
+```
 
 ^ the **node_modules **folder is not something we want to check in to git. We’ll fill in the rest of the file contents after we add additional packages. Don’t forget to commit the changes:
 
@@ -284,19 +286,46 @@ export default {
 
 Add the configuration below to the **src/.babelrc** file to ensure babel is using the presets we installed:
 
-<iframe src="https://medium.com/media/32aa467fc3db369906ced2c165c596bf" frameborder=0></iframe>
-
+```json
+{
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env", {
+        "targets": {
+          "esmodules": true
+        }
+      }
+    ]
+  ]
+}
+```
 ## Library: Add a component to test
 
 Now, in theory, if we add a component we should be able to build with Rollup and get a bundle we can reference from another project!
 
 Add the following to **src/components/button.js** — this will give us an end-to-end example of importing from Carbon, abstracting the Carbon component and adding an additional prop, then re-exporting it.
 
-<iframe src="https://medium.com/media/28101af7be73193dfbb13eaa88803241" frameborder=0></iframe>
+```js
+import React from 'react'
+import { Button as CarbonButton } from 'carbon-components-react'
+
+const Button = function Button({ children, otherText, ...rest }) {
+  return (<CarbonButton {...rest}>{children} {otherText}</CarbonButton>)
+}
+
+export { Button }
+```
 
 Then add a little code to **src/index.js** to import and re-export the Button component.
 
-<iframe src="https://medium.com/media/ff9fece5711a78f17ef32713b79318f5" frameborder=0></iframe>
+```js
+import { Button } from './components/button/button'
+
+export {
+  Button,
+}
+```
 
 ^ Per our **rollup.config.js**, **src/index.js** will be build into **lib/index.js** which will allow any application using our library to import components in the format:
 
@@ -306,8 +335,16 @@ Then add a little code to **src/index.js** to import and re-export the Button co
 
 We could call rollup straight from the command line, but best practice is to add the scripts we need to **package.json**. In addition to the **build **script, add a **watch** script that will rebuild on any changes during development. Add the following **watch **and** build **scripts to **package.json**:
 
-<iframe src="https://medium.com/media/b6ba69495e0fe038f9719f9b7b7a4de9" frameborder=0></iframe>
-
+```json
+  "...": "...",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "rollup -cw",
+    "build": "rm -rf lib && rollup -c"
+  },
+  "...": "...",
+  ```
 Then, try it out:
 
     npm run build
@@ -332,7 +369,27 @@ So far so good! We have a component library package that builds and (in theory) 
 
 That command might take a couple minutes to complete. When it’s done, open up **src/App.js** in the newly created Create React App (CRA) project, and edit it to look like this:
 
-<iframe src="https://medium.com/media/50ead410f34e6b665c81fecc72f15e98" frameborder=0></iframe>
+```js
+import React from 'react';
+import logo from './logo.svg';
+import { Button } from 'component-library'
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          <Button otherText="World">Hello</Button>
+        </p>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+```
 
 Now, (still from the **library-consumer** folder) run the CRA project:
 
@@ -350,15 +407,46 @@ We’ve seen now how to create a component that wraps a Carbon component. Let’
 
 Switch back to the **component-library** project and add a component to **src/components/message/message.js**:
 
-<iframe src="https://medium.com/media/6c48f9c5ce613baaaca5b8ad66d7eec8" frameborder=0></iframe>
+```js
+import React, { useState } from 'react'
+import './message.scss'
 
+const Message = function Message({}) {
+  const [message, setMessage] = useState('oh hi')
+
+  const handleChange = (e) => {
+    setMessage(e.target.value)
+  }
+
+  return (
+    <>
+      <input value={message} onChange={handleChange} />
+      <h4 className="message">{message}</h4>
+    </>
+  )
+}
+
+export { Message }
+```
 … and add a class to **src/components/message/message.scss:**
 
-<iframe src="https://medium.com/media/621799976a985ad47d3bb848a424412e" frameborder=0></iframe>
+```css
+.message {
+  font-size: 40px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+```
+... and then import & export it from **src/index.js**:
 
-.. and then import & export it from **src/index.js**:
+```js
+import { Button } from './components/button/button'
+import { Message } from './components/message/message'
 
-<iframe src="https://medium.com/media/e95aecc5fe032ee84532ed8f222ebc60" frameborder=0></iframe>
+export {
+  Button,
+  Message
+}
+```
 
 … and that’s it! Since you’ve already set up the SASS processing in **rollup.config.js**, when you import a **.scss** file it will be automatically processed & build into a final bundle.
 
@@ -370,7 +458,31 @@ Make sure you build the library again if you’re not running the watch command:
 
 Back in the **library-consumer** application, in **src/App.js**, make the following changes to import the **Message **component and styles from our **index.css** file. (If you wanted, you could include these in the App.css file instead with: *@import ‘../node_modules/component-library/lib/index.css’;*):
 
-<iframe src="https://medium.com/media/d92c79a4e0141d03c9aa71cf8c9e47e1" frameborder=0></iframe>
+```js
+import React from 'react';
+import logo from './logo.svg';
+import { Button, Message } from 'component-library'
+import 'component-library/lib/index.css'
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          <Button otherText="World">Hello</Button>
+        </p>
+        <div>
+          <Message />
+        </div>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+```
 
 ## ⚠️ This will probably give you an error ⚠️
 
@@ -400,12 +512,22 @@ Right now the Button component looks pretty plain. The Carbon library uses SASS 
 
 The most performant option (for build time & package size) would be to import component files one at a time from Carbon library in **node_modules/ **as needed, but for this example I’m going to [import all the Carbon styles at once](https://www.carbondesignsystem.com/tutorial/react/step-1#import-carbon-component-styles). Add this import line to the **src/carbon.scss **file:
 
-<iframe src="https://medium.com/media/46a0787ef68822ee2467cbe60a7f2128" frameborder=0></iframe>
-
+```css
+@import 'node_modules/carbon-components/scss/globals/scss/styles.scss';
+```
 … and then import the styles in **src/index.js:**
 
-<iframe src="https://medium.com/media/e3074d2ab97199c5c14852e4295822c7" frameborder=0></iframe>
+```js
+import { Button } from './components/button/button'
+import { Message } from './components/message/message'
 
+import './carbon.scss'
+
+export {
+  Button,
+  Message
+}
+```
 … and since we already have our **index.css **file imported in the **library-consumer** application, you should see now (**or when you rebuild the component-library**) that the layout has changed and the button is big and blue.
 
 ## And that’s about it

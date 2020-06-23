@@ -14,9 +14,6 @@ const useStyles = createUseStyles({
       padding: 0,
       fontWeight: 'normal',
     },
-    // 'ol, ul': {
-    //   listStyle: 'none',
-    // },
     img: {
       maxWidth: '100%',
       height: 'auto',

@@ -46,37 +46,42 @@ const useStyles = createUseStyles((theme) => ({
     body: {
       backgroundColor: theme.colors.body.primary,
       color: theme.colors.text.primary,
+      fontSize: '1.125rem',
+      lineHeight: '1.5rem',
     },
     '.markdown-body': {
       boxSizing: 'border-box',
       margin: '0 auto',
       maxWidth: '680px',
-      minWidth: '5r500px',
+      minWidth: '320px',
       padding: '45px',
     },
-    'h1, h2': {
+    'h1, h2, h3': {
+      fontWeight: 'bold',
       lineHeight: theme.spacing.xl,
       marginBottom: theme.spacing.base,
     },
-    'h1, h2, p': {
-      '& + ul, & + ol': {
-        marginTop: `-${theme.spacing.sm}`,
-      }
-    },
-    p: {
-      lineHeight: theme.spacing.lg,
+    // 'h1, h2, p': {
+    //   '& + ul, & + ol': {
+    //     marginTop: `-${theme.spacing.sm}`,
+    //   }
+    // },
+    'p, ul, ol': {
       marginBottom: theme.spacing.base,
+    },
 
-      /* image caption */
-      '& img ~ em': {
-        textAlign: 'center',
-        fontSize: '.75rem',
-        display: 'block',
-      },
+    /* image caption */
+    'p img ~ em': {
+      textAlign: 'center',
+      fontSize: '.75rem',
+      display: 'block',
     },
     'ul, ol': {
       '& li': {
         marginLeft: theme.spacing.lg,
+        '& *:last-child': {
+          marginBottom: theme.spacing.xs,
+        }
       }
     },
     blockquote: {
@@ -88,11 +93,16 @@ const useStyles = createUseStyles((theme) => ({
     pre: {
       overflow: 'scroll',
       '& code': {
-        display: 'block',
-        overflowX: 'auto',
         background: '#2b2b2b',
         color: '#f8f8f2',
+        display: 'block',
+        fontSize: '.875rem',
+        lineHeight: '1.125rem',
+        overflowX: 'auto',
         padding: '0.5em',
+        '&:not([class])': {
+          whiteSpace: 'pre-wrap',
+        }
       }
     }
   }

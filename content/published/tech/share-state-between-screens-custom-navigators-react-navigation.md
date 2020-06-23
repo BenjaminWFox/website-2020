@@ -21,7 +21,21 @@ Recently I ran into an annoying issue that took me a while to solve — the need
 
 This was a challenge because React Navigation doesn’t, by default, expose most of the navigators you’re creating as components that could be used directly in markup, so there is no obvious way to pass a state object down as a prop to child screens. A basic React Navigation implementation might look something like this:
 
-<iframe src="https://medium.com/media/7c932c7f680f90cb2cd6ad2e8d513eab" frameborder=0></iframe>
+```js
+import { createAppContainer, createBottomTabNavigator } from 'react-navigation';
+
+import HomeScreen from '../screens/HomeScreen';
+import LinksScreen from '../screens/LinksScreen';
+import SettingsScreen from '../screens/SettingsScreen';
+
+export const MainTabNavigator = createBottomTabNavigator({
+  HomeScreen,
+  LinksScreen,
+  SettingsScreen,
+})
+
+export default createAppContainer(MainTabNavigator);
+```
 
 In the above example MainTabNavigator is a React component, but explicitly rendering it is an [anti-pattern/common mistake](https://reactnavigation.org/docs/en/common-mistakes.html). By default, the only navigator that gets directly exposed to the markup is the root component AppContainer which is rendered in [App.js](https://github.com/BenjaminWFox/react-navigation-sharing-screen-state/blob/master/App.js).
 
@@ -52,13 +66,45 @@ Create the custom navigator. At its most basic, this component needs to do two t
 
 There is a pre-existing TabRouter in the MainTabNavigator and that is what we should use for our custom navigator. All of the paths and actions are already defined, and it will provide the same behavior as if we were using MainTabNavigator on its own.
 
-<iframe src="https://medium.com/media/06de934372c50b1771a864a3f2af882e" frameborder=0></iframe>
+```js
+import React from 'react'
+import { MainTabNavigator } from './BasicReactNavigationSetup'
+
+class CustomReactNavigationNavigatorSimple extends React.Component {
+  static router = MainTabNavigator.router
+
+  render() {
+    return (
+      <MainTabNavigator />
+    )
+  }
+}
+
+export default CustomReactNavigationNavigatorSimple
+```
 
 **Second** we need to render MainTabNavigation while ensuring that it maintains access to the [navigation property](https://reactnavigation.org/docs/en/navigation-prop.html).
 
 In the above snippet, we effectively cut off our MainTabNavigator from React Navigations navigation object, and our app will throw an error if we try to run it. We can fix that by explicitly assigning navigation to MainTabNavigator
 
-<iframe src="https://medium.com/media/f3129f5baec5462c5affafb3c132ba61" frameborder=0></iframe>
+```js
+import React from 'react'
+import { MainTabNavigator } from './BasicReactNavigationSetup'
+
+class CustomReactNavigationNavigatorSimple extends React.Component {
+  static router = MainTabNavigator.router
+
+  render() {
+    const { navigation } = this.props
+
+    return (
+      <MainTabNavigator navigation={navigation} />
+    )
+  }
+}
+
+export default CustomReactNavigationNavigatorSimple
+```
 
 If you prefer, you could accomplish the same thing by instead wrapping MainTabNavigator with the [withNavigation HOC](https://reactnavigation.org/docs/en/with-navigation.html).
 
@@ -68,7 +114,46 @@ Set up your state and pass some props.
 
 We’ll update the custom navigator to create a counter that will track how many times tabs have been switched, and a method that increments the counter. We will pass both of these to MainTabNavigator as props so that any child screen can display the counter and trigger the increment when tabs are switched.
 
-<iframe src="https://medium.com/media/f5f935b79497d0e299ea83e3bcc16fcf" frameborder=0></iframe>
+```js
+import React from 'react'
+import { MainTabNavigator } from './BasicReactNavigationSetup'
+
+class CustomReactNavigationNavigator extends React.Component {
+  static router = MainTabNavigator.router
+
+  state = {
+    timesTabbed: 0
+  }
+
+  componentDidMount = () => {
+    const { navigation } = this.props
+
+    navigation.addListener('didFocus', this.incrementTimesTabbed)
+  }
+
+  incrementTimesTabbed = () => {
+    const { timesTabbed } = this.state
+
+    this.setState({ timesTabbed: timesTabbed + 1 })
+  }
+
+  render() {
+    const { timesTabbed } = this.state
+
+    return (
+      <MainTabNavigator
+        navigation={this.props.navigation}
+        screenProps={{
+          tabCounter: timesTabbed,
+          onDidTab: this.incrementTimesTabbed,
+        }}
+      />
+    )
+  }
+}
+
+export default CustomReactNavigationNavigator
+```
 
 The **gotcha **here is that the props can not be assigned directly on MainTabNavigator. In order for them to be correctly passed down to the screens they must be assigned via screenProps.
 
@@ -78,7 +163,38 @@ Properties assigned via screenProps can now accessed from any screen that is a c
 
 We can use these to create a basic screen component that will display the number of times tabs have been switched, and trigger the increment function when tabbing to a new screen.
 
-<iframe src="https://medium.com/media/2ea1c8b426d701a91f1db3b27a5d762d" frameborder=0></iframe>
+```js
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { NavigationEvents } from 'react-navigation'
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
+});
+
+export default class BaseScreen extends React.Component {
+  render() {
+    const { tabCounter, onDidTab } = this.props.screenProps
+      || { tabCounter: null, onDidTab: () => null }
+    const { screenName } = this.props
+
+    return (
+      <View style={styles.container}>
+        <NavigationEvents
+          onDidBlur={onDidTab}
+        />
+        <Text>Hi from the {screenName} Screen</Text>
+        <Text>You've tabbed {tabCounter} times.</Text>
+      </View>
+    );
+  }
+}
+```
 
 ## Thanks!
 [**BenjaminWFox/react-navigation-sharing-screen-state**

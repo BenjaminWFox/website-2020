@@ -83,7 +83,59 @@ For configuration, let’s start with eslint — that’ll ensure that any futur
 
 While that’s running, create a file .eslintrc at the root of your site. Add the configuration below to this file. [There are a ton of options for configuring ESLint](https://eslint.org/docs/user-guide/configuring). This is, approximately, the bare minimum to get ESLint working with the default Next.js code, without having to make any manual changes:
 
-<iframe src="https://medium.com/media/b6fd70735bcff93b31e4187c4a92d143" frameborder=0></iframe>
+```json
+{
+  "extends": [
+    "eslint:all",
+    "plugin:react/all",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "indent": ["error", 2],
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "max-len": 0,
+    "max-lines-per-function": 0,
+    "space-before-function-paren": ["error", {
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
+    "function-call-argument-newline": 0,
+    "padded-blocks": 0,
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+      { "blankLine": "any",    "prev": ["const", "let", "var"], "next": ["const", "let", "var"]}
+    ],
+    "object-curly-spacing": ["error", "always"],
+    "one-var": ["error", "never"],
+    "quote-props": 0,
+    "react/jsx-indent": [2, 2],
+    "react/jsx-indent-props": [2, 2],
+    "react/jsx-filename-extension": 0,
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-no-literals": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-max-depth": 0
+  },
+  "ignorePatterns": ["node_modules/", ".next/"]
+}
+```
 
 ^ some breakdown of what this is doing:
 
@@ -135,7 +187,17 @@ Next up let’s add testing capabilities. Start with the install:
 
 Create two new files at the project root for Jest: **jest.config.js** & **jest.setup.js**. Add this content to the **jest.config.js **file:
 
-<iframe src="https://medium.com/media/9d35874a1540c7cbb6874f69e0cdf1a0" frameborder=0></iframe>
+```javascript
+// Jest.config.js
+module.exports = {
+  // Automatically clear mock calls and instances between every test
+  'clearMocks': true,
+  // The directory where Jest should output its coverage files
+  'coverageDirectory': '.coverage',
+  // A list of paths to modules that run some code to configure or set up the testing framework before each test
+  'setupFilesAfterEnv': ['./jest.setup.js']
+}
+```
 
 ^ There are [a huge number of configuration options ](https://jestjs.io/docs/en/configuration)for Jest. This is a very small subset. **clearMocks **can prevent headaches with unintended [persistence of mock data](https://jestjs.io/docs/en/manual-mocks) between tests. **coverageDirectory** is for generating [test coverage](https://jestjs.io/docs/en/cli.html#--coverageboolean), running jest with the --coverage flag. The most important piece here is **setupFilesAfterEnv**, which will run before each test file. Add this to the **jest.setup.js** file:
 
@@ -156,7 +218,22 @@ The last config file we need is called **.babelrc **(create it at the root of th
 
 Create a file **pages/index.test.js** and add some test code:
 
-<iframe src="https://medium.com/media/f101eca9a0cf4048ff8e0ecc5e721a27" frameborder=0></iframe>
+```javascript
+import Home from './index'
+import { render } from '@testing-library/react'
+
+// `describe` is not required, but it helps the tests read nicely
+describe('The Home Page Component', () => {
+  // Each test for the component will get an `it` block
+  it('should have exactly 1 `main` section', () => {
+    // The getByRole will error if there are less or more than 1 element found
+    const { getByRole } = render(<Home />)
+    const main = getByRole('main')
+
+    expect(main).toBeInTheDocument()
+  })
+})
+```
 
 ### Add a Test Script
 
@@ -173,13 +250,15 @@ Then in the project root in the terminal you can npm run test — and should see
 
 I have seen some debate that leads me to believe path aliases are a love-it or hate-it addition to a codebase. I personally hate having to remember which particular file I’m working in and how many levels it is to import some other component or method…so I love aliasing my import paths. The difference is:
 
-    // (Default) Relative imports 😈: 
-    import { Awesome } from '../../components/awesome
-    import { Method } from '../../../classes/method
+```javascript
+// (Default) Relative imports 😈: 
+import { Awesome } from '../../components/awesome
+import { Method } from '../../../classes/method
 
-    // (Aliased) Absolute imports 😇:
-    import { Awesome } from '@/components/awesome
-    import { Method } from '@/classes/method
+// (Aliased) Absolute imports 😇:
+import { Awesome } from '@/components/awesome
+import { Method } from '@/classes/method
+```
 
 ^ Note that the syntax I’m using, @/folder/path, is arbitrary — the @ may look fancy but it is only there to make it obvious that this isn’t an npm package or a relative import — you could name the alias paths however you like!
 
@@ -191,7 +270,17 @@ In order to verify the aliased paths are working we need something to import. Ty
 
 Instead, let’s create a new section in the code specifically for components. This will be two new folders and a file: **components/callout/callout.js**. Add this to the **callout.js** file:
 
-<iframe src="https://medium.com/media/451387a6a9490cde9c3658fd5cdf69f2" frameborder=0></iframe>
+```javascript
+import PropTypes from 'prop-types'
+
+export default function Callout({ children }) {
+  return <p><strong style={{ color: 'red' }}>!</strong> {children} <strong style={{ color: 'red' }}>!</strong></p>
+}
+
+Callout.propTypes = {
+  children: PropTypes.node.isRequired
+}
+```
 
 ### Try The Component
 
@@ -270,7 +359,20 @@ Finally we need to update Jest. In the file **pages/index.test.js** add an impor
 
 The addition to fix this will go into **jest.config.js**, [a property called moduleNameMapper](https://jestjs.io/docs/en/configuration#modulenamemapper-objectstring-string--arraystring) which uses RegEx syntax, so is a bit more complicated:
 
-<iframe src="https://medium.com/media/feaece72c63e4261dd385246e3f42d8b" frameborder=0></iframe>
+```javascript
+module.exports = {
+  // Automatically clear mock calls and instances between every test
+  clearMocks: true,
+  // The directory where Jest should output its coverage files
+  coverageDirectory: '.coverage',
+  // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
+  moduleNameMapper: {
+    '^@/components(.*)$': '<rootDir>/components$1'
+  },
+  // A list of paths to modules that run some code to configure or set up the testing framework before each test
+  setupFilesAfterEnv: ['./jest.setup.js']
+}
+```
 
 ^ The regex is using a [capturing group](https://javascript.info/regexp-groups) to take everything that comes after @/components and resolve it instead from the <rootDir>/components specified on the right. [Check it out on regex101.com](https://regex101.com/r/hD0zR5/6) for a more complete breakdown of what’s going on.
 
