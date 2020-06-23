@@ -20,6 +20,7 @@ const light = {
     body: {
       primary: '#FFFFFF',
     },
+    // http://web-accessibility.carnegiemuseums.org/design/color/#:~:text=%E2%80%9CWCAG%20(Web%20Content%20Accessibility%20Guidelines,of%20at%20least%204.5%3A1.
     text: {
       primary: '#112e51',
       secondary: '#323a45',
