@@ -56,20 +56,28 @@ const useStyles = createUseStyles((theme) => ({
       maxWidth: '680px',
       minWidth: '320px',
       padding: '45px',
-      '& h1, & h2, & h3': {
-        // fontWeight: 'bold',
-      },
       '& h1 + p': {
         fontSize: '1.5rem',
         fontStyle: 'italic',
         color: theme.colors.text.lightest,
+      },
+      '& h1, & h2, & h3': {
+        '& a, & a:hover, & a:visited, & a:active': {
+          color: 'inherit',
+          textDecoration: 'none',
+        },
+        '& a:hover': {
+          '&::after': {
+            content: '" (link)"',
+          }
+        }
       }
     },
     'h1, h2, h3': {
       fontWeight: 400,
       lineHeight: theme.spacing.xl,
       marginBottom: theme.spacing.base,
-      color: '#000'
+      color: '#000',
     },
     // 'h1, h2, p': {
     //   '& + ul, & + ol': {

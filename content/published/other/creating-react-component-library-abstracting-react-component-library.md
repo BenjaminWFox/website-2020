@@ -9,7 +9,7 @@ category: "other"
 
 Using Rollup, Babel, and React we’ll look at why & how you might abstract a third-party component library to create your own component library.
 
-![](https://cdn-images-1.medium.com/max/3200/1*fOLLMlLkYKS72dBihyBBdQ.png)
+![Graphic of react logos consuming progressively smaller logos](https://cdn-images-1.medium.com/max/3200/1*fOLLMlLkYKS72dBihyBBdQ.png)
 
 Component libraries are useful. They allow developers to add features quickly and with confidence that they will have consistent style & functionality. Libraries may be built in-house or by a third party. The former offers complete control over implementation but takes more time and resources to build; The latter can be implemented quickly, but relies on the existing implementation.
 
@@ -44,7 +44,7 @@ When might you want to do this?
 
 ## What I’ll Cover
 
-1. [Final Repositories](#884c)
+1. [Final Repositories](#final-repositories)
 
 1. [Selecting a 3rd-party library](#0c0e)
 
@@ -74,7 +74,9 @@ When might you want to do this?
 
 1. [Library: Importing Carbon SASS Styles](#dcd6)
 
-## Final Repositories
+<a name="final-repositories"></a>
+
+## [Final Repositories](#final-repositories)
 
 If you’d like to start with a full picture of the project take a look at the repositories below. This tutorial assumes that the two projects below are in sibling directories while developing.
 
