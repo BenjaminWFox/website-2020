@@ -38,6 +38,9 @@
       "functions": "never"
     }],
     "capitalized-comments": 0,
+    "no-undef-init": 0,
+    "no-undefined": 0,
+    "max-statements": 0,
     "multiline-ternary": ["error", "always-multiline"],
     "no-ternary": 0,
     "max-lines-per-function": 0,
@@ -75,7 +78,7 @@
     "import/resolver": {
       "alias": [
           ["@/components", "./components"],
-          ["@/classes", "./classes"]
+          ["@/lib", "./lib"]
       ]
     }
   }

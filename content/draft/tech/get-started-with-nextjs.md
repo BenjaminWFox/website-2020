@@ -2,7 +2,7 @@
 title: "Reference cheatsheet for Next.js"
 date: "2020-06-19"
 subtitle: "A quick and dirty cheatsheet guide to Next.js idiosyncracies - what are they, and where you can read more about them."
-category: "draft"
+category: "tech"
 ---
 
 # Reference cheatsheet for Next.js

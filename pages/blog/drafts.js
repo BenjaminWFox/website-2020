@@ -61,8 +61,8 @@ export default function Home({ postData }) {
             >
               <h2>
                 <Link
-                  as={`/blog/${post.meta.category}/${post.slug}`}
-                  href={`/blog/${post.meta.category}/[slug]`}
+                  as={`/blog/draft/${post.meta.category}/${post.slug}`}
+                  href={`/blog/draft/${post.meta.category}/[slug]`}
                 ><a>{post.meta.title}</a>
                 </Link>
               </h2>
@@ -83,11 +83,9 @@ export default function Home({ postData }) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const postsToShow = 2
-  const postsOfStatus = postStatuses.published
+  const postsToShow = 4
+  const postsOfStatus = postStatuses.draft
   const postData = await getPostManifest(postsToShow, postsOfStatus)
-
-  console.log('POST DATA', postData[0])
 
   return {
     props: {

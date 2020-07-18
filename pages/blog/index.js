@@ -83,11 +83,9 @@ export default function Home({ postData }) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const postsToShow = 2
+  const postsToShow = 4
   const postsOfStatus = postStatuses.published
   const postData = await getPostManifest(postsToShow, postsOfStatus)
-
-  console.log('POST DATA', postData[0])
 
   return {
     props: {

@@ -1,9 +1,7 @@
-import { getPostData, getStaticPathsForCategory } from '../../../lib/posts'
+import { getDynamicPaths } from '@/lib/posts'
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
-
-const CATEGORY = 'tech'
 
 export default function PostTemplate({ postData }) {
   return (
@@ -31,7 +29,9 @@ export default function PostTemplate({ postData }) {
 }
 
 export const getStaticPaths = async () => {
-  const paths = getStaticPathsForCategory(CATEGORY)
+  const paths = await getDynamicPaths()
+
+  console.log('PATHS COMPLETE', paths)
 
   return {
     fallback: false,
@@ -40,7 +40,11 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const postData = await getPostData(CATEGORY, params.slug)
+  // const postData = await getPostData(CATEGORY, params.slug)
+  const postData = {
+    date: params.slug,
+    contentHtml: params.slug,
+  }
 
   return {
     props: {
