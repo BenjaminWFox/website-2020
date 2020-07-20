@@ -5,10 +5,6 @@ subtitle: "Using Rollup, Babel, and React we’ll look at why & how you might ab
 category: "other"
 ---
 
-# Creating a React Component Library by Abstracting a React Component Library
-
-Using Rollup, Babel, and React we’ll look at why & how you might abstract a third-party component library to create your own component library.
-
 ![Graphic of react logos consuming progressively smaller logos](https://cdn-images-1.medium.com/max/3200/1*fOLLMlLkYKS72dBihyBBdQ.png)
 
 Component libraries are useful. They allow developers to add features quickly and with confidence that they will have consistent style & functionality. Libraries may be built in-house or by a third party. The former offers complete control over implementation but takes more time and resources to build; The latter can be implemented quickly, but relies on the existing implementation.

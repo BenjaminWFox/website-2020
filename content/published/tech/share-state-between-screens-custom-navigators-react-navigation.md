@@ -5,10 +5,6 @@ subtitle: "Expose your React Navigation navigators for simple state sharing betw
 category: "tech"
 ---
 
-# Share state between screens with custom navigators in React Navigation
-
-Expose your React Navigation navigators for simple state sharing between any child screens in React Native.
-
 ![](https://cdn-images-1.medium.com/max/5120/1*rVkhYjY_ug8nKb9rKroCyw.jpeg)
 
 ### **Update 1/7/2020:**

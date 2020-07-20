@@ -1,9 +1,10 @@
-import { getDynamicPaths } from '@/lib/posts'
+import { getDynamicPaths, getPost } from '@/lib/posts'
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
+import Header from '@/components/header/header'
 
-export default function PostTemplate({ postData }) {
+export default function PostTemplate({ post }) {
   return (
     <div>
       <Head>
@@ -14,24 +15,30 @@ export default function PostTemplate({ postData }) {
         />
       </Head>
 
-      <Link href="/"><a>&lt; Home</a></Link>
-      <br />
-      {postData.date}
-      <br />
-      <div
-        className="markdown-body"
-        dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-      />
-      <br />
-      <Link href="/"><a>&lt; Home</a></Link>
+      <main>
+        <Header />
+        <div
+          className="markdown-body"
+        >
+          <div style={{ textAlign: 'right',
+            marginBottom: '.5rem' }}
+          >{post.meta.dateLong}
+          </div>
+          <h1>{post.meta.title}</h1>
+          <p>{post.meta.subtitle}</p>
+          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        </div>
+
+        <br />
+        <Link href="/"><a>&lt; Home</a></Link>
+      </main>
+
     </div>
   )
 }
 
 export const getStaticPaths = async () => {
   const paths = await getDynamicPaths()
-
-  console.log('PATHS COMPLETE', paths)
 
   return {
     fallback: false,
@@ -40,15 +47,11 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }) => {
-  // const postData = await getPostData(CATEGORY, params.slug)
-  const postData = {
-    date: params.slug,
-    contentHtml: params.slug,
-  }
+  const post = await getPost(params.slug)
 
   return {
     props: {
-      postData,
+      post,
     },
   }
 }

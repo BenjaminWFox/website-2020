@@ -2,6 +2,7 @@ import { createUseStyles, useTheme } from 'react-jss'
 import Head from 'next/head'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
+import Header from '@/components/header/header'
 import { getPostManifest } from '@/lib/posts'
 import { postStatuses } from '@/lib/config'
 
@@ -31,18 +32,7 @@ export default function Home({ postData }) {
       </Head>
 
       <main>
-        <div style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '150px',
-        }}
-        >
-          <p style={{ fontSize: '2rem' }}>
-            Hi, I&apos;m Ben
-          </p>
-        </div>
+        <Header />
 
         <div style={{
           maxWidth: '680px',
@@ -57,11 +47,11 @@ export default function Home({ postData }) {
           {postData.map((post) => (
             <div
               className={classes.text}
-              key={post.slug}
+              key={post.name}
             >
               <h2>
                 <Link
-                  as={`/blog/${post.meta.category}/${post.slug}`}
+                  as={`/blog/${post.meta.category}/${post.name}`}
                   href={`/blog/${post.meta.category}/[slug]`}
                 ><a>{post.meta.title}</a>
                 </Link>

@@ -5,10 +5,6 @@ subtitle: "A comprehensive step-by-step guide to configuring Jest, React Testing
 category: "tech"
 ---
 
-# Next.js Setup & Config for Testing, Linting, and Absolute Imports
-
-A comprehensive step-by-step guide to configuring Jest, React Testing Library, ESLint, and Path Aliases in a Next.js project.
-
 ![](https://cdn-images-1.medium.com/max/8064/1*dwiW-wU9A2rPh55jiRHXoQ.jpeg)
 
 Next.js is amazing when it comes to installing, learning the framework, and jumping into the code. Its superb documentation & zero-config philosophy make this possible, and not having to think about configuration is wonderful…right up to the point when you want to add some additional configuration.

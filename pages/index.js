@@ -2,6 +2,7 @@ import { createUseStyles, useTheme } from 'react-jss'
 import Head from 'next/head'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
+import Header from '@/components/header/header'
 import { getPostManifest } from '@/lib/posts'
 import { postStatuses } from '@/lib/config'
 
@@ -31,19 +32,7 @@ export default function Home({ postData }) {
       </Head>
 
       <main>
-        <div style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '150px',
-        }}
-        >
-          <p style={{ fontSize: '2rem' }}>
-            Hi, I&apos;m Ben
-          </p>
-        </div>
-
+        <Header />
         <div style={{
           maxWidth: '680px',
           margin: '0 auto',
@@ -54,24 +43,28 @@ export default function Home({ postData }) {
             Blog
           </h1>
 
-          {postData.map((post) => (
-            <div
-              className={classes.text}
-              key={post.slug}
-            >
-              <h2>
-                <Link
-                  as={`/blog/${post.meta.category}/${post.slug}`}
-                  href={`/blog/${post.meta.category}/[slug]`}
-                ><a>{post.meta.title}</a>
-                </Link>
-              </h2>
-              <p>
-                {post.meta.subtitle}
-              </p>
-              <hr />
-            </div>
-          ))}
+          {postData.map((post) => {
+            console.log('POST', post.name)
+
+            return (
+              <div
+                className={classes.text}
+                key={post.name}
+              >
+                <h2>
+                  <Link
+                    as={`/blog/${post.meta.category}/${post.name}`}
+                    href="/blog/[...slug]"
+                  ><a>{post.meta.title}</a>
+                  </Link>
+                </h2>
+                <p>
+                  {post.meta.subtitle}
+                </p>
+                <hr />
+              </div>
+            )
+          })}
         </div>
       </main>
 
@@ -86,8 +79,6 @@ export const getStaticProps = async ({ params }) => {
   const postsToShow = 2
   const postsOfStatus = postStatuses.published
   const postData = await getPostManifest(postsToShow, postsOfStatus)
-
-  console.log('POST DATA', postData[0])
 
   return {
     props: {

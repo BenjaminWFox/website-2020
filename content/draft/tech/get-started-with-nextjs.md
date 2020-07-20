@@ -5,10 +5,6 @@ subtitle: "A quick and dirty cheatsheet guide to Next.js idiosyncracies - what a
 category: "tech"
 ---
 
-# Reference cheatsheet for Next.js
-
-A quick and dirty cheatsheet guide to Next.js idiosyncracies - what are they, and where you can read more about them.
-
 ## What is Next.js?
 
 Next.js is a React based framework that blends together technologies of the client (browser) and server (nodejs).
