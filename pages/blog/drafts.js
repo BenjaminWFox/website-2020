@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import Header from '@/components/header/header'
 import { getPostManifest } from '@/lib/posts'
 import { postStatuses } from '@/lib/config'
+import { isProduction } from '@/lib/utility'
+import Error404 from '@/components/errors/404/404'
 
 const useStyles = createUseStyles((theme) => ({
   text: {
@@ -20,6 +22,11 @@ const useStyles = createUseStyles((theme) => ({
 
 export default function Home({ postData }) {
   const classes = useStyles(useTheme())
+
+  if (isProduction()) {
+
+    return <Error404 />
+  }
 
   return (
     <div className="container">

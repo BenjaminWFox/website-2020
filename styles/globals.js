@@ -62,6 +62,7 @@ const useStyles = createUseStyles((theme) => ({
         color: theme.colors.text.lightest,
       },
       '& h1, & h2, & h3': {
+        marginTop: '2rem',
         '& a, & a:hover, & a:visited, & a:active': {
           color: 'inherit',
           textDecoration: 'none',
@@ -71,7 +72,7 @@ const useStyles = createUseStyles((theme) => ({
             content: '" (link)"',
           }
         }
-      }
+      },
     },
     'h1, h2, h3': {
       fontWeight: 400,
@@ -89,12 +90,12 @@ const useStyles = createUseStyles((theme) => ({
     },
     a: {
       color: theme.colors.text.highlight,
-      textDecoration: 'none',
+      textDecoration: 'underline',
       '&:visited': {
         color: theme.colors.text.accent,
       },
       '&:hover': {
-        textDecoration: 'underline',
+        textDecoration: 'none',
         color: theme.colors.text.active,
       },
       '&:active': {

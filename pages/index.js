@@ -19,6 +19,7 @@ const useStyles = createUseStyles((theme) => ({
 }))
 
 export default function Home({ postData }) {
+  const clientPostData = postData
   const classes = useStyles(useTheme())
 
   return (
@@ -43,7 +44,7 @@ export default function Home({ postData }) {
             Blog
           </h1>
 
-          {postData.map((post) => {
+          {clientPostData.map((post) => {
             console.log('POST', post.name)
 
             return (
@@ -76,7 +77,7 @@ export default function Home({ postData }) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const postsToShow = 2
+  const postsToShow = 8
   const postsOfStatus = postStatuses.published
   const postData = await getPostManifest(postsToShow, postsOfStatus)
 
