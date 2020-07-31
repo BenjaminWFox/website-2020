@@ -37,7 +37,7 @@ export default function Home({ postData }) {
         }}
         >
           <h1>
-            About
+            Hi, I&apos;m Ben
           </h1>
 
           <div>
@@ -66,11 +66,12 @@ export default function Home({ postData }) {
               among others.
             </p>
             <p>
-              Professionally I work and lead teams across all areas of the stack.
-              As fun as coding can be, I also throughly enjoy creating diagrams and flowcharts that break down complex ideas, architectures, or flows into
-              manageable id
+              I lead teams working across all areas of the stack, and work primarily between infrastructure, front, and middle layers.
+              As 🥳 as coding can be, I also throughly enjoy simplifying complex ideas, architectures, and flows via charts & diagrams;
+              exchanging ideas & feedback during code reviews;
+              and producing articles and documentation aimed at detailing complex and/or 😡 processes.
             </p>
-            <p>Developing in my spare time I enjoy making casual games, and have participating in the
+            <p>Developing in my spare time I enjoy making casual games, and have participated in the
               {' '}
               <a href="https://js13kgames.com/" rel="noreferrer nofollow" target="_blank">js13kGames competition</a>
               {' '}
@@ -83,6 +84,9 @@ export default function Home({ postData }) {
               <a href="https://js13kgames.com/entries/row" rel="noreferrer nofollow" target="_blank">in 2019</a>
               {' '}
               creating browser-based games under 13kb.
+            </p>
+            <p>
+              Not developing in my spare time I spend a lot of time outside (🏃🏻‍♂️ 🚴🏻‍♂️ 🏔) and whatever time is left split between a handful of other hobbies (📷 🎸 📚).
             </p>
           </div>
         </div>
