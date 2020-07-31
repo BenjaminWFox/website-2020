@@ -2,7 +2,7 @@
 title: "Creating a React Component Library by Abstracting a React Component Library"
 date: "2020-05-17"
 subtitle: "Using Rollup, Babel, and React we’ll look at why & how you might abstract a third-party component library to create your own component library."
-category: "other"
+category: "tech"
 ---
 
 ![Graphic of react logos consuming progressively smaller logos](https://cdn-images-1.medium.com/max/3200/1*fOLLMlLkYKS72dBihyBBdQ.png)

@@ -13,8 +13,6 @@ The configuration I want to add is, technically speaking, useless to your final 
 
 How’s that for a hook…🙄
 
-This configuration is, technically, useless to your final product. It won’t make it faster, or reduce your bundle size, or add amazing new features. How’s that for a hook…🙄
-
 But it’s important 🤩 Consider this step the first reminder to [go slow to go fast](https://www.infoq.com/articles/slow-down-go-faster/) (esp. check the second to last paragraph). If you need more convincing, remember when Facebook changed its motto to ‘[move fast with stable infra](https://mashable.com/2014/04/30/facebooks-new-mantra-move-fast-with-stability/)’?
 
 You don’t even have to use all of it right away. ESLint and path aliases for absolute imports, once set up, are a free productivity boost. Absolute imports mean no need to worry about how many levels of ../../ are needed to find the component you are trying to import. Linting means no need to worry that a missing ) or } will leave you bashing your head against the wall for 30 minutes wondering why your code doesn’t work.
@@ -35,19 +33,19 @@ Let’s look at what it takes.
 
 ### What We’ll Cover
 
-1. [Assumptions](#0db2)
+1. [Assumptions](#assumptions)
 
-1. [Final Repository](#57b3)
+2. [Final Repository](#final)
 
-1. [Next.js: Installing](#6ab5)
+3. [Next.js: Installing](#install-nextjs)
 
-1. [ESLint: Install & Configure](#003c)
+4. [ESLint: Install & Configure](#install-eslint)
 
-1. [Jest & React Testing Library: Install, Configure, Implement](#1f77)
+5. [Jest & React Testing Library: Install, Configure, Implement](#install-configure-jest-testing-library)
 
-1. [Configuring Path Aliases/Absolute Imports](#7f40)
+6. [Configuring Path Aliases/Absolute Imports](#configure-path-alias)
 
-## Assumptions
+## <a name="assumptions"></a>[Assumptions](#assumptions)
 
 I’m going to assume you have familiarity running commands in a terminal, and I’m going to use npm commands. None of the commands are anything fancy, so you should be able to [convert to yarn](https://alligator.io/nodejs/npm-yarn-cheatsheet/) if needed.
 
@@ -59,11 +57,11 @@ I’m not going to talk about IDE-specific integrations or setup. I’m using VS
 
 Some of the configuration files we create ([jest.config.js](https://jestjs.io/docs/en/configuration) [.eslintrc](https://eslint.org/docs/user-guide/configuring), & [.babelrc](https://babeljs.io/docs/en/configuration#packagejson)) can be included within package.json rather than using separate files, if that feels cleaner to you. That will require additional wrapping syntax, which you can find at their respective links. The jsconfig.json & jest.setup.js files will have to be separate.
 
-## Final Repository
+## <a name="final"></a>[Final Repository](#final)
 
 [https://github.com/BenjaminWFox/nextjs-base](https://github.com/BenjaminWFox/nextjs-base)
 
-## Next.js: Installing
+## <a name="install-nextjs"></a>[Next.js: Installing](#install-nextjs)
 
 To start, in your terminal of choice, cd into a folder where you want to install this project. A new subfolder will be created be after you run the setup:
 
@@ -71,7 +69,7 @@ To start, in your terminal of choice, cd into a folder where you want to install
 
 Give your project a name like nextjs-base (this will also be the folder name), then select Default starter app when prompted to pick a template. Once the install completes, cd nextjs-base into your project folder.
 
-## ESLint: Install & Configure
+## <a name="install-eslint"></a>[ESLint: Install & Configure](#install-eslint)
 
 For configuration, let’s start with eslint — that’ll ensure that any future code we write is linted right away and we don’t need to go back and make edits. This will also include a plugin for specifically linting React, and another for linting import/export statements:
 
@@ -169,7 +167,7 @@ If you npm run lint now, you can also see all the errors in the console.
 
 * Assuming you use this base template in new projects, if you find yourself making updates to the .estlintrc file to accommodate your style preferences, remember to copy those back to the base project!
 
-## Jest & Testing Library: Install, Configure, Implement
+## <a name="install-configure-jest-testing-library"></a>[Jest & Testing Library: Install, Configure, Implement](#install-configure-jest-testing-library)
 
 ### Install Dependencies
 
@@ -242,7 +240,7 @@ Then in the project root in the terminal you can npm run test — and should see
 
 ![](https://cdn-images-1.medium.com/max/3548/1*FlTB0Avl89dbpuz19_Hi4g.png)
 
-## Configuring Path Aliases/Absolute Imports
+## <a name="configure-path-alias"></a>[Configuring Path Aliases/Absolute Imports](#configure-path-alias)
 
 I have seen some debate that leads me to believe path aliases are a love-it or hate-it addition to a codebase. I personally hate having to remember which particular file I’m working in and how many levels it is to import some other component or method…so I love aliasing my import paths. The difference is:
 
