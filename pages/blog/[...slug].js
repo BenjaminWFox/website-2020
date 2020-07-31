@@ -23,7 +23,7 @@ export default function PostTemplate({ post }) {
         <meta content={post.meta.title} property="og:title" />
         <meta content={post.meta.subtitle} property="og:description" />
         <meta content={post.meta.image} property="og:image" />
-        <meta content={`${process.env.SITE_ROOT}/blog${post.relativePath}`} property="og:url" />
+        <meta content={`${process.env.VERCEL_URL}/blog${post.relativePath}`} property="og:url" />
         <meta content="blog" property="og:type" />
       </Head>
 
