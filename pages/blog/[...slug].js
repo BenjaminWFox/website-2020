@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
 import Header from '@/components/header/header'
+import PropTypes from 'prop-types'
 
 export default function PostTemplate({ post }) {
   return (
@@ -14,8 +15,6 @@ export default function PostTemplate({ post }) {
           rel="icon"
         />
         {
-          console.log(post.relativePath)
-        } {
           post.meta.canon
             ? <link href={post.meta.canon} rel="canonical" />
             : ''
@@ -67,4 +66,8 @@ export const getStaticProps = async ({ params }) => {
       post,
     },
   }
+}
+
+PostTemplate.propTypes = {
+  post: PropTypes.object.isRequired,
 }

@@ -62,6 +62,7 @@
     "object-curly-spacing": ["error", "always"],
     "one-var": ["error", "never"],
     "quote-props": 0,
+    "no-magic-numbers": ["error", { "ignoreArrayIndexes": true }],
     "react/jsx-indent": [2, 2],
     "react/jsx-indent-props": [2, 2],
     "react/jsx-filename-extension": 0,
@@ -72,7 +73,8 @@
     "react/forbid-prop-types": 0,
     "react/function-component-definition": 0,
     "react/jsx-props-no-spreading": 0,
-    "react/jsx-max-props-per-line": [2, { "maximum": 4 }]
+    "react/jsx-max-props-per-line": [2, { "maximum": 4 }],
+    "react/no-danger": 0
   },
   "ignorePatterns": ["node_modules/", ".next/"],
   "settings": {
