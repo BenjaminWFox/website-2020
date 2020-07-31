@@ -13,6 +13,19 @@ export default function PostTemplate({ post }) {
           href="/favicon.ico"
           rel="icon"
         />
+        {
+          console.log(post.relativePath)
+        } {
+          post.meta.canon
+            ? <link href={post.meta.canon} rel="canonical" />
+            : ''
+        }
+        <meta content="Ben Fox" property="og:site_name" />
+        <meta content={post.meta.title} property="og:title" />
+        <meta content={post.meta.subtitle} property="og:description" />
+        <meta content={post.meta.image} property="og:image" />
+        <meta content={`${process.env.SITE_ROOT}/blog${post.relativePath}`} property="og:url" />
+        <meta content="blog" property="og:type" />
       </Head>
 
       <main>

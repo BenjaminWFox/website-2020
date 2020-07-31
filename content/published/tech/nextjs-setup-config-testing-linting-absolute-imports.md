@@ -3,6 +3,8 @@ title: "Next.js Setup & Config for Testing, Linting, and Absolute Imports"
 date: "2020-05-29"
 subtitle: "A comprehensive step-by-step guide to configuring Jest, React Testing Library, ESLint, and Path Aliases in a Next.js project."
 category: "tech"
+canon: 'https://medium.com/@benjaminwfox/next-js-setup-config-for-testing-linting-and-absolute-imports-605959d7bd6f'
+image: 'images/blog/tech/nextjs-configuration-construction.jpg'
 ---
 
 ![](https://cdn-images-1.medium.com/max/8064/1*dwiW-wU9A2rPh55jiRHXoQ.jpeg)
