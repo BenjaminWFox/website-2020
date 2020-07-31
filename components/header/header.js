@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <div className={classes.root}>
       <p style={{ fontSize: '2rem' }}>
-        Hi, I&apos;m Ben
+        Ben Fox
       </p>
       <nav>
         <ul className={classes.nav}>
