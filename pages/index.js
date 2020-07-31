@@ -44,28 +44,24 @@ export default function Home({ postData }) {
             Blog
           </h1>
 
-          {clientPostData.map((post) => {
-            console.log('POST', post.name)
-
-            return (
-              <div
-                className={classes.text}
-                key={post.name}
-              >
-                <h2>
-                  <Link
-                    as={`/blog/${post.meta.category}/${post.name}`}
-                    href="/blog/[...slug]"
-                  ><a>{post.meta.title}</a>
-                  </Link>
-                </h2>
-                <p>
-                  {post.meta.subtitle}
-                </p>
-                <hr />
-              </div>
-            )
-          })}
+          {clientPostData.map((post) => (
+            <div
+              className={classes.text}
+              key={post.name}
+            >
+              <h2>
+                <Link
+                  as={`/blog/${post.meta.category}/${post.name}`}
+                  href="/blog/[...slug]"
+                ><a>{post.meta.title}</a>
+                </Link>
+              </h2>
+              <p>
+                {post.meta.subtitle}
+              </p>
+              <hr />
+            </div>
+          ))}
         </div>
       </main>
 

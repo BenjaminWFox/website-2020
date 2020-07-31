@@ -1,6 +1,5 @@
 import { createUseStyles, useTheme } from 'react-jss'
 import Head from 'next/head'
-import PropTypes from 'prop-types'
 import Header from '@/components/header/header'
 
 const useStyles = createUseStyles((theme) => ({
@@ -15,7 +14,7 @@ const useStyles = createUseStyles((theme) => ({
   }
 }))
 
-export default function Home({ postData }) {
+export default function Home() {
   const classes = useStyles(useTheme())
 
   return (
@@ -104,7 +103,3 @@ export const getStaticProps = async ({ params }) => ({
     params: params || null,
   },
 })
-
-Home.propTypes = {
-  postData: PropTypes.array.isRequired,
-}

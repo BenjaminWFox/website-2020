@@ -1,4 +1,4 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document'
+import Document from 'next/document'
 import { JssProvider, SheetsRegistry, createGenerateId } from 'react-jss'
 import React from 'react'
 

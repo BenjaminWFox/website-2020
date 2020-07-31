@@ -13,12 +13,13 @@ import GlobalStyles from '../styles/globals'
 import React from 'react'
 import { ThemeProvider } from 'react-jss'
 import { themes } from '../styles/theme'
+import PropTypes from 'prop-types'
 
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = React.useState(themes.light)
 
-  const handleChangeTheme = () => {
-    if (theme._id === 1) {
+  const handleChangeTheme = function handleChangeTheme() {
+    if (theme.id === themes.ids.light) {
       setTheme(themes.dark)
     }
     else {
@@ -52,4 +53,9 @@ export default function App({ Component, pageProps }) {
       />
     </ThemeProvider>
   )
+}
+
+App.propTypes = {
+  Component: PropTypes.func.isRequired,
+  pageProps: PropTypes.object.isRequired,
 }

@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import { createUseStyles, useTheme } from 'react-jss'
+import { createUseStyles } from 'react-jss'
 import { isProduction } from '@/lib/utility'
 
-const useStyles = createUseStyles((theme) => ({
+const useStyles = createUseStyles(() => ({
   root: {
     maxWidth: '780px',
     display: 'flex',
@@ -18,7 +18,7 @@ const useStyles = createUseStyles((theme) => ({
 }))
 
 export default function Header() {
-  const classes = useStyles(useTheme())
+  const classes = useStyles()
 
   return (
     <div className={classes.root}>

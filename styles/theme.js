@@ -14,7 +14,7 @@ const tokens = {
 }
 
 const light = {
-  _id: 1,
+  id: 1,
   name: 'light',
   colors: {
     body: {
@@ -53,4 +53,8 @@ const light = {
 export const themes = {
   // dark,
   light,
+  ids: {
+    light: 1,
+    dark: 2,
+  }
 }

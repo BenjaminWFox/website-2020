@@ -68,8 +68,12 @@ const useStyles = createUseStyles((theme) => ({
           textDecoration: 'none',
         },
         '& a:hover': {
-          '&::after': {
-            content: '" (link)"',
+          position: 'relative',
+          '&::before': {
+            position: 'absolute',
+            opacity: 0.25,
+            content: '"🔗"',
+            right: '101%',
           }
         }
       },
