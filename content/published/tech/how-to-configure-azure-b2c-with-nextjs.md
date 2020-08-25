@@ -94,6 +94,7 @@ To set this up, copy and rename (or just rename) the `.env.example` file in the 
 - **AUTH_CLIENT_ID** - The App Registration client id.
 - **AUTH_CLIENT_SECRET** - The App Registration client secret. If you didn't save the value when you created it the first time, [just create a new one](https://docs.microsoft.com/en-us/azure/active-directory-b2c/tutorial-register-applications?tabs=app-reg-ga#create-a-client-secret).
 - **AUTH_TENANT_NAME** - The 'Initial domain name' from when you initially set up Azure B2C.
+- **AUTH_TENANT_GUID** - The GUID of the B2C Tenant, it can be found in the "Directory + subscription" blade in the Azure top nav bar (<img style="vertical-align: text-top;" src="/images/blog/tech/how-to-configure-azure-b2c-with-nextjs/directory-subscription-icon-azure-b2c.png" />).
 - **USER_FLOW** - The name of your signup/signin user flow, probably starting with B2C\_1\_
 
 **`next.config.js`**
