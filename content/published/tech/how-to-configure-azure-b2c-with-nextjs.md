@@ -1,5 +1,5 @@
 ---
-title: "How to Configure Azure AD B2C with Next.js"
+title: "How to Configure Azure AD B2C Authentication with Next.js"
 date: "2020-08-24"
 subtitle: "Configuring authentication with Azure B2C in Next.js is not a particularly straight forward process. We'll look at how to facilitate this using the NextAuth.js library."
 category: "tech"
