@@ -28,6 +28,7 @@ export default function PostTemplate({ post }) {
       </Head>
 
       <main>
+        <a id="top" />
         <Header />
         <div
           className="markdown-body"
@@ -40,9 +41,10 @@ export default function PostTemplate({ post }) {
           <p>{post.meta.subtitle}</p>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
         </div>
-
-        <br />
-        <Link href="/"><a>&lt; Home</a></Link>
+        <div style={{ textAlign: 'center',
+          padding: '20px' }}
+        ><Link href="/"><a>Home</a></Link> | <a href="#top">Top of Page</a>
+        </div>
       </main>
 
     </div>

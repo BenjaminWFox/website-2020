@@ -53,7 +53,7 @@ const useStyles = createUseStyles((theme) => ({
     '.markdown-body': {
       boxSizing: 'border-box',
       margin: '0 auto',
-      maxWidth: '680px',
+      maxWidth: '740px',
       minWidth: '320px',
       padding: '45px',
       '& h1 + p': {
@@ -121,6 +121,9 @@ const useStyles = createUseStyles((theme) => ({
         }
       }
     },
+    strong: {
+      fontSize: '1rem',
+    },
     blockquote: {
       borderLeft: '2px #ccc solid',
       fontWeight: '300',
@@ -140,6 +143,14 @@ const useStyles = createUseStyles((theme) => ({
         '&:not([class])': {
           whiteSpace: 'pre-wrap',
         }
+      }
+    },
+    p: {
+      '& code': {
+        fontSize: '.875rem',
+        backgroundColor: 'rgba(242, 242, 242, 1)',
+        wordBreak: 'break-all',
+        padding: '2px 4px',
       }
     }
   }
