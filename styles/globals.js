@@ -149,7 +149,7 @@ const useStyles = createUseStyles((theme) => ({
       '& code': {
         fontSize: '.875rem',
         backgroundColor: 'rgba(242, 242, 242, 1)',
-        wordBreak: 'break-all',
+        wordBreak: 'break-word',
         padding: '2px 4px',
       }
     }

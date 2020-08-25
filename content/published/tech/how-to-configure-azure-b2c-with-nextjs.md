@@ -76,7 +76,7 @@ The basic pre-generated user flows are enough to get started, but as needs evolv
 
 ## <a id="create-nextjs-app"></a>[Create a Next.js App](#create-nextjs-app)
 
-That should be all the setup & configuration needed on the Azure B2C side, so lets get a Next.js environment set up. I named mine `nextjs-azureb2c-nextauth` when I ran the following commands:
+That should be all the setup & configuration needed on the Azure B2C side, so let's get a Next.js environment set up. I named mine `nextjs-azureb2c-nextauth` when I ran the following commands:
 
 ```
 npx create-next-app
@@ -118,7 +118,7 @@ module.exports = {
 }
 ```
 
-[I'm not sure](https://nextjs.org/docs/api-reference/next.config.js/environment-variables) the `require('dotenv').config() is even required, but it isn't breaking anything at the moment.
+[I'm not sure](https://nextjs.org/docs/api-reference/next.config.js/environment-variables) the `require('dotenv').config()` is even required, but it isn't breaking anything at the moment.
 
 **`_app.js`**
 
@@ -204,7 +204,7 @@ The `providers.id` string must match what you've used in your callback (Redirect
 
 The `profile` property is used to map values returned from the authorization flow to the users token. Auzre AD B2C does some weird stuff, like returning an array of email addresses, so if you want any of these available make sure to understand the values that are coming back in the `profile` obejct and map them accordingly to the return properties.
 
-The `state` property is false. I had some issues when NextAuth release v3 and this was enabled, [but it doesn't sound like disabling it should be a problem(https://github.com/nextauthjs/next-auth/issues/468).
+The `state` property is false. I had some issues when NextAuth release v3 and this was enabled, [but it doesn't sound like disabling it should be a problem](https://github.com/nextauthjs/next-auth/issues/468).
 
 See more details on [all the options for using a custom provider here](https://next-auth.js.org/configuration/providers#using-a-custom-provider).
 
@@ -289,7 +289,7 @@ export default function Signout() {
 
 ## And Is That It?
 
-In theory you're all set...but given some of the idiosyncracies I've experienced with Azure (and sometimes Next.js) maybe not? Hopefully this at least helps you in the right direction if you were also struggling with this integration. My experience so far with Azure AD B2C has not been particularly pleasant, but given that it's *significantly* cheaper than a lot of the alternatives out there I'll be sticking with it for the forseeable future.
+In theory you're all set...but given some of the idiosyncrasies I've experienced with Azure (and sometimes Next.js) maybe not? Hopefully this at least helps you in the right direction if you were also struggling with this integration. My experience so far with Azure AD B2C has not been particularly pleasant, but given that it's *significantly* cheaper than a lot of the alternatives out there I'll be sticking with it for the forseeable future.
 
 ## Issues? Questions? Comments?
 
