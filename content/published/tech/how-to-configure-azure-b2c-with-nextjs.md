@@ -3,7 +3,10 @@ title: "How to Configure Azure AD B2C with Next.js"
 date: "2020-08-24"
 subtitle: "Configuring authentication with Azure B2C in Next.js is not a particularly straight forward process. We'll look at how to facilitate this using the NextAuth.js library."
 category: "tech"
+image: 'images/blog/tech/how-to-configure-azure-b2c-with-nextjs/azure-b2c-next-js-config-title-image-2x1.jpg'
 ---
+
+![](/images/blog/tech/how-to-configure-azure-b2c-with-nextjs/azure-b2c-next-js-config-title-image-2x1.jpg)
 
 ## Authentication with Azure B2C and Next.js
 
@@ -11,7 +14,7 @@ Authentication with [Next.js](https://nextjs.org/) is, at least for me, a bit of
 
 Add in the task of configuring authentication with Azure B2C and complications are compounded. Azure AD B2C is many things but straight-forward is not one of them at least as far as I have found.
 
-Please note that [Azure AD B2C](https://azure.microsoft.com/en-us/services/active-directory/external-identities/b2c/) is **NOT** the same thing as [Azure AD](https://azure.microsoft.com/en-us/services/active-directory/). Azure AD B2C (also referred to here as Azure B2C) is an identity & access management solution specifically for customer facing applications.
+Please note that [Azure AD B2C](https://azure.microsoft.com/en-us/services/active-directory/external-identities/b2c/) is ***not*** the same thing as [Azure AD](https://azure.microsoft.com/en-us/services/active-directory/). Azure AD B2C (also referred to here as Azure B2C) is an identity & access management solution specifically for customer facing applications.
 
 ## Enter NextAuth.js
 
