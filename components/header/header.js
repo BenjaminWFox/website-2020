@@ -29,6 +29,7 @@ export default function Header() {
         <ul className={classes.nav}>
           <li><Link href="/"><a>Home</a></Link></li>
           <li><Link href="/about"><a>About</a></Link></li>
+          <li><a href="https://github.com/BenjaminWFox" rel="noreferrer" target="_blank">GitHub</a></li>
           {!isProduction() && <li><Link href="/blog/drafts"><a>Drafts</a></Link></li>}
         </ul>
       </nav>
