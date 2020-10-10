@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<title></title>
+	<link type="text/css" rel="stylesheet" href="css/styles.css">
+</head>
+<body id="body" ng-app="values" ng-controller="ValuesCtrl" resize>
+	
+	<div id="nav" class="nav__wrapper">
+		<div class="header__instructions" ng-class="{'full-width':!allowSelection}">
+			<span ng-if="currentPhase.phaseNumber == 1">Start by selecting values that resonate with you. Choose at least {{currentPhase.requiredSelections}} to begin.</span>
+			<span ng-if="currentPhase.phaseNumber == 2">Ok, now you've got to narrow your focus...choose the {{currentPhase.requiredSelections}} that feel like the best fit.</span>
+			<span ng-if="currentPhase.phaseNumber == 3">Now pare the list down a little further. Pick  {{currentPhase.requiredSelections}} to contunie.</span>
+			<span ng-if="currentPhase.phaseNumber == 4 && allowSelection">For the last step, choose a final {{currentPhase.requiredSelections}}.</span>
+			<span ng-if="!allowSelection">That's it! Use these results as a tool for growing your self awareness.</span>
+		</div>
+		<div class="header__values-selected" ng-if="allowSelection">
+			Selected<br/>
+			{{totalValuesSelected}}
+		</div>
+		<div class="header__next-btn" ng-if="allowSelection" ng-class="{'btnVisible':showNextStep()}" ng-click="gotoNextStep()">
+			<span ng-if="currentPhase.phaseNumber < appPhases.length">Next Step</span>
+			<span ng-if="currentPhase.phaseNumber == appPhases.length">Finish</span>
+		</div>
+	</div>
+	
+	<div class="values__wrapper" ng-if="allowSelection">
+		<div class="value" ng-repeat="item in valuesArray" ng-click="addSelectedItem(item)" ng-class="{'selected':item.selected}">
+			<div>{{item.label}}</div>
+		</div>
+	</div>
+
+	<div class="values__wrapper" ng-if="!allowSelection">
+		<div class="phase__values" ng-repeat="phase in appPhases | orderBy:'-phaseNumber'">
+			<div class="phase__label" ng-if="$first">
+				Your highest values are:
+			</div>
+			<div class="phase__label" ng-if="$index == 1">
+				Strong secondary values you hold are:
+			</div>
+			<div class="phase__label" ng-if="$index == 2">
+				Other relatively strong values are:
+			</div>
+			<div class="phase__label" ng-if="$last">
+				Additional values that make up the core of your beliefs are:
+			</div>
+			<div class="value" ng-repeat="value in phase.chosenValues">
+				<div>{{value.label}}</div>
+			</div>
+		</div> 
+	</div>
+	
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+
+</body>
+</html>
