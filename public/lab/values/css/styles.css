@@ -1,0 +1,156 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	font-family: Helvetica, sans-serif;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Nav Styles */
+.nav__wrapper {
+	position: fixed; 
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	background: #EFEFEF;
+	border-bottom: 1px #666 solid;
+	text-align: center;
+	padding-bottom: 10px;
+}
+.header__instructions {
+	float:left;
+	margin: 10px 0px 0px 10px;
+	max-width: 65%;
+}
+.header__instructions.full-width {
+	max-width: 100%;
+}
+.header__values-selected {
+	float:right;
+	padding: 5px;
+	margin: 10px 10px 0px 0px;
+	border:1px #666 solid;
+	height: 35px;
+	width:72px;
+}
+.header__next-btn {
+	border: 1px #666 solid;
+    float: right;
+    height: 35px;
+    margin: 10px 10px 0px 0px;
+    padding: 5px;
+    cursor: pointer;
+    color: #fff;
+    background-color: rgba(37, 193, 88, 0.8);
+    width:72px;
+    visibility: hidden;
+}
+.btnVisible {
+	visibility: visible;
+}
+
+@media (max-width: 580px) {
+	.header__instructions {
+		max-width: 45%;
+	}
+}
+
+/* Values Styles */
+@media (min-width: 0px) {
+	.value {
+		width: 99%;
+		padding: 7% 0;
+	}
+}
+@media (min-width: 485px) {
+	.value {
+		width: 49%;
+		padding: 5% 0;
+	}
+}
+@media (min-width: 700px) {
+	.value {
+		width: 32.25%;
+		padding: 5% 0;
+	}
+}
+@media (min-width: 1000px) {
+	.value {
+		width: 24%;
+		padding: 2.5% 0;
+	}
+}
+@media (min-width: 1250px) {
+	.value {
+		width: 19%;
+		padding: 2.5% 0;
+	}
+}
+.value {
+	background-color: rgba(113, 154, 176, 1.0);
+	color: white;
+	display: inline-block;
+	/* padding: 2.5% 0; */
+	/* width: 19%; */
+	margin: .5%;
+	font-size: 20px;
+	text-align: center;
+	vertical-align: top;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+}
+.value:hover {
+	background-color:rgba(113, 154, 176, .9);
+}
+.value.selected {
+	background-color: rgba(37, 193, 88, 0.8);
+}
+
+.phase__values {
+	margin: 30px 15px;
+}
+.phase__label {
+	margin-bottom: 10px;
+}
