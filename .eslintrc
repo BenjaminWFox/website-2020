@@ -52,6 +52,7 @@
     }],
     "function-call-argument-newline": 0,
     "padded-blocks": 0,
+    "no-warning-comments": 0,
     "padding-line-between-statements": [
       "error",
       { "blankLine": "always", "prev": "*", "next": "return" },
