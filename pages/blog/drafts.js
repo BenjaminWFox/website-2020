@@ -60,7 +60,7 @@ export default function Home({ postData }) {
                 <Link
                   as={`/blog/draft/${post.meta.category}/${post.name}`}
                   href={`/blog/draft/${post.meta.category}/[slug]`}
-                ><a>{post.meta.title}</a>
+                ><a>{post.meta.title || post.name}</a>
                 </Link>
               </h2>
               <p>
@@ -83,6 +83,8 @@ export const getStaticProps = async ({ params }) => {
   const postsToShow = 4
   const postsOfStatus = postStatuses.draft
   const postData = await getPostManifest(postsToShow, postsOfStatus)
+
+  console.log('gSP.', postData)
 
   return {
     props: {
