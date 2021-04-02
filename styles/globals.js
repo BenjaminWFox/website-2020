@@ -61,9 +61,10 @@ const useStyles = createUseStyles((theme) => ({
         fontStyle: 'italic',
         color: theme.colors.text.lightest,
       },
-      '& h1, & h2, & h3': {
+      '& h1, & h2, & h3, & h4, & h5, & h6': {
         marginTop: '2rem',
         '& a, & a:hover, & a:visited, & a:active': {
+          fontWeight: 'bold',
           color: 'inherit',
           textDecoration: 'none',
         },

@@ -84,8 +84,6 @@ export const getStaticProps = async ({ params }) => {
   const postsOfStatus = postStatuses.draft
   const postData = await getPostManifest(postsToShow, postsOfStatus)
 
-  console.log('gSP.', postData)
-
   return {
     props: {
       params: params || null,
