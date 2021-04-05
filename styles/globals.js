@@ -3,45 +3,8 @@ import { createUseStyles, useTheme } from 'react-jss'
 
 const useStyles = createUseStyles((theme) => ({
   '@global': {
-    '@font-face': [
-      {
-        fontFamily: 'Lato',
-        src: 'url(\'/fonts/Lato-Italic.ttf\')',
-        fontWeight: '400',
-        fontStyle: 'italic',
-        fontDisplay: 'swap',
-      },
-      {
-        fontFamily: 'Lato',
-        src: 'url(\'/fonts/Lato-Regular.ttf\')',
-        fontWeight: '400',
-        fontStyle: 'normal',
-        fontDisplay: 'swap',
-      },
-      {
-        fontFamily: 'Lato',
-        src: 'url(\'/fonts/Lato-Bold.ttf\')',
-        fontWeight: '700',
-        fontStyle: 'normal',
-        fontDisplay: 'swap',
-      },
-      {
-        fontFamily: 'Lato',
-        src: 'url(\'/fonts/Lato-Light.ttf\')',
-        fontWeight: '300',
-        fontStyle: 'normal',
-        fontDisplay: 'swap',
-      },
-      {
-        fontFamily: 'Lato',
-        src: 'url(\'/fonts/Lato-LightItalic.ttf\')',
-        fontWeight: '300',
-        fontStyle: 'italic',
-        fontDisplay: 'swap',
-      },
-    ],
     html: {
-      fontFamily: 'Lato, Times New Roman',
+      fontFamily: 'Helvetica, Arial, Tahoma',
     },
     body: {
       backgroundColor: theme.colors.body.primary,
@@ -135,9 +98,12 @@ const useStyles = createUseStyles((theme) => ({
       fontStyle: 'italic',
       paddingLeft: theme.spacing.lg,
     },
+    code: {
+      lineHeight: '1rem',
+    },
     pre: {
-      overflow: 'scroll',
       '& code': {
+        fontFamily: '"Courier New", monospace',
         background: '#2b2b2b',
         color: '#f8f8f2',
         display: 'block',
@@ -152,6 +118,7 @@ const useStyles = createUseStyles((theme) => ({
     },
     p: {
       '& code': {
+        fontFamily: 'monospace, "Courier New"',
         fontSize: '.875rem',
         backgroundColor: 'rgba(242, 242, 242, 1)',
         wordBreak: 'break-word',
