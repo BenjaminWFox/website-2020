@@ -1,5 +1,5 @@
 ---
-title: "Styleguide for writing posts with Markdown"
+title: "Markdown Styleguide for Posts"
 date: "2100-01-01"
 subtitle: "Reference and documentation to ensure you know what formatting to use where."
 category: "other"
@@ -9,14 +9,14 @@ image: 'images/blog/tech/how-to-configure-azure-b2c-with-nextjs/azure-b2c-next-j
 ![Initial image used as anchor for article](https://cdn-images-1.medium.com/max/3200/1*fOLLMlLkYKS72dBihyBBdQ.png)
 
 The content in the markdown file header is parsed by `gray-matter` and used in various places:
-```
+```text
 ---
-title: Used in meta tags, and added to post JSX outside of markdown transfomration
-date: Added to post JSX outside of markdown transfomration
+title:    Used in meta tags, and added to post JSX outside of markdown transfomration
+date:     Added to post JSX outside of markdown transfomration
 subtitle: Used in meta tags, and added to post JSX outside of markdown transfomration
 category: Used in constructing post URL
-image: Used in meta tags
-canon: Can be used to specify a canonical link, if originally published elsewhere
+image:    Used in meta tags
+canon:    Can be used to specify a canonical link, if originally published elsewhere
 ---
 ```
 
@@ -108,27 +108,16 @@ Mice attack dog, run away and pretend to be victim and twitch tail in permanent 
 Sit on human they not getting up ever meow meow find a way to fit in tiny box. I see a bird i stare at it i meow at it i do a wiggle come here birdy thinking longingly about tuna brine for plan steps for world domination yet cats woo so get suspicious of own shadow then go play with toilette paper sleep on dog bed, force dog to sleep on floor.
 
 ## [Some Other Section](#some-other-section)
-Setting up Azure B2C for authentication with NextAuth, though, is still a bit of a process. It requires some initial setup & configuration in the Azure Portal, as well as a custom configuration in NextAuth.
-
-My goal with this article is to detail all of the necessary steps to create a minimal authentication setup in Next.js using Azure B2C and NextAuth.js, and specifically to share the NextAuth configuration file I'm using. I'm not going to dive deep into the workings Azure B2C, Next.js, or NextAuth.
-
-Setting up Azure B2C for authentication with NextAuth, though, is still a bit of a process. It requires some initial setup & configuration in the Azure Portal, as well as a custom configuration in NextAuth.
-
-My goal with this article is to detail all of the necessary steps to create a minimal authentication setup in Next.js using Azure B2C and NextAuth.js, and specifically to share the NextAuth configuration file I'm using. I'm not going to dive deep into the workings Azure B2C, Next.js, or NextAuth.
+Run at 3am yowling nonstop the whole night. My cat stared at me he was sipping his tea, too cry louder at reflection that box? i can fit in that box so chew the plant, slap owner's face at 5am until human fills food dish and pee in the shoe. My slave human didn't give me any food so i pooped on the floor side-eyes your "jerk" other hand while being petted or give me some of your food give me some of your food give me some of your food meh, i don't want it. Step on your keyboard while you're gaming and then turn in a circle experiences short bursts of poo-phoria after going to the loo or yowling nonstop the whole night for run outside as soon as door open. Warm up laptop with butt lick butt fart rainbows until owner yells pee in litter box hiss at cats hey! you there, with the hands i show my fluffy belly but it's a trap! if you pet it i will tear up your hand, or poop on grasses dream about hunting birds but behind the couch, but let me in let me out let me in let me out let me in let me out who broke this door anyway.
 
 ### [Section SubHeading](#section-subheading)
-Setting up Azure B2C for authentication with NextAuth, though, is still a bit of a process. It requires some initial setup & configuration in the Azure Portal, as well as a custom configuration in NextAuth.
+Meow meow spot something, big eyes, big eyes, crouch, shake butt, prepare to pounce this human feeds me, i should be a god, meow all night, yet hiss at vacuum cleaner yet sit on the laptop. When owners are asleep, cry for no apparent reason claw your carpet in places everyone can see - why hide my amazing artistic clawing skills? or cat milk copy park pee walk owner escape bored tired cage droppings sick vet vomit, so purr so immediately regret falling into bathtub claws in the eye of the beholder i is not fat, i is fluffy.
 
-My goal with this article is to detail all of the necessary steps to create a minimal authentication setup in Next.js using Azure B2C and NextAuth.js, and specifically to share the NextAuth configuration file I'm using. I'm not going to dive deep into the workings Azure B2C, Next.js, or NextAuth.
+Warm up laptop with butt lick butt fart rainbows until owner yells pee in litter box hiss at cats hey! you there, with the hands i show my fluffy belly but it's a trap! if you pet it i will tear up your hand, or poop on grasses dream about hunting birds but behind the couch, but let me in let me out let me in let me out let me in let me out who broke this door anyway.
 
-Setting up Azure B2C for authentication with NextAuth, though, is still a bit of a process. It requires some initial setup & configuration in the Azure Portal, as well as a custom configuration in NextAuth.
-
-My goal with this article is to detail all of the necessary steps to create a minimal authentication setup in Next.js using Azure B2C and NextAuth.js, and specifically to share the NextAuth configuration file I'm using. I'm not going to dive deep into the workings Azure B2C, Next.js, or NextAuth.
+Run at 3am yowling nonstop the whole night. My cat stared at me he was sipping his tea, too cry louder at reflection that box? i can fit in that box so chew the plant, slap owner's face at 5am until human fills food dish and pee in the shoe. My slave human didn't give me any food so i pooped on the floor side-eyes your "jerk" other hand while being petted or give me some of your food give me some of your food give me some of your food meh, i don't want it. Step on your keyboard while you're gaming and then turn in a circle experiences short bursts of poo-phoria after going to the loo or yowling nonstop the whole night for run outside as soon as door open. Warm up laptop with butt lick butt fart rainbows until owner yells pee in litter box hiss at cats hey! you there, with the hands i show my fluffy belly but it's a trap! if you pet it i will tear up your hand, or poop on grasses dream about hunting birds but behind the couch, but let me in let me out let me in let me out let me in let me out who broke this door anyway.
 
 #### [Other Callout](#other-callout)
-
-Get on going on this thing 1 2 3
-
 Pretend you want to go out but then don't skid on floor, crash into wall the fat cat sat on the mat bat away with paws yowling nonstop the whole night adventure always chew foot. Get scared by sudden appearance of cucumber check cat door for ambush 10 times before coming in go crazy with excitement when plates are clanked together signalling the arrival of cat food, catching very fast laser pointer commence midnight zoomies and tweeting a baseball chew the plant.
 
 Meow meow spot something, big eyes, big eyes, crouch, shake butt, prepare to pounce this human feeds me, i should be a god, meow all night, yet hiss at vacuum cleaner yet sit on the laptop. When owners are asleep, cry for no apparent reason claw your carpet in places everyone can see - why hide my amazing artistic clawing skills? or cat milk copy park pee walk owner escape bored tired cage droppings sick vet vomit, so purr so immediately regret falling into bathtub claws in the eye of the beholder i is not fat, i is fluffy.
