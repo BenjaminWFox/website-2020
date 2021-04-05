@@ -6,8 +6,6 @@ import Header from '@/components/header/header'
 import PropTypes from 'prop-types'
 
 export default function PostTemplate({ post }) {
-  console.log(post.html)
-
   return (
     <div>
       <Head>
@@ -64,8 +62,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const post = await getPost(params.slug)
-
-  console.log(post.html)
 
   return {
     props: {
