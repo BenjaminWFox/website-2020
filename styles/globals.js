@@ -18,7 +18,13 @@ const useStyles = createUseStyles((theme) => ({
       margin: '0 auto',
       maxWidth: '740px',
       minWidth: '320px',
-      padding: '45px',
+      padding: theme.spacing.base,
+      [theme.breakpoints.queries.tabletAndUp]: {
+        padding: theme.layout.lg,
+      },
+      [theme.breakpoints.queries.desktopAndUp]: {
+        padding: theme.layout.xl,
+      },
       '& h1 + p': {
         fontSize: '1.5rem',
         fontStyle: 'italic',
@@ -59,6 +65,7 @@ const useStyles = createUseStyles((theme) => ({
     a: {
       color: theme.colors.text.highlight,
       textDecoration: 'underline',
+      overflowWrap: 'break-word',
       '&:visited': {
         color: theme.colors.text.accent,
       },
@@ -84,7 +91,7 @@ const useStyles = createUseStyles((theme) => ({
     'ul, ol': {
       '& li': {
         marginLeft: theme.spacing.lg,
-        '& *:last-child': {
+        '& > *:last-child': {
           marginBottom: theme.spacing.xs,
         }
       }
