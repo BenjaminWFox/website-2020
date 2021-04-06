@@ -1,16 +1,32 @@
 const tokens = {
   spacing: {
-    '3xs': '.125',
-    '2xs': '.25',
+    xs3: '.125',
+    xs2: '.25',
     xs: '.5rem',
     sm: '.75rem',
     base: '1rem',
     lg: '1.5rem',
     xl: '2rem',
-    '2xl': '2.5rem',
-    '3xl': '3rem'
+    xl2: '2.5rem',
+    xl3: '3rem'
   },
-  typography: {}
+  layout: {
+    base: '1rem',
+    lg: '2rem',
+    xl: '4rem',
+    xl2: '8rem',
+    xl3: '16rem',
+  },
+  typography: {},
+  breakpoints: {
+    queries: {
+      mobileAndUp: '@media screen and (min-width: 320px)',
+      tabletAndUp: '@media screen and (min-width: 672px)',
+      desktopAndUp: '@media screen and (min-width: 1056px)',
+      largeAndUp: '@media screen and (min-width: 1312px)',
+      maxAndUp: '@media screen and (min-width: 1584px)',
+    }
+  }
 }
 
 const light = {
@@ -34,6 +50,12 @@ const light = {
   },
   spacing: {
     ...tokens.spacing,
+  },
+  layout: {
+    ...tokens.layout,
+  },
+  breakpoints: {
+    ...tokens.breakpoints,
   }
 }
 

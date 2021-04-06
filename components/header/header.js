@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { createUseStyles } from 'react-jss'
 import { isProduction } from '@/lib/utility'
 
-const useStyles = createUseStyles(() => ({
+const useStyles = createUseStyles((theme) => ({
   root: {
     maxWidth: '780px',
     display: 'flex',
@@ -10,6 +10,10 @@ const useStyles = createUseStyles(() => ({
     justifyContent: 'space-between',
     height: '150px',
     margin: '0 auto',
+    padding: `0 ${theme.spacing.xs}`,
+    [theme.breakpoints.queries.desktopAndUp]: {
+      padding: 0,
+    },
   },
   nav: {
     listStyleType: 'none',
