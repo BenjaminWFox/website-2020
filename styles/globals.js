@@ -48,9 +48,6 @@ const useStyles = createUseStyles((theme) => ({
           }
         }
       },
-      '& > *': {
-        tabIndex: 0,
-      }
     },
     'h1': {
       lineHeight: theme.spacing.xl2,
