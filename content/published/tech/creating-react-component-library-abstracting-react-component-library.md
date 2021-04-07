@@ -12,13 +12,15 @@ Component libraries are useful. They allow developers to add features quickly an
 
 I like third party libraries, and have found that almost any limitations can be overcome by abstracting the library components on the side of the implementing application. When the library to implementing application ratio is 1 to 1, like in personal projects or on a small team, this process is relatively straight forward. With larger or multiple teams, however, where multiple applications are relying on the same underlying library, one-off customizations quickly lead to inconsistent implementations:
 
-![Multiple applications creating different custom implementations from a 3rd party library component.](https://cdn-images-1.medium.com/max/2000/1*WXHkK3ZvQdiqvq-llSMfdw.png)*Multiple applications creating different custom implementations from a 3rd party library component.*
+![Multiple applications creating different custom implementations from a 3rd party library component.](https://cdn-images-1.medium.com/max/2000/1*WXHkK3ZvQdiqvq-llSMfdw.png)
+*Multiple applications creating different custom implementations from a 3rd party library component.*
 
 So, what if you want 🎂🍰🥄👄😋? […to have your cake and eat it too!]
 
 Create your own component library…by abstracting an entire component library!
 
-![Multiple applications using the same custom implementation, abstracted from a 3rd party component.](https://cdn-images-1.medium.com/max/2000/1*ZK7tY-q7okG3JRnO6fpREg.png)*Multiple applications using the same custom implementation, abstracted from a 3rd party component.*
+![Multiple applications using the same custom implementation, abstracted from a 3rd party component.](https://cdn-images-1.medium.com/max/2000/1*ZK7tY-q7okG3JRnO6fpREg.png)
+*Multiple applications using the same custom implementation, abstracted from a 3rd party component.*
 
 When might you want to do this?
 
@@ -28,7 +30,7 @@ When might you want to do this?
 
 * Extensive customizations to style (think theme/brand) and/or functionality need to be made, AND multiple teams and/or applications need to implement these customizations with consistency.
 
-## Some things to consider before going this route:
+## Some things to consider before going this route: <!-- omit in toc -->
 
 1. Documentation becomes challenging — The original implementation details live in the original library, but any new functionality needs to be documented in the abstracting library.
 
@@ -36,40 +38,27 @@ When might you want to do this?
 
 3. There is a trap in thinking that, because you are abstracting the third-party library, that you might easily swap it for a different one later on. Don’t fall for it! In this scenario, you should be exposing all the underlying props of any abstracted components. As soon as applications start implementing *your *library you’re locked in to your choice.
 
-## A quick definition of Abstraction
+## A quick definition of Abstraction <!-- omit in toc -->
 > Regarding the word ‘abstract[ion]/[ing]/[ed]’ — I’m going to use it a lot, and essentially what I mean in this context is ‘wrapping’. I’m going to ‘wrap’ a 3rd-party component library with my own component library, specifically by ‘wrapping’ any components from that library with my own components.
 
-## What I’ll Cover
-
+## What I'll Cover <!-- omit in toc -->
 1. [Final Repositories](#final-repositories)
-
-1. [Selecting a 3rd-party library](#0c0e)
-
-1. [Component Library Initial Setup](#50c3)
-
-1. [Installing Rollup](#d3af)
-
-1. [Installing Babel](#6921)
-
-1. [Installing React](#c9fb)
-
-1. [Installing Carbon](#df0d)
-
-1. [Configuring Rollup](#09c0)
-
-1. [Configuring Babel](#13a8)
-
-1. [Adding a Component](#b58f)
-
-1. [Adding a Build Script](#cd92)
-
-1. [Creating a Consumer Application](#5324)
-
-1. [Library: Adding Another Component](#f09b)
-
-1. [Consumer: Adding the Message Component](#fd7f)
-
-1. [Library: Importing Carbon SASS Styles](#dcd6)
+2. [Selection of a 3rd-party Library](#selection-of-a-3rd-party-library)
+3. [Library: Initial Setup](#library-initial-setup)
+   1. [Project folder, npm, and git](#project-folder-npm-and-git)
+   2. [Folder structure & files](#folder-structure--files)
+4. [Library: Install Rollup](#library-install-rollup)
+5. [Library: Install Babel](#library-install-babel)
+6. [Library: Install React](#library-install-react)
+7. [Library: Install Carbon](#library-install-carbon)
+8. [Library: Configure Rollup](#library-configure-rollup)
+9. [Library: Configure Babel](#library-configure-babel)
+10. [Library: Add a component to test](#library-add-a-component-to-test)
+11. [Library: Add a Build Script](#library-add-a-build-script)
+12. [Consumer: Setup & Consumption](#consumer-setup--consumption)
+13. [Library: Add Another Component](#library-add-another-component)
+14. [Consumer: Add the Message Component](#consumer-add-the-message-component)
+15. [Library: Importing Carbon SASS Styles](#library-importing-carbon-sass-styles)
 
 <a name="final-repositories"></a>
 
@@ -85,7 +74,7 @@ The **library-consumer** is a basic React application that imports the **compone
 
 [https://github.com/BenjaminWFox/library-consumer](https://github.com/BenjaminWFox/library-consumer)
 
-## Selection of a 3rd-party Library
+## [Selection of a 3rd-party Library](#selection-of-a-3rd-party-library)
 
 If you’re going down this route chances are you’re not the only stakeholder whose opinion matters. Depending on your situation there may be additional considerations from design (a full design system, Sketch/Figma support?) or business (license, speed, size, accessibility?) stakeholders.
 
@@ -94,9 +83,9 @@ There are so many component libraries out there that the ‘right’ choice will
 I’m going to use the React component library from the Carbon Design System by IBM. The design team I work with recently chose it as the foundation for our in-house design system because it offers a relatively straight-forward, opinionated guidance and strong integration support for Figma. It’s got some good things going for it for developers too, including a React component library with first-class* support of the design system, great documentation, and attention to important & often-overlooked details like accessibility.
 > \* by ‘first-class’ support I mean that the React implementation is a direct subset of the Carbon Design System & maintained in-house. Compare that to Material-UI (full disclosure, I also like MUI and it was a strong 2nd contender), which is a 3rd party implementation of the Material Design System.
 
-## Library: Initial Setup
+## [Library: Initial Setup](#library-initial-setup)
 
-### Project folder, npm, and git
+### [Project folder, npm, and git](#project-folder-npm-and-git)
 
 Now that we know what we’re aiming to build, we can initialize the project. Get it all out of the way at once creating a project folder, an npm package, & git repo with an initial commit:
 
@@ -115,7 +104,7 @@ Make one change to your `package.json` file:
 
 the **lib/index.js** file specified by the **main** property is where that project will look for the import.
 
-### Folder structure & files
+### [Folder structure & files](#folder-structure--files)
 
 You now have a **package.json **file — create some additional folder structure and some files:
 ~~~
@@ -147,7 +136,7 @@ For the first file update, open the **.gitignore** file and add:
 
     git add . && git commit -m “Add initial folder & file structure”
 
-## Library: Install Rollup
+## [Library: Install Rollup](#library-install-rollup)
 
 The first packages to add are for Rollup, a JavaScript module bundler like Webpack. The research I did before implementing this boiled down to “use Webpack for applications and Rollup for libraries” … so that’s what I did 🤷‍♂️
 
@@ -167,7 +156,7 @@ I used two separate articles for the basis of this library, but both were out of
 
 * rollup-plugin-postcss: [Used to compile & export the SASS/C](https://github.com/egoist/rollup-plugin-postcss)SS — it will also leverage two additional plugins: [node-sass](https://github.com/sass/node-sass) & [autoprefixer](https://github.com/postcss/autoprefixer#readme)
 
-## Library: Install Babel
+## [Library: Install Babel](#library-install-babel)
 
 Next up is Babel, which will transform the code we write to ensure backwards compatibility.
 
@@ -175,7 +164,7 @@ Next up is Babel, which will transform the code we write to ensure backwards com
 
 [The first three packages (cli, core, and preset-env)](https://babeljs.io/docs/en/next/usage) are the basics required for using Babel. [The last (preset-react) package](https://babeljs.io/docs/en/babel-preset-react) will add support for React & JSX specific syntax.
 
-## Library: Install React
+## [Library: Install React](#library-install-react)
 
 It’s a React library, so this next one is pretty straight froward…
 
@@ -201,7 +190,7 @@ It’s a React library, so this next one is pretty straight froward…
 }
 ~~~
 
-## Library: Install Carbon
+## [Library: Install Carbon](#library-install-carbon)
 
 The [Carbon component library for React](https://www.carbondesignsystem.com/get-started/develop/react) is pretty easy to get started with:
 
@@ -213,7 +202,7 @@ Commit all these new changes:
 
     git add . && git commit -m “Install necessary packages”
 
-## Library: Configure Rollup
+## [Library: Configure Rollup](#library-configure-rollup)
 
 Add the configuration below to the **rollup.config.js** file. This is by far the most complex part of creating a component library, with the largest challenge, I though, being how to configure the plugin to compile & bundle the SASS. I originally tried a different plugin, [rollup-plugin-sass](https://www.npmjs.com/package/rollup-plugin-sass), but it didn’t seem to be quite as flexible.
 
@@ -281,7 +270,7 @@ export default {
 }
 ~~~
 
-## Library: Configure Babel
+## [Library: Configure Babel](#library-configure-babel)
 
 Add the configuration below to the **src/.babelrc** file to ensure babel is using the presets we installed:
 
@@ -299,7 +288,7 @@ Add the configuration below to the **src/.babelrc** file to ensure babel is usin
   ]
 }
 ```
-## Library: Add a component to test
+## [Library: Add a component to test](#library-add-a-component-to-test)
 
 Now, in theory, if we add a component we should be able to build with Rollup and get a bundle we can reference from another project!
 
@@ -330,7 +319,7 @@ export {
 
     import { Component } from ‘component-library’
 
-## Library: Add a Build Script
+## [Library: Add a Build Script](#library-add-a-build-script)
 
 We could call rollup straight from the command line, but best practice is to add the scripts we need to **package.json**. In addition to the **build **script, add a **watch** script that will rebuild on any changes during development. Add the following **watch **and** build **scripts to **package.json**:
 
@@ -358,7 +347,7 @@ Then, try it out:
 
 …and you’ll also have a new directory, **lib/** with two files, **index.js** & **index.map.js**. If you don’t have a **lib/ **folder, make sure you [updated the **main** prop in **package.json](#50c3)**.
 
-## Consumer: Setup & Consumption
+## [Consumer: Setup & Consumption](#consumer-setup--consumption)
 
 So far so good! We have a component library package that builds and (in theory) should be exporting our Carbon button abstraction. How do we test that the build really worked & the export can be used in another application? Create a basic application, then let’s import it — this script assumes that you’re running it from **within the component-library directory**:
 
@@ -396,11 +385,11 @@ Now, (still from the **library-consumer** folder) run the CRA project:
 
 …and you should see the button with “Hello World”!
 
-### At this point you’ve successfully abstracted a react component library to build your very own react component library!
+### At this point you’ve successfully abstracted a react component library to build your very own react component library! <!-- omit in toc -->
 
-## 🎉 🎂 😋
+## 🎉 🎂 😋 <!-- omit in toc -->
 
-## Library: Add Another Component
+## [Library: Add Another Component](#library-add-another-component)
 
 We’ve seen now how to create a component that wraps a Carbon component. Let’s create another component, this time without using Carbon. As a bonus, we’ll add some styles.
 
@@ -453,7 +442,7 @@ Make sure you build the library again if you’re not running the watch command:
 
     npm run build
 
-## Consumer: Add the Message Component
+## [Consumer: Add the Message Component](#consumer-add-the-message-component)
 
 Back in the **library-consumer** application, in **src/App.js**, make the following changes to import the **Message **component and styles from our **index.css** file. (If you wanted, you could include these in the App.css file instead with: *@import ‘../node_modules/component-library/lib/index.css’;*):
 
@@ -483,7 +472,7 @@ function App() {
 export default App;
 ```
 
-## ⚠️ This will probably give you an error ⚠️
+## ⚠️ This will probably give you an error ⚠️  <!-- omit in toc -->
 
 Just get an error about hooks?
 > This problem can also come up when you use *npm link* or an equivalent. In that case, your bundler might “see” two Reacts — one in application folder and one in your library folder. Assuming *myapp* and *mylib* are sibling folders, one possible fix is to run *npm link ../myapp/node_modules/react* from *mylib*. This should make the library use the application’s React copy.
@@ -505,7 +494,7 @@ Then switch back to the **library-consumer **application and restart the applica
 
 ❗️If the above doesn’t work, try deleting your **node_modules** folders in both projects️ and re-running **npm install** prior to running this series of commands. I had some varying results when I was testing.
 
-## Library: Importing Carbon SASS Styles
+## [Library: Importing Carbon SASS Styles](#library-importing-carbon-sass-styles)
 
 Right now the Button component looks pretty plain. The Carbon library uses SASS for styling, and those styles are separate from the components. Applying the styles (like for the Button) will require importing them explicitly.
 
@@ -529,10 +518,10 @@ export {
 ```
 … and since we already have our **index.css **file imported in the **library-consumer** application, you should see now (**or when you rebuild the component-library**) that the layout has changed and the button is big and blue.
 
-## And that’s about it
+## And that’s about it <!-- omit in toc -->
 
 Nice work! If you got this far you’ve built a fully-functional React component library with access to all of the Styles and React components from the Carbon design system!
 
-## Questions? Comments?
+## Questions? Comments? <!-- omit in toc -->
 
 Find me on twitter — [@BenjaminWFox](https://twitter.com/BenjaminWFox)
