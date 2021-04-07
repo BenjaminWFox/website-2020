@@ -66,7 +66,7 @@ export default function Home({ postData }) {
       </main>
 
       <footer className={classes.footer}>
-        <sub>&copy; 2020 Benjamin W Fox</sub>
+        <sub>&copy; {new Date().getFullYear()} Benjamin W Fox</sub>
       </footer>
     </div>
   )
