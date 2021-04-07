@@ -4,10 +4,10 @@ date: "2020-05-29"
 subtitle: "A comprehensive step-by-step guide to configuring Jest, React Testing Library, ESLint, and Path Aliases in a Next.js project."
 category: "tech"
 canon: 'https://medium.com/@benjaminwfox/next-js-setup-config-for-testing-linting-and-absolute-imports-605959d7bd6f'
-image: 'images/blog/tech/nextjs-configuration-construction.jpg'
+image: 'images/blog/tech/nextjs-setup-config-testing-linting/nextjs-configuration-construction-meta-image.jpg'
 ---
 
-![](https://cdn-images-1.medium.com/max/8064/1*dwiW-wU9A2rPh55jiRHXoQ.jpeg)
+![Seven almost identical buildings under construction in a row](/public/images/blog/tech/nextjs-setup-config-testing-linting/nextjs-configuration-construction-title-image.jpg)
 
 Next.js is amazing when it comes to installing, learning the framework, and jumping into the code. Its superb documentation & zero-config philosophy make this possible, and not having to think about configuration is wonderful…right up to the point when you want to add some additional configuration.
 

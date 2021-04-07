@@ -12,6 +12,7 @@ const useStyles = createUseStyles((theme) => ({
       fontSize: '1.125rem',
       fontWeight: 400,
       lineHeight: '1.5rem',
+      overflowWrap: 'break-word',
     },
     '.markdown-body': {
       boxSizing: 'border-box',
@@ -48,24 +49,23 @@ const useStyles = createUseStyles((theme) => ({
         }
       },
     },
+    'h1': {
+      lineHeight: theme.spacing.xl2,
+    },
+    'h2, h3': {
+      lineHeight: theme.spacing.xl,
+    },
     'h1, h2, h3': {
       fontWeight: 400,
-      lineHeight: theme.spacing.xl,
       marginBottom: theme.spacing.base,
       color: '#000',
     },
-    // 'h1, h2, p': {
-    //   '& + ul, & + ol': {
-    //     marginTop: `-${theme.spacing.sm}`,
-    //   }
-    // },
     'p, ul, ol': {
       marginBottom: theme.spacing.base,
     },
     a: {
       color: theme.colors.text.highlight,
       textDecoration: 'underline',
-      overflowWrap: 'break-word',
       '&:visited': {
         color: theme.colors.text.accent,
       },
@@ -76,10 +76,10 @@ const useStyles = createUseStyles((theme) => ({
       '&:active': {
         color: theme.colors.text.active,
       },
-      // '&[target="_blank"]::after': {
-      //   content: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==)',
-      //   margin: '0 3px 0 5px',
-      // }
+      '&[target="_blank"]::after': {
+        content: 'url(/images/icons/external-link-icon-blue.png)',
+        margin: '0 3px 0 5px',
+      }
     },
 
     /* image caption */
@@ -123,10 +123,10 @@ const useStyles = createUseStyles((theme) => ({
         }
       }
     },
-    p: {
+    'p, li': {
       '& code': {
         fontFamily: 'monospace, "Courier New"',
-        fontSize: '.875rem',
+        fontSize: '1em',
         backgroundColor: 'rgba(242, 242, 242, 1)',
         wordBreak: 'break-word',
         padding: '2px 4px',
