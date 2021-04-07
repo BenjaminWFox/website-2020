@@ -44,7 +44,12 @@ const useStyles = createUseStyles((theme) => ({
             position: 'absolute',
             opacity: 0.25,
             content: '"🔗"',
-            right: '101%',
+            left: '102%',
+            right: 'auto',
+            [theme.breakpoints.queries.tabletAndUp]: {
+              left: 'auto',
+              right: '101%',
+            }
           }
         }
       },
@@ -76,10 +81,10 @@ const useStyles = createUseStyles((theme) => ({
       '&:active': {
         color: theme.colors.text.active,
       },
-      '&[target="_blank"]::after': {
-        content: 'url(/images/icons/external-link-icon-blue.png)',
-        margin: '0 3px 0 5px',
-      }
+      // '&[target="_blank"]::after': {
+      //   content: 'url(/images/icons/external-link-icon-blue.png)',
+      //   margin: '0 3px 0 5px',
+      // }
     },
 
     /* image caption */
