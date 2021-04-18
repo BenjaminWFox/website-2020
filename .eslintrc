@@ -64,6 +64,8 @@
     "one-var": ["error", "never"],
     "quote-props": 0,
     "no-magic-numbers": 0,
+    "func-style": 0,
+    "max-params": 0,
     "react/jsx-indent": [2, 2],
     "react/jsx-indent-props": [2, 2],
     "react/jsx-filename-extension": 0,
