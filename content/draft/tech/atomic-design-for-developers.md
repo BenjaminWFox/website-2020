@@ -7,6 +7,13 @@ category: "tech"
 
 Organizing your application can seem easy. A folder for components, one for assets, another for utility methods. Maybe even a separate folder for pages! Don't be fooled, it is never that easy. Without a plan, as your app starts to grow, you should have a way to organize things that provides more granular organization, separation and, importantly, is based on explicit rules and guidelines rather than guesswork or instinct.
 
+- [Backstory](#backstory)
+- [Atomic Design](#atomic-design)
+- [Why this Article](#why-this-article)
+  - [My goal is to:](#my-goal-is-to)
+  - [Sample Code](#sample-code)
+- [Atoms, the Mighty ~~Particle~~ Component](#atoms-the-mighty-particle-component)
+
 ## Backstory
 
 A few years back I was searching for a better way to organize components in web apps. The designers I was working with at the time were adopting a design system that followed Atomic Design principles and it seems like that would translate well into the front-end development space since ultimately our work was to implement the components creted by the design team.
@@ -27,11 +34,24 @@ It begins by starting at the smallest component level (atoms) and combining thos
 
 In this article I'm going to talk about applying Atomic Design principles to front-end app development. I'll be using React for specific examples, but the definitions and principles should apply to any component or composition based UI applications.
 
+## Why this Article
+
+The biggest challenge I faced with my team after deciding to use Atomic Design principles as the basis for our component organization and heirarchy was figuring out what components went into which buckets. There were some other writeups I found that had bits and pieces of details, but I never found anything that gave a prescriptive example of how each level might be delineated or gave examples of implemenation and usage.
+
+When you're building reusable components there are a lot of considerations which include decisions like how it's structured, what data it needs, where that data lives, if (and where) state is needed, and so on. Since you've (hopefully) already made most or all of those decisions before starting the build the component, you can use them as a set of heuristics to store your component where it makes the most sense.
+
+> ***heuristic*** - a practical method [for decision making] that is not guaranteed to be optimal, perfect, or rational, but is nevertheless sufficient for reaching an immediate, short-term goal. - [*wikipedia*](https://en.wikipedia.org/wiki/Heuristic)
+
+<!-- I say heuristics since there will always be gray area -->
+
 ### My goal is to:
 1. Enumerate the rules I've found that work for me and my team when determining which level a component.
 2. Provide code showing how to implement each of the five levels.
 3. Show usage of these components in the context of a "real" site.
 
-## Challenges
+### Sample Code
 
-The biggest challenge I faced with my team after deciding to use Atomic Design principles as the basis for our component organization and heirarchy, was figuring out what components went into which buckets. 
+- Repository:
+- Website: 
+
+## Atoms, the Mighty ~~Particle~~ Component
