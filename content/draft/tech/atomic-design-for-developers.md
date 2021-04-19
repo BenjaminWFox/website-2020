@@ -12,7 +12,16 @@ Organizing your application can seem easy. A folder for components, one for asse
 - [Why this Article](#why-this-article)
   - [My goal is to:](#my-goal-is-to)
   - [Sample Code](#sample-code)
-- [Atoms, the Mighty ~~Particle~~ Component](#atoms-the-mighty-particle-component)
+- [Atoms](#atoms)
+  - [Examples:](#examples)
+  - [Rules of Atoms:](#rules-of-atoms)
+- [Molecules](#molecules)
+- [Examples:](#examples-1)
+  - [Rules:](#rules)
+- [Organisms](#organisms)
+- [Templates](#templates)
+- [Pages](#pages)
+- [One Rule to Rule Them All](#one-rule-to-rule-them-all)
 
 ## Backstory
 
@@ -49,9 +58,85 @@ When you're building reusable components there are a lot of considerations which
 2. Provide code showing how to implement each of the five levels.
 3. Show usage of these components in the context of a "real" site.
 
+You are free to disgreee with any/all of the rules I present. You may find that they do not cover every edge case. My hope, rather, is that you come away with an understanding of how to implement this in your own way to ultimately reach a higher goal for your projects:
+
+**organization, reusability, flexibility, and composability**
+
+> Atomic design is not a linear process, but rather a mental model to help us think of our user interfaces as both a cohesive whole and a collection of parts at the same time. - *Brad Frost*
+
 ### Sample Code
 
-- Repository:
-- Website: 
+Throughout this article I'll be sharing and referring to code that I've developed in the form of a relatively simple list/todo app. There's no interactive functionality. It's designed to show visually & structurally how components build on one another other using Atomic Design.
 
-## Atoms, the Mighty ~~Particle~~ Component
+- Website: https://atomic-design-example.benjaminwfox.com/
+- Repository: https://github.com/BenjaminWFox/example-app-atomic-design
+
+## [Atoms](#atoms)
+The **atom** is the most basic component, as generic as can be.
+
+### Examples:
+
+Icons, buttons, links, and labels are good examples of atoms. They don't do much on their own, and many other components on a site will typically depend on using these in one way or another.
+
+### Rules of Atoms:
+
+- Should not compose other components
+  - Exception: I will put framework-specific components (like the NextJS `Link` component) that are very close do the native element (`a`) in atoms
+- Can have its own markup & styles
+- Can maintain its own, local state
+- Able to be reused throughout the codebase regardless of organism/page/template
+- Should not access application (or higher level) state directly
+- Should not fetch application-specific data
+- Should not implement any application-specific business logic
+
+
+## Molecules
+The **molecule** composes atoms, and may introduce additional markup and styling. 
+
+## Examples:
+
+
+
+### Rules:
+- A component made up of multiple Atoms
+	- Exception: You may or may not allow molecules to compose other molecules. If not, any multi-molecule components are organisms.
+- Can have its own markup & styles
+- Can maintain its own, local state
+- Able to be reused throughout the codebase regardless of organism/page/template
+- Should not access application (or higher level) state directly
+- Should not fetch application-specific data
+- Should not implement any application-specific business logic
+
+
+## Organisms
+- A complex component made up of multiple atoms and/or molecules and/or other organisms
+- Can have its own markup & styles
+- Can fetch application-specific data
+- Can implement application-specific business logic
+- Can be connected to application (or higher level) state
+
+
+## Templates
+- A component that facilitates the layout of multiple organisms
+- Can have its own markup & styles.
+- Should not access application (or higher level) state
+- Should not fetch application-specific data
+- Should not implement any application-specific business logic
+
+
+## Pages
+- A component that implements a particular template
+- Can fetch application-specific data
+- Can implement application-specific business logic
+- Can be connected to application (or higher level) state
+- Should not have its own markup & styles
+
+## One Rule to Rule Them All
+
+As mentioned earlier, our end goal inclueds reusability and composability. To that end, remember this rule even if you forget everything else you're read already:
+
+***Do not *ever* set margins externally (on the component itself). Only set margins internally (from a parent).***
+
+What do I mean?
+
+[... example ...]
