@@ -166,7 +166,7 @@ export default function BannerImage({ src, title, subtitle, height }) {
 }
 ```
 
-Compare the `BannerImage` here to the `ImageWithOverlay` in the previous screenshot:
+Compare the `BannerImage` here (stretched to the top & side margins) against the `ImageWithOverlay` in the previous screenshot:
 
 ![Image showing the `BannerImage` component.](/public/images/blog/tech/atomic-design-for-developers/molecules-example.png)
 
@@ -284,6 +284,9 @@ export default function TemplateSidebarContent({ header, sidebar, content }) {
 ```
 
 The component really doesn't do much from a markup standpoint. The css does most of the work, but even then it's not much - primarily setting `flex` properties, widths, and heights. It's not until this component is composed into Pages that the good times start rolling 🥳 as each of those props (`header`/`sidebar`/`content`) will be an individual component that we can count on to be laid out on screen exactly as intended 🤓
+
+![](/public/images/blog/tech/atomic-design-for-developers/template-example.png)
+*An empty template - Header, Sidebar, and Content*
 
 ### Template Variations
 
