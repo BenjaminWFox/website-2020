@@ -25,9 +25,11 @@ Organizing your application can seem easy. A folder for components, one for asse
 7. [Templates](#templates)
    1. [Examples of Templates](#examples-of-templates)
    2. [Template Variations](#template-variations)
-   3. [Rules of Templates](#rules-of-templates)
+   3. [Tiered Templates](#tiered-templates)
+   4. [Rules of Templates](#rules-of-templates)
 8. [Pages](#pages)
    1. [Examples of Pages](#examples-of-pages)
+   2. [Rules of Pages](#rules-of-pages)
 9. [One Rule to Rule Them All](#one-rule-to-rule-them-all)
 
 ## Backstory
@@ -103,7 +105,7 @@ export default function BlockLink({href, children}) {
 
 For whatever reason, the demo site I built has a frequent need for block links! In this case importing a framework primitive is fine. It's smaller than an Atom, so let's call it a *neurotron* since that sounds kind of cool 😎 ⚛️. The `Link` is just an abstraction of the `a` tag with framework-specific functionality. It doesn't do anything from a style or markup perspective.
 
-![Screenshot.](../../../public/images/blog/tech/atomic-design-for-developers/atoms-example.png)
+![Screenshot.](/public/images/blog/tech/atomic-design-for-developers/atoms-example.png)
 *Visual example of Atoms: `BlockLink` in header and sidebar, `Button` in sidebar and main content.*
 
 ### Rules of Atoms
@@ -166,7 +168,7 @@ export default function BannerImage({ src, title, subtitle, height }) {
 
 Compare the `BannerImage` here to the `ImageWithOverlay` in the previous screenshot:
 
-![Image showing the `BannerImage` component.](../../../public/images/blog/tech/atomic-design-for-developers/molecules-example.png)
+![Image showing the `BannerImage` component.](/public/images/blog/tech/atomic-design-for-developers/molecules-example.png)
 
 ### A Nebulous Molecule
 
@@ -250,6 +252,7 @@ export default function ListSidebar({category, name, description, sidenav}) {
 - Can implement application-specific business logic
 - Can be connected to application (or higher level) state
 - Can be tightly coupled with a specific area (UI and/or Logic) of the app
+- Can be organized into sub-folders by logical categorization (feature, page, etc...)
 
 ## Templates
 Templates are a way to ensure that the Pages of your app are consistent. They handle creating the layout, and make it easy to know where specific areas of content or functionality need to go. There are a number of ways to create templates. The way I'm going to show is very explicit,  not as common, at least from code I've seen, but I feel is 
@@ -288,6 +291,12 @@ It can be tempting to start adding additional props to templates to support 'var
 
 Just consider that the more thought that has to go into using the template component, the less useful it becomes. The beauty is in its simplicity and not having to worry about high-level details of how the site is laid out on the page.
 
+### Tiered Templates
+
+It's worth noting that templates don't *have* to be implemented only at the page level. Suppose you're using a template to lay out the highest-level elements of the site (header, sidebar, content area) as you'll see in the next section, you may find that you *also* want templates to lay out content within the content area!
+
+Templates are an excellent choice anywhere *a consistent layout* is reused with *different content*.
+
 ### Rules of Templates
 
 - A component that facilitates the layout of multiple organisms
@@ -297,7 +306,9 @@ Just consider that the more thought that has to go into using the template compo
 - Should not implement any application-specific business logic
 
 ## Pages
-Pages are the final piece of the puzzle, and each one will implement a specific Template.
+Pages are the final piece of the puzzle, and each one will implement a specific Template. Pages are distinctly separate from Routing, and while I'm not coving Routing in this article it should at least be said that in the same way each Page implements a Template, each Route should implement a Page.
+
+Because I'm using React with Next.js, which has page-based routing, I've made a specific delineation in my project structure. All Atomic Design Pages live under `/src/components/pages`, and all Routes live under `/src/pages`. Excluding the special `_app.js`, there is a 1:1 ratio of component pages to route pages.
 
 ### Examples of Pages
 
@@ -316,6 +327,9 @@ export default function Category({name, description, category, categories, siden
 }
 ```
 
+For each page I'll pick both the template and the components to fill the template. These could be fairly general use like the `UserHeader`, which is used on all pages. They can also be specific use like the `CategoryDetails` component. As mentioned in the Templates section, the `CategoryDetails` component *could* implement another template if needed! Heck, either of the other components could implement another template as well if the content were complex enough!
+
+### Rules of Pages
 - A component that implements a particular template
 - Can fetch application-specific data
 - Can implement application-specific business logic
@@ -323,7 +337,6 @@ export default function Category({name, description, category, categories, siden
 - Should not have its own markup & styles
 
 ## One Rule to Rule Them All
-
 As mentioned earlier, our end goal includes reusability and composability. To that end, remember this rule even if you forget everything else you're read already:
 
 ***Do not *ever* set margins externally (on the component itself). Only set margins internally (from a parent).***
