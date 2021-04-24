@@ -17,6 +17,7 @@
       "jsx": true
     }
   },
+  "plugins": ["no-autofix"],
   "rules": {
     "indent": ["error", 2],
     "quotes": ["error", "single"],
@@ -29,6 +30,8 @@
     "dot-location": ["error", "property"],
     "sort-keys": 0,
     "id-length": 0,
+    "prefer-const": "off",
+    "no-autofix/prefer-const": "error",
     "class-methods-use-this": 0,
     "comma-dangle": ["error", {
       "arrays": "only-multiline",
@@ -37,6 +40,7 @@
       "exports": "only-multiline",
       "functions": "never"
     }],
+    "no-console": ["error", { "allow": ["warn", "error", "info", "debug"] }],
     "capitalized-comments": 0,
     "no-undef-init": 0,
     "no-undefined": 0,
@@ -61,6 +65,8 @@
     ],
     "sort-imports": 0,
     "object-curly-spacing": ["error", "always"],
+    "object-property-newline": ["error", { "allowAllPropertiesOnSameLine": true }],
+    "object-curly-newline": ["error", { "multiline": true }],
     "one-var": ["error", "never"],
     "quote-props": 0,
     "no-magic-numbers": 0,
