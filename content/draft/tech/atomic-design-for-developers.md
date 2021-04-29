@@ -116,7 +116,7 @@ For whatever reason, the demo site I built has a frequent need for block links! 
 - Can maintain its own, local state
 - Should not be tightly coupled to specific UI or Logic areas
 - Should not access application (or higher level) state directly
-- Should not fetch application-specific data
+- Should not have any non-ui/layout related side effects
 - Should not implement any application-specific business logic
 
 ## Molecules
@@ -157,7 +157,7 @@ import ImageWithOverlay from '../atoms/image-with-overlay'
 
 export default function BannerImage({ src, title, subtitle, height }) {
   return (
-    <div
+    <divƒ
       style={{height}}
       className={[styles.banner, 'flush-width', 'flush-top'].join(' ')}>
       <ImageWithOverlay title={title} subtitle={subtitle} src={src}/>
@@ -191,7 +191,7 @@ The reason I've labeled these as molecules is that while they don't explicitly c
 - Can maintain its own, local state
 - Should not be tightly coupled to specific UI or Logic areas
 - Should not access application (or higher level) state directly
-- Should not fetch application-specific data
+- Should not have any non-ui/layout related side effects
 - Should not implement any application-specific business logic
 
 ## Organisms
@@ -304,8 +304,9 @@ Templates are an excellent choice anywhere *a consistent layout* is reused with 
 
 - A component that facilitates the layout of multiple organisms
 - Can have its own markup & styles.
+- Can accept & pass props as required.
 - Should not access application (or higher level) state
-- Should not fetch application-specific data
+- Should not have any non-ui/layout related side effects
 - Should not implement any application-specific business logic
 
 ## Pages
