@@ -28,30 +28,30 @@ I'll provide a little background, but there is a lot of content out there about 
 ### Contents
 
 1. [Backstory](#backstory)
-2. [Atomic Design](#atomic-design)
-3. [Why this Article](#why-this-article)
-4. [Why NOT this Article](#why-not-this-article)
-5. [Sample Code](#sample-code)
-6. [Atoms](#atoms)
+1. [Atomic Design](#atomic-design)
+1. [Why this Article](#why-this-article)
+1. [Why NOT this Article](#why-not-this-article)
+1. [Sample Code](#sample-code)
+1. [Atoms](#atoms)
    1. [Examples of Atoms](#examples-of-atoms)
-   2. [Rules of Atoms](#rules-of-atoms)
-7. [Molecules](#molecules)
+   1. [Rules of Atoms](#rules-of-atoms)
+1. [Molecules](#molecules)
    1. [Examples of Molecules](#examples-of-molecules)
-   2. [A Nebulous Molecule](#a-nebulous-molecule)
-   3. [Rules of Molecules](#rules-of-molecules)
-8. [Organisms](#organisms)
+   1. [A Nebulous Molecule](#a-nebulous-molecule)
+   1. [Rules of Molecules](#rules-of-molecules)
+1. [Organisms](#organisms)
    1. [Examples of Organisms](#examples-of-organisms)
-   2. [Rules of Organisms](#rules-of-organisms)
-9. [Templates](#templates)
+   1. [Rules of Organisms](#rules-of-organisms)
+1. [Templates](#templates)
    1. [Examples of Templates](#examples-of-templates)
-   2. [Template Variations](#template-variations)
-   3. [Tiered Templates](#tiered-templates)
-   4. [Rules of Templates](#rules-of-templates)
-10. [Pages](#pages)
+   1. [Template Variations](#template-variations)
+   1. [Tiered Templates](#tiered-templates)
+   1. [Rules of Templates](#rules-of-templates)
+1. [Pages](#pages)
    1. [Examples of Pages](#examples-of-pages)
-   2. [Rules of Pages](#rules-of-pages)
-   3. [A Note on Routes](#a-note-on-routes)
-11. [Conclusion](#conclusion)
+   1. [Rules of Pages](#rules-of-pages)
+   1. [A Note on Routes](#a-note-on-routes)
+1. [Conclusion](#conclusion)
    1. [One Rule to Rule Them All](#one-rule-to-rule-them-all)
 
 ## [Backstory](#backstory)
@@ -208,7 +208,7 @@ export default function HeaderLinkList({children}) {
 
 The reason I've labeled these as molecules is that while they don't explicitly compose any atoms, they all depend implicitly on a specific atom being passed as `children`. In the case here of the `HeaderLinkList`, all the children should be `BlockLink` components. If the example app were more robust, I might create a custom `PropType` entry to throw an error if any of the `children` were not `BlockLink`.
 
-### [Rules of Molecules]()
+### [Rules of Molecules](#rules-of-molecules)
 - A component made up of one or more Atoms
 - Can have its own markup & styles
 - Can maintain its own internal state
@@ -217,10 +217,10 @@ The reason I've labeled these as molecules is that while they don't explicitly c
 - Should not have any non-ui/layout related side effects
 - Should not implement any application-specific business logic
 
-## [Organisms]()
+## [Organisms](#organisms)
 Organisms are where the business logic of your application starts to come out. They might correspond to a specific feature or section of the app. They may also be generally applicable but tightly coupled with the application logic. Data fetching and reading/writing to application state should primarily happen here (or alternatively at the Page level).
 
-### [Examples of Organisms]()
+### [Examples of Organisms](#examples-of-organisms)
 
 One of the more basic organisms in the sample app is the `SidebarNavigation`. At two molecules and one atom, it has not grown terribly complex, but it is *specialized enough* - designed to live in the sidebar and further composes a molecule - that it is no longer a molecule itself.
 
@@ -273,7 +273,7 @@ export default function ListSidebar({category, name, description, sidenav}) {
 }
 ```
 
-### [Rules of Organisms]()
+### [Rules of Organisms](#rules-of-organisms)
 
 - A complex component made up of multiple atoms and/or molecules and/or other organisms
 - Can have its own markup & styles
@@ -283,10 +283,10 @@ export default function ListSidebar({category, name, description, sidenav}) {
 - Can be tightly coupled with a specific area (UI and/or Logic) of the app
 - Can be organized into sub-folders by logical categorization (feature, page, etc...)
 
-## [Templates]()
+## [Templates](#templates)
 Templates are a way to ensure that the Pages of your app are consistent. They handle creating the layout, and make it easy to know where specific areas of content or functionality need to go. There are a number of ways to create templates. The way I'm going to show is very explicit, and I like it because it helps force high-level separation of application logic (into pages and organisms) and application layout (in templates).
 
-### [Examples of Templates]()
+### [Examples of Templates](#examples-of-templates)
 
 In React this is not a pattern I've seen very often, although I have seen at least a couple articles where it was discussed. That may be because people more often talk about lower-level (atom/molecule/organism) or higher-level (page) components 🤷‍♂️ 
 
@@ -317,19 +317,19 @@ The component really doesn't do much right?! The css import does most of the hea
 ![Screenshot.](/public/images/blog/tech/atomic-design-for-developers/template-example.png)
 *A template, highlighting the Header, Sidebar, and Content*
 
-### [Template Variations]()
+### [Template Variations](#template-variations)
 
 It can be tempting to start adding additional props to templates to support 'variations' like a border, a background color, or other minor stylistic differences. Is this something I've done? 👀 Yes. Is this something you should do? No. Is it the end of the world if you do? Also no.
 
 Just consider that the more thought that has to go into using the template component, the less useful it becomes. The beauty is in its simplicity and not having to worry about high-level details of how the site is laid out on the page.
 
-### [Tiered Templates]()
+### [Tiered Templates](#tiered-templates)
 
 It's worth noting that templates don't *have* to be implemented only at the page level. Suppose you're using a template to lay out the highest-level elements of the site (header, sidebar, content area) as you'll see in the next section, you may find that you *also* want templates to lay out content within the content area!
 
 > Templates are an excellent choice anywhere a consistent layout is reused with different content.
 
-### [Rules of Templates]()
+### [Rules of Templates](#rules-of-templates)
 
 - A component that facilitates the layout of multiple organisms
 - Can have its own markup & styles.
@@ -338,12 +338,13 @@ It's worth noting that templates don't *have* to be implemented only at the page
 - Should not have any non-ui/layout related side effects
 - Should not implement any application-specific business logic
 
-## [Pages]()
+## [Pages](#pages)
+
 Pages are the final piece of the puzzle, and each one will implement a specific Template. Pages are distinctly separate from Routing, and while I'm not coving Routing in this article it should at least be said that in the same way each Page implements a Template, each Route should implement a Page.
 
 Because I'm using React with Next.js, which has page-based routing, I've made a specific delineation in my project structure. All Atomic Design Pages live under `/src/components/pages`, and all Routes live under `/src/pages`. Excluding the special `_app.js`, there is a 1:1 ratio of component pages to route pages.
 
-### [Examples of Pages]()
+### [Examples of Pages](#examples-of-pages)
 
 ```javascript
 import TemplateSidebarContent from '../templates/template-sidebar-content'
@@ -362,29 +363,58 @@ export default function Category({name, description, category, categories, siden
 
 For each page I'll pick both the template and the components to fill the template. These could be fairly general use like the `UserHeader`, which is used on all pages. They can also be specific use like the `CategoryDetails` component. As mentioned in the Templates section, the `CategoryDetails` component *could* implement another template if needed! Heck, either of the other components could implement another template as well if the content were complex enough!
 
-### [Rules of Pages]()
+### [Rules of Pages](#rules-of-pages)
 - A component that implements a particular template
 - Can fetch application-specific data
 - Can implement application-specific business logic
 - Can be connected to application (or higher level) state
 - Should not have its own markup & styles
 
-### [A Note on Routes]()
+### [A Note on Routes](#a-note-on-routes)
 You may find, depending on your particular framework, that Routes do more of the heavy lifting than pages. In Next.js this will probably be the case, since it is in the Routes where you have to work with the special `getStaticProps` and `getServerSideProps`. 
 
 That's not a problem, but I would pick just one, Pages **or** Routes, to put this logic. Whichever of those you **don't** pick should be a more basic implementation.
 
-## [Conclusion]()
+## [Conclusion](#conclusion)
 
 Hopefully this has given you some concrete examples of developing with Atomic Design and a new way to think about structuring your applications.
 
-I want to reiterate the quote from Brad Frost that this is primarily "a mental model to help us think of our user interfaces as both a cohesive whole and a collection of parts at the same time." As you continue developing component based applications, always consider how you structure those components to be as generic, flexible, and reusable as possible.
+I want to reiterate the quote from Brad Frost that this is primarily *"a mental model to help us think of our user interfaces as both a cohesive whole and a collection of parts at the same time."* As you continue developing component based applications, always consider how you structure those components to be as generic, flexible, and reusable as possible.
 
-### [One Rule to Rule Them All]()
+### [One Rule to Rule Them All](#one-rule-to-rule-them-all)
 
-To that end I have one more rule that probably deserves its own post, but has caused me enough headache over the years that it bears mentioning. If you forget everything else, remember this:
+To that end I have one more rule that probably deserves its own post, but has caused me enough headache over the years that it bears mentioning here. If you forget everything else, remember this!
 
-***Do not *ever* set margins externally (on the component itself). Only set margins internally (from a parent).***
+***Assign margins to a component via its parent, never to the component itself.***
 
-What do I mean? Let's look at the `VerticalListLayout` component for an example.
+Why not? Consider that each component you create should be a self contained unit that functions predictably within it's own bounds. Margins break this pattern by creating space *outside* of the element itself, and can lead to unpredictability or variable behavior [due to margin collapsing](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing).
 
+![Screenshot example showing a div with margin, border, and padding.](/public/images/blog/tech/atomic-design-for-developers/margin-example.png)
+
+Consider the above `div` with margin, padding, and a border. The *border* of the element is essentially where the component should end. If the *margin* is applied to the `div` component itself, reusing the component in other contexts may have unintended layout and display consequences.
+
+If the div needs a margin, the better approach is to specifically target it in the parent component.
+
+>  Margins create extra space **around** an element. In contrast, padding creates extra space **within** an element.
+> 
+> — [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/margin), emphasis added
+
+An example from the sample app is the `VerticalListLayout` component. It renders a collection of children that are intended to be `BlockLink`s.
+
+```javascript
+export default function VerticalListLayout({children}) {
+  return <div className={[styles.verticalListLayout, 'molecule'].join(' ')}>{children}</div>
+}
+```
+
+It is also intended that every `BlockLink` has a certain layout within the parent component, including specific margins. If I had created this component in a vacuum, I might have applied the margin to each `BlockLink`, since that's how it needs to appear in the list, but that would cause problems reusing the `BlockLink` in other contexts. To prevent this the margin is assigned from the `VerticalListLayout` itself, applied to any first-level children.
+
+```css
+.verticalListLayout > * {
+  margin: 0 var(--spacing-md) var(--spacing-lg);
+}
+```
+
+## Questions? Comments? <!-- omit in toc -->
+
+Hope you found this informative, maybe even helpful! Let me know on twitter — [@BenjaminWFox](https://twitter.com/BenjaminWFox).
