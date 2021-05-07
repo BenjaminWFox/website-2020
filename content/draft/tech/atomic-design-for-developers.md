@@ -30,30 +30,31 @@ I'll provide a little background, but there is a lot of content out there about 
 1. [Backstory](#backstory)
 2. [Atomic Design](#atomic-design)
 3. [Why this Article](#why-this-article)
-   1. [Sample Code](#sample-code)
-4. [Atoms](#atoms)
+4. [Why NOT this Article](#why-not-this-article)
+5. [Sample Code](#sample-code)
+6. [Atoms](#atoms)
    1. [Examples of Atoms](#examples-of-atoms)
    2. [Rules of Atoms](#rules-of-atoms)
-5. [Molecules](#molecules)
+7. [Molecules](#molecules)
    1. [Examples of Molecules](#examples-of-molecules)
    2. [A Nebulous Molecule](#a-nebulous-molecule)
    3. [Rules of Molecules](#rules-of-molecules)
-6. [Organisms](#organisms)
+8. [Organisms](#organisms)
    1. [Examples of Organisms](#examples-of-organisms)
    2. [Rules of Organisms](#rules-of-organisms)
-7. [Templates](#templates)
+9. [Templates](#templates)
    1. [Examples of Templates](#examples-of-templates)
    2. [Template Variations](#template-variations)
    3. [Tiered Templates](#tiered-templates)
    4. [Rules of Templates](#rules-of-templates)
-8. [Pages](#pages)
+10. [Pages](#pages)
    1. [Examples of Pages](#examples-of-pages)
    2. [Rules of Pages](#rules-of-pages)
    3. [A Note on Routes](#a-note-on-routes)
-9. [Conclusion](#conclusion)
+11. [Conclusion](#conclusion)
    1. [One Rule to Rule Them All](#one-rule-to-rule-them-all)
 
-## Backstory
+## [Backstory](#backstory)
 
 A few years back I was searching for a better way to organize components in web apps. The designers I was working with at the time were adopting a design system that followed Atomic Design principles and it seems like that would translate well into the front-end development space since ultimately our work was to implement the components created by the design team.
 
@@ -61,7 +62,7 @@ Having a common language to use for categorizing components seemed like a no-bra
 
 It did work out pretty well for the engineering team internally though so, good news, you don't need to have buy-in and adoption from designers to start using these principles for development!
 
-## Atomic Design
+## [Atomic Design](#atomic-design)
 
 [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design) is a methodology for creating design systems created by [Brad Frost](https://bradfrost.com/). You can read his full post for a comprehensive overview.
 
@@ -73,7 +74,7 @@ It begins at the smallest component level (atoms) and combining those to create 
 
 In this article I'm going to talk about applying Atomic Design principles to front-end development. I'll be using React for specific examples, but the definitions and principles should apply to any component or composition based UI applications.
 
-## Why this Article
+## [Why this Article](#why-this-article)
 
 The biggest challenge I faced with my team after deciding to use Atomic Design principles as the basis for our component organization and hierarchy was figuring out what components went into which buckets. There were some other writeups I found that had bits and pieces of details, but I never found anything that gave both a prescriptive example of how each level might be delineated and examples of implementation and usage.
 
@@ -89,7 +90,15 @@ I say heuristics intentionally, since you're certain to find edge cases or gray 
 > 
 >  — Brad Frost
 
-### Sample Code
+## [Why NOT this Article](#why-not-this-article)
+
+In my experience this approach is best suited to applications that are (or expect to be) large, frequently updated, and/or frequently extended.
+
+It helps to have a well-planned design and information hierarchy, but it's not strictly necessary. Even with relatively simple mockups or wireframes you can start to develop a sense of what parts of the UI build upon one another.
+
+I would not use this approach if I were working on libraries or applications that were relatively limited in scope, complexity, or life expectancy.
+
+## [Sample Code](#sample-code)
 
 Throughout this article I'll be sharing and referring to code that I've developed in the form of a relatively simple list/todo app. There's no interactive functionality. It's designed to show visually & structurally how components build on one another other using Atomic Design. On the site, you can take a look at [the /settings page](https://atomic-design-example.benjaminwfox.com/settings) to toggle outlines for various levels of components.
 
@@ -99,7 +108,7 @@ Throughout this article I'll be sharing and referring to code that I've develope
 ## [Atoms](#atoms)
 The **atom** is the most basic component, as generic as can be.
 
-### Examples of Atoms
+### [Examples of Atoms](#examples-of-atoms)
 
 Icons, buttons, links, and labels are good examples of atoms. They don't do much on their own, and many other components on a site will typically depend on using these in one way or another. They can be used virtually anywhere throughout a site, so have a lot of flexibility. Let's look at a very basic example, the `Button`:
 
@@ -124,7 +133,7 @@ For whatever reason, the demo site I built has a frequent need for block links! 
 ![Screenshot.](/public/images/blog/tech/atomic-design-for-developers/atoms-example.png)
 *Visual example of Atoms: `BlockLink`, `Button`, and `Icon` components.*
 
-### Rules of Atoms
+### [Rules of Atoms]()
 
 - Should not compose other components/only uses [native elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) or framework-specific components similar to native elements
 - Can have its own markup & styles 
@@ -134,10 +143,10 @@ For whatever reason, the demo site I built has a frequent need for block links! 
 - Should not have any non-ui/layout related side effects
 - Should not implement any application-specific business logic
 
-## Molecules
+## [Molecules]()
 The **molecule** composes atoms to create a more complex component, with its own markup and styling added to the mix. Aside from that, the rules I use for molecules are virtually identical to those of atoms.
 
-### Examples of Molecules
+### [Examples of Molecules]()
 
 Molecules, being made up of Atoms, tend to be a little more specific in usage but (and this is of course also design dependant) they should also still be reusable is areas throughout the site. Below is an example atom `ImageWithOverlay` that overlays some text onto an image. It doesn't have much in the way of specific styling besides positioning the text.
 
@@ -185,7 +194,7 @@ Compare the `BannerImage` here (stretched to the top & side margins) against the
 
 ![Image showing the `BannerImage` component.](/public/images/blog/tech/atomic-design-for-developers/molecules-example.png)
 
-### A Nebulous Molecule
+### [A Nebulous Molecule]()
 
 There are a few components in the example project that, on first glance, don't fit neatly into the molecule definition. The `SidebarLinkList`, `HeaderLinkList`, and `HeaderIconList` fall into this category. They are all about the same, and render a collection of children in a single `div`:
 
@@ -199,7 +208,7 @@ export default function HeaderLinkList({children}) {
 
 The reason I've labeled these as molecules is that while they don't explicitly compose any atoms, they all depend implicitly on a specific atom being passed as `children`. In the case here of the `HeaderLinkList`, all the children should be `BlockLink` components. If the example app were more robust, I might create a custom `PropType` entry to throw an error if any of the `children` were not `BlockLink`.
 
-### Rules of Molecules
+### [Rules of Molecules]()
 - A component made up of one or more Atoms
 - Can have its own markup & styles
 - Can maintain its own internal state
@@ -208,10 +217,10 @@ The reason I've labeled these as molecules is that while they don't explicitly c
 - Should not have any non-ui/layout related side effects
 - Should not implement any application-specific business logic
 
-## Organisms
+## [Organisms]()
 Organisms are where the business logic of your application starts to come out. They might correspond to a specific feature or section of the app. They may also be generally applicable but tightly coupled with the application logic. Data fetching and reading/writing to application state should primarily happen here (or alternatively at the Page level).
 
-### Examples of Organisms
+### [Examples of Organisms]()
 
 One of the more basic organisms in the sample app is the `SidebarNavigation`. At two molecules and one atom, it has not grown terribly complex, but it is *specialized enough* - designed to live in the sidebar and further composes a molecule - that it is no longer a molecule itself.
 
@@ -264,7 +273,7 @@ export default function ListSidebar({category, name, description, sidenav}) {
 }
 ```
 
-### Rules of Organisms
+### [Rules of Organisms]()
 
 - A complex component made up of multiple atoms and/or molecules and/or other organisms
 - Can have its own markup & styles
@@ -274,10 +283,10 @@ export default function ListSidebar({category, name, description, sidenav}) {
 - Can be tightly coupled with a specific area (UI and/or Logic) of the app
 - Can be organized into sub-folders by logical categorization (feature, page, etc...)
 
-## Templates
+## [Templates]()
 Templates are a way to ensure that the Pages of your app are consistent. They handle creating the layout, and make it easy to know where specific areas of content or functionality need to go. There are a number of ways to create templates. The way I'm going to show is very explicit, and I like it because it helps force high-level separation of application logic (into pages and organisms) and application layout (in templates).
 
-### Examples of Templates
+### [Examples of Templates]()
 
 In React this is not a pattern I've seen very often, although I have seen at least a couple articles where it was discussed. That may be because people more often talk about lower-level (atom/molecule/organism) or higher-level (page) components 🤷‍♂️ 
 
@@ -308,19 +317,19 @@ The component really doesn't do much right?! The css import does most of the hea
 ![Screenshot.](/public/images/blog/tech/atomic-design-for-developers/template-example.png)
 *A template, highlighting the Header, Sidebar, and Content*
 
-### Template Variations
+### [Template Variations]()
 
 It can be tempting to start adding additional props to templates to support 'variations' like a border, a background color, or other minor stylistic differences. Is this something I've done? 👀 Yes. Is this something you should do? No. Is it the end of the world if you do? Also no.
 
 Just consider that the more thought that has to go into using the template component, the less useful it becomes. The beauty is in its simplicity and not having to worry about high-level details of how the site is laid out on the page.
 
-### Tiered Templates
+### [Tiered Templates]()
 
 It's worth noting that templates don't *have* to be implemented only at the page level. Suppose you're using a template to lay out the highest-level elements of the site (header, sidebar, content area) as you'll see in the next section, you may find that you *also* want templates to lay out content within the content area!
 
 > Templates are an excellent choice anywhere a consistent layout is reused with different content.
 
-### Rules of Templates
+### [Rules of Templates]()
 
 - A component that facilitates the layout of multiple organisms
 - Can have its own markup & styles.
@@ -329,12 +338,12 @@ It's worth noting that templates don't *have* to be implemented only at the page
 - Should not have any non-ui/layout related side effects
 - Should not implement any application-specific business logic
 
-## Pages
+## [Pages]()
 Pages are the final piece of the puzzle, and each one will implement a specific Template. Pages are distinctly separate from Routing, and while I'm not coving Routing in this article it should at least be said that in the same way each Page implements a Template, each Route should implement a Page.
 
 Because I'm using React with Next.js, which has page-based routing, I've made a specific delineation in my project structure. All Atomic Design Pages live under `/src/components/pages`, and all Routes live under `/src/pages`. Excluding the special `_app.js`, there is a 1:1 ratio of component pages to route pages.
 
-### Examples of Pages
+### [Examples of Pages]()
 
 ```javascript
 import TemplateSidebarContent from '../templates/template-sidebar-content'
@@ -353,30 +362,29 @@ export default function Category({name, description, category, categories, siden
 
 For each page I'll pick both the template and the components to fill the template. These could be fairly general use like the `UserHeader`, which is used on all pages. They can also be specific use like the `CategoryDetails` component. As mentioned in the Templates section, the `CategoryDetails` component *could* implement another template if needed! Heck, either of the other components could implement another template as well if the content were complex enough!
 
-### Rules of Pages
+### [Rules of Pages]()
 - A component that implements a particular template
 - Can fetch application-specific data
 - Can implement application-specific business logic
 - Can be connected to application (or higher level) state
 - Should not have its own markup & styles
 
-### A Note on Routes
+### [A Note on Routes]()
 You may find, depending on your particular framework, that Routes do more of the heavy lifting than pages. In Next.js this will probably be the case, since it is in the Routes where you have to work with the special `getStaticProps` and `getServerSideProps`. 
 
-That's not a problem, but I would pick just one, Pages **or** Routes, do put this logic and leave the other as more basic implementation.
+That's not a problem, but I would pick just one, Pages **or** Routes, to put this logic. Whichever of those you **don't** pick should be a more basic implementation.
 
-## Conclusion
+## [Conclusion]()
 
-Hopefully this has given you some concrete examples of developing with Atomic Design.
+Hopefully this has given you some concrete examples of developing with Atomic Design and a new way to think about structuring your applications.
 
 I want to reiterate the quote from Brad Frost that this is primarily "a mental model to help us think of our user interfaces as both a cohesive whole and a collection of parts at the same time." As you continue developing component based applications, always consider how you structure those components to be as generic, flexible, and reusable as possible.
 
-### One Rule to Rule Them All
+### [One Rule to Rule Them All]()
 
 To that end I have one more rule that probably deserves its own post, but has caused me enough headache over the years that it bears mentioning. If you forget everything else, remember this:
 
 ***Do not *ever* set margins externally (on the component itself). Only set margins internally (from a parent).***
 
-What do I mean?
+What do I mean? Let's look at the `VerticalListLayout` component for an example.
 
-[... example ...]
