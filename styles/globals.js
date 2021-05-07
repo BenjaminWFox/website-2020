@@ -87,6 +87,11 @@ const useStyles = createUseStyles((theme) => ({
       // }
     },
 
+    /* image */
+    'p img': {
+      align: 'center',
+    },
+
     /* image caption */
     'p img ~ em': {
       textAlign: 'center',
@@ -109,6 +114,14 @@ const useStyles = createUseStyles((theme) => ({
       fontWeight: '300',
       fontStyle: 'italic',
       paddingLeft: theme.spacing.lg,
+      paddingRight: theme.spacing.xl1,
+      marginLeft: theme.spacing.base,
+      marginTop: theme.spacing.lg,
+      marginBottom: theme.spacing.lg,
+      [theme.breakpoints.queries.tabletAndUp]: {
+        paddingRight: theme.spacing.xl1,
+        marginLeft: theme.spacing.lg,
+      }
     },
     code: {
       lineHeight: '1rem',
