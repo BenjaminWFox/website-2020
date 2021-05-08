@@ -138,7 +138,7 @@ For whatever reason, the demo site I built has a frequent need for block-display
 ![Screenshot.](/public/images/blog/tech/atomic-design-for-developers/atoms-example.png)
 *Visual example of Atoms: `BlockLink`, `Button`, and `Icon` components.*
 
-### [Rules of Atoms]()
+### [Rules of Atoms](#rules-of-atoms)
 
 - Should not compose other components/only uses [native elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) or framework-specific components similar to native elements
 - Can have its own markup & styles 
@@ -148,10 +148,10 @@ For whatever reason, the demo site I built has a frequent need for block-display
 - Should not have any non-ui/layout related side effects
 - Should not implement any application-specific business logic
 
-## [Molecules]()
+## [Molecules](#molecules)
 The **molecule** composes atoms to create a more complex component, with its own markup and styling added to the mix. Aside from that, the rules I use for molecules are virtually identical to those of atoms.
 
-### [Examples of Molecules]()
+### [Examples of Molecules](#examples-of-molecules)
 
 Molecules, being made up of Atoms, tend to be a little more specific in usage, but (and this is of course also design dependant) they should also still be reusable in areas throughout the site. Below is an example atom `ImageWithOverlay` that overlays some text onto an image. It doesn't have much in the way of specific styling besides positioning the text.
 
@@ -199,7 +199,7 @@ Compare the `BannerImage` here (stretched to the top & side margins) against the
 
 ![Image showing the `BannerImage` component.](/public/images/blog/tech/atomic-design-for-developers/molecules-example.png)
 
-### [A Nebulous Molecule]()
+### [A Nebulous Molecule](#a-nebulous-molecule)
 
 There are a few components in the example project that, on first glance, don't fit neatly into the molecule definition. The `SidebarLinkList`, `HeaderLinkList`, and `HeaderIconList` fall into this category. They are all about the same, and render a collection of children in a single `div`:
 
