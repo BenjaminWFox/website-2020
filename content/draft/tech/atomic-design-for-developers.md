@@ -13,7 +13,7 @@ Organizing your application can seem easy. A folder for components, one for asse
 >  
 > — Hermes Conrad
 
-And what is bureaucracy if not rules and regulations! As your app starts to grow, you should have a way to organize things that provides more granular organization, separation and, importantly, is based on explicit rules and guidelines rather than guesswork or instinct.
+Hermes Conrad would agree that what your app needs is a good, one-hour bureaucratizing. Hooray for rules and regulations! I'm not normally for bureauracy but as your app starts to grow you should have a way to organize things that provides more granular organization, separation and, importantly, is based on explicit rules and guidelines rather than guesswork or instinct.
 
 ### My Goal
 
@@ -23,36 +23,36 @@ I'll provide a little background, but there is a lot of content out there about 
 2. Provide code showing implementation for each of the five categories.
 3. Show usage of these components in the context of a "real" site.
 
-**Please note:** You are free to disagree with any/all of the rules I present. You may find that they do not cover every edge case. I'd love to [hear any thoughts and opinions](https://twitter.com/benjaminwfox). My hope is just that you come away with an idea of how to implement this methodology in a way that works for you.
+**Please note:** You are free to disagree with any/all of the rules I present. You may find that they do not cover every edge case. I'd love to [hear any thoughts and opinions](https://twitter.com/benjaminwfox). My hope is that you come away with an idea of how to implement this methodology in a way that works for you.
 
 ### Contents
 
-1. [Backstory](#backstory)
-1. [Atomic Design](#atomic-design)
-1. [Why this Article](#why-this-article)
-1. [Why NOT this Article](#why-not-this-article)
-1. [Sample Code](#sample-code)
-1. [Atoms](#atoms)
-   1. [Examples of Atoms](#examples-of-atoms)
-   1. [Rules of Atoms](#rules-of-atoms)
-1. [Molecules](#molecules)
-   1. [Examples of Molecules](#examples-of-molecules)
-   1. [A Nebulous Molecule](#a-nebulous-molecule)
-   1. [Rules of Molecules](#rules-of-molecules)
-1. [Organisms](#organisms)
-   1. [Examples of Organisms](#examples-of-organisms)
-   1. [Rules of Organisms](#rules-of-organisms)
-1. [Templates](#templates)
-   1. [Examples of Templates](#examples-of-templates)
-   1. [Template Variations](#template-variations)
-   1. [Tiered Templates](#tiered-templates)
-   1. [Rules of Templates](#rules-of-templates)
-1. [Pages](#pages)
-   1. [Examples of Pages](#examples-of-pages)
-   1. [Rules of Pages](#rules-of-pages)
-   1. [A Note on Routes](#a-note-on-routes)
-1. [Conclusion](#conclusion)
-   1. [One Rule to Rule Them All](#one-rule-to-rule-them-all)
+- [Backstory](#backstory)
+- [Atomic Design](#atomic-design)
+- [Why this Article](#why-this-article)
+- [Why NOT this Article](#why-not-this-article)
+- [Sample Code](#sample-code)
+- [Atoms](#atoms)
+  - [Examples of Atoms](#examples-of-atoms)
+  - [Rules of Atoms](#rules-of-atoms)
+- [Molecules](#molecules)
+  - [Examples of Molecules](#examples-of-molecules)
+  - [A Nebulous Molecule](#a-nebulous-molecule)
+  - [Rules of Molecules](#rules-of-molecules)
+- [Organisms](#organisms)
+  - [Examples of Organisms](#examples-of-organisms)
+  - [Rules of Organisms](#rules-of-organisms)
+- [Templates](#templates)
+  - [Examples of Templates](#examples-of-templates)
+  - [Template Variations](#template-variations)
+  - [Tiered Templates](#tiered-templates)
+  - [Rules of Templates](#rules-of-templates)
+- [Pages](#pages)
+  - [Examples of Pages](#examples-of-pages)
+  - [Rules of Pages](#rules-of-pages)
+  - [A Note on Routes](#a-note-on-routes)
+- [Conclusion](#conclusion)
+  - [One Rule to Rule Them All](#one-rule-to-rule-them-all)
 
 ## [Backstory](#backstory)
 
@@ -64,11 +64,11 @@ It did work out pretty well for the engineering team internally though so, good 
 
 ## [Atomic Design](#atomic-design)
 
-[Atomic Design](https://bradfrost.com/blog/post/atomic-web-design) is a methodology for creating design systems created by [Brad Frost](https://bradfrost.com/). You can read his full post for a comprehensive overview.
+Atomic Design is a methodology for creating design systems created by [Brad Frost](https://bradfrost.com/). You can [read his full post](https://bradfrost.com/blog/post/atomic-web-design) for a comprehensive overview.
 
 For the purposes of this article it's important to know that Atomic Design breaks design systems (and the components that make up an application) into a hierarchy with five levels.
 
-It begins at the smallest component level (atoms) and combining those to create larger components (molecules) which themselves get combined into still larger components (organisms) which are then displayed in logical groups (templates) that make up the the app (pages).
+It begins at the smallest component level (atoms) and combining those to create larger components (molecules) which themselves get combined into still larger components (organisms) which are then displayed in logical groups (templates) that make up the app (pages).
 
 **`Atoms -> Molecules -> Organisms -> Templates -> Pages`**
 
@@ -78,7 +78,7 @@ In this article I'm going to talk about applying Atomic Design principles to fro
 
 The biggest challenge I faced with my team after deciding to use Atomic Design principles as the basis for our component organization and hierarchy was figuring out what components went into which buckets. There were some other writeups I found that had bits and pieces of details, but I never found anything that gave both a prescriptive example of how each level might be delineated and examples of implementation and usage.
 
-When you're building reusable components there are a lot of considerations, including decisions like how a component is structured, what data it needs, where that data lives, if (and where) state is needed, and so on. Since you've (hopefully) already made most or all of those decisions before starting the build the component, you can use them as a set of heuristics to store your component where it makes the most sense.
+When you're building reusable components there are a lot of considerations, including decisions like how a component is structured, what data it needs, where that data lives, if (and where) state is needed, and so on. Since you've (hopefully) already made most, or all, of those decisions before starting the build the component, you can use them as a set of heuristics to store your component where it makes the most sense.
 
 > ***heuristic*** - a practical method [for decision making] that is not guaranteed to be optimal, perfect, or rational, but is nevertheless sufficient for reaching an immediate, short-term goal.
 > 
@@ -110,7 +110,7 @@ The **atom** is the most basic component, as generic as can be.
 
 ### [Examples of Atoms](#examples-of-atoms)
 
-Icons, buttons, links, and labels are good examples of atoms. They don't do much on their own, and many other components on a site will typically depend on using these in one way or another. They can be used virtually anywhere throughout a site, so have a lot of flexibility. Let's look at a very basic example, the `Button`:
+Icons, buttons, links, and labels are good examples of atoms. They don't do much on their own, and many other components on a site will typically depend on using these in one way or another. They can be used virtually anywhere throughout a site, so they have a lot of flexibility. Let's look at a very basic example, the `Button`:
 
 ```javascript
 export default function Button({label, onClick}) {
@@ -118,7 +118,7 @@ export default function Button({label, onClick}) {
 }
 ```
 
-This is about as basic as it gets. Not even any styles needed here. While that may not be the case for most sites, styles would not add much complexity and wouldn't change anything about the "Atomness" of the `Button`. For one other example, a `BlockLink`:
+This is about as basic as it gets. Not even any styles needed here. While that may not be the case for most sites, styles would not add much complexity and wouldn't change anything about the "Atomness" of the `Button`. Another example, a `BlockLink`:
 
 ```javascript
 import Link from 'next/link'
@@ -128,7 +128,7 @@ export default function BlockLink({href, children}) {
 }
 ```
 
-For whatever reason, the demo site I built has a frequent need for block links! In this case importing a framework primitive is fine. It's smaller than an Atom. You can call it a *neurotron* if you want, that's a cool-sounding mash-up word 😎 ⚛️. The `Link` is just an abstraction of the `a` tag with framework-specific functionality. It doesn't do anything from a style or markup perspective.
+For whatever reason, the demo site I built has a frequent need for block-display links! In this case importing a framework primitive is fine. It's smaller than an Atom. You can call it a *neurotron* if you want, that's a cool-sounding made-up word 😎 ⚛️. The `Link` is just an abstraction of the `a` tag with framework-specific functionality. It doesn't do anything from a style or markup perspective.
 
 ![Screenshot.](/public/images/blog/tech/atomic-design-for-developers/atoms-example.png)
 *Visual example of Atoms: `BlockLink`, `Button`, and `Icon` components.*
@@ -148,7 +148,7 @@ The **molecule** composes atoms to create a more complex component, with its own
 
 ### [Examples of Molecules]()
 
-Molecules, being made up of Atoms, tend to be a little more specific in usage but (and this is of course also design dependant) they should also still be reusable is areas throughout the site. Below is an example atom `ImageWithOverlay` that overlays some text onto an image. It doesn't have much in the way of specific styling besides positioning the text.
+Molecules, being made up of Atoms, tend to be a little more specific in usage, but (and this is of course also design dependant) they should also still be reusable in areas throughout the site. Below is an example atom `ImageWithOverlay` that overlays some text onto an image. It doesn't have much in the way of specific styling besides positioning the text.
 
 Below that is a molecule `BannerImage` that composes `ImageWithOverlay` to create a banner designed specifically to be added at the start of content, flush with the top & side margins of its parent element.
 
@@ -232,7 +232,9 @@ Literally as I am writing this, I noticed that in the `SidebarNavigation` compon
 
 Why? There isn't anything explicitly sidebar-related about those two components!
 
-It just happened that the sidebar was the only place they had been implemented. While I feel I was correct in making them molecules (even that may be debateable for the `VerticalListLayout`, but meh...heuristics), if they were *actually* only usable within the context of the sidebar adding them as organisms may have been more appropriate.
+It just happened that the sidebar was the only place they had been implemented. While I feel I was correct in making them molecules (even that may be debatable for the `VerticalListLayout`, but meh...heuristics), if they were *actually* only usable within the context of the sidebar adding them as organisms may have been more appropriate.
+
+After re-naming those two components to ensure they're more generalized, my `SidebarNavigation` component looks like:
 
 ```javascript
 import SidebarLinkList from '../molecules/sidebar-link-list'
@@ -312,7 +314,7 @@ export default function TemplateSidebarContent({ header, sidebar, content }) {
 }
 ```
 
-The component really doesn't do much right?! The css import does most of the heavy lifting, but even then it's not much - primarily setting `flex` properties, widths, and heights. It's not until this component is composed into Pages that the good times start rolling 🥳 as each of those props (`header`/`sidebar`/`content`) will be an individual component that we can count on to be placed on screen exactly as intended 🤓
+The component really doesn't do much right?! The css import does most of the heavy lifting, but even then it's not much - primarily setting `flex` properties, widths, and heights. It's not until this component is composed into Pages that the good times start rolling 🥳 as each of those props (`header`/`sidebar`/`content`) will be an individual component that we can count on to be placed on screen exactly as intended. 🤓
 
 ![Screenshot.](/public/images/blog/tech/atomic-design-for-developers/template-example.png)
 *A template, highlighting the Header, Sidebar, and Content*
@@ -340,7 +342,7 @@ It's worth noting that templates don't *have* to be implemented only at the page
 
 ## [Pages](#pages)
 
-Pages are the final piece of the puzzle, and each one will implement a specific Template. Pages are distinctly separate from Routing, and while I'm not coving Routing in this article it should at least be said that in the same way each Page implements a Template, each Route should implement a Page.
+Pages are the final piece of the puzzle, and each one will implement a specific Template. Pages are distinctly separate from Routing, and while I'm not covering Routing in this article it should at least be said that in the same way each Page implements a Template, each Route should implement a Page.
 
 Because I'm using React with Next.js, which has page-based routing, I've made a specific delineation in my project structure. All Atomic Design Pages live under `/src/components/pages`, and all Routes live under `/src/pages`. Excluding the special `_app.js`, there is a 1:1 ratio of component pages to route pages.
 
@@ -361,7 +363,7 @@ export default function Category({name, description, category, categories, siden
 }
 ```
 
-For each page I'll pick both the template and the components to fill the template. These could be fairly general use like the `UserHeader`, which is used on all pages. They can also be specific use like the `CategoryDetails` component. As mentioned in the Templates section, the `CategoryDetails` component *could* implement another template if needed! Heck, either of the other components could implement another template as well if the content were complex enough!
+For each page I'll pick both the template and the components to fill the template. These could be fairly general-use like the `UserHeader`, which is used on all pages. They can also be specific use like the `CategoryDetails` component. As mentioned in the Templates section, the `CategoryDetails` component *could* implement another template if needed! Heck, either of the other components could implement another template as well if the content were complex enough!
 
 ### [Rules of Pages](#rules-of-pages)
 - A component that implements a particular template
@@ -387,7 +389,7 @@ To that end I have one more rule that probably deserves its own post, but has ca
 
 ***Assign margins to a component via its parent, never to the component itself.***
 
-Why not? Consider that each component you create should be a self contained unit that functions predictably within it's own bounds. Margins break this pattern by creating space *outside* of the element itself, and can lead to unpredictability or variable behavior [due to margin collapsing](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing).
+Why not? Consider that each component you create should be a self contained unit that functions predictably within its own bounds. Margins break this pattern by creating space *outside* of the element itself, and can lead to unpredictability or variable behavior [due to margin collapsing](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing).
 
 ![Screenshot example showing a div with margin, border, and padding.](/public/images/blog/tech/atomic-design-for-developers/margin-example.png)
 
@@ -417,4 +419,4 @@ It is also intended that every `BlockLink` has a certain layout within the paren
 
 ## Questions? Comments? <!-- omit in toc -->
 
-Hope you found this informative, maybe even helpful! Let me know on twitter — [@BenjaminWFox](https://twitter.com/BenjaminWFox).
+Hope you found this informative, maybe even helpful! Let me know on Twitter: [@BenjaminWFox](https://twitter.com/BenjaminWFox).
