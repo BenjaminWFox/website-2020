@@ -3,11 +3,16 @@ title: "Better App Organization with Atomic Design for Developers"
 date: "2021-04-18"
 subtitle: "A practical guide to organizing and building component based apps around the Atomic Design methodology."
 category: "tech"
+image: 'images/blog/tech/atomic-design-for-developers/tetris-game-over.png'
 ---
+
+![Graphic of react logos consuming progressively smaller logos](/public/images/blog/tech/atomic-design-for-developers/tetris-game-over.png)
 
 Organizing your application can seem easy. A folder for components, one for assets, another for utility methods. Maybe even a separate folder for pages! Don't be fooled, it is almost never that easy...
 
-<p><img style="width: 100%;" alt="Futurama Meme: Too much papers! Not enough hiding plants!" src="/images/blog/tech/atomic-design-for-developers/leela-too-much-papers.png"/></p>
+![Graphic of react logos consuming progressively smaller logos](/public/images/blog/tech/atomic-design-for-developers/leela-too-much-papers.png)
+
+<!-- <p><img style="width: 100%;" alt="Futurama Meme: Too much papers! Not enough hiding plants!" src="/images/blog/tech/atomic-design-for-developers/leela-too-much-papers.png"/></p> -->
 
 > "It's alright. This place just needs a one-hour bureaucratizing."
 >  
