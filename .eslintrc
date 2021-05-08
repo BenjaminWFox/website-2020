@@ -40,7 +40,7 @@
       "exports": "only-multiline",
       "functions": "never"
     }],
-    "no-console": ["error", { "allow": ["warn", "error", "info", "debug"] }],
+    "no-console": ["error", { "allow": ["warn", "error", "info", "time", "timeEnd", "timeStamp"] }],
     "capitalized-comments": 0,
     "no-undef-init": 0,
     "no-undefined": 0,
