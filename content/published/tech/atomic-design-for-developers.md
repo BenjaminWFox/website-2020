@@ -1,7 +1,7 @@
 ---
 title: "Atomic Design for Developers: Better Component Composition and Organization"
 date: "2021-05-08"
-subtitle: "A practical guide to developing component based sites and apps around the Atomic Design methodology.."
+subtitle: "A practical guide to developing component based sites and apps around the Atomic Design methodology."
 category: "tech"
 image: 'images/blog/tech/atomic-design-for-developers/tetris-game-over.png'
 ---
