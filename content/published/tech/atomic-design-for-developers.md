@@ -1,14 +1,14 @@
 ---
-title: "Better App Organization with Atomic Design for Developers"
-date: "2021-04-18"
-subtitle: "A practical guide to organizing and building component based apps around the Atomic Design methodology."
+title: "Atomic Design for Developers: Better Component Composition and Organization"
+date: "2021-05-08"
+subtitle: "A practical guide to developing component based sites and apps around the Atomic Design methodology.."
 category: "tech"
 image: 'images/blog/tech/atomic-design-for-developers/tetris-game-over.png'
 ---
 
 ![Graphic of react logos consuming progressively smaller logos](/public/images/blog/tech/atomic-design-for-developers/tetris-game-over.png)
 
-Organizing your application can seem easy. A folder for components, one for assets, another for utility methods. Maybe even a separate folder for pages! Don't be fooled, it is almost never that easy...
+Organizing your application (or app/site, I'll use these interchangeably) can seem easy. A folder for components, one for assets, another for utility methods. Maybe even a separate folder for pages! Don't be fooled, it is almost never that easy...
 
 ![Graphic of react logos consuming progressively smaller logos](/public/images/blog/tech/atomic-design-for-developers/leela-too-much-papers.png)
 
@@ -18,7 +18,7 @@ Organizing your application can seem easy. A folder for components, one for asse
 >  
 > — Hermes Conrad
 
-Hermes Conrad would agree that what your app needs is a good, one-hour bureaucratizing. Hooray for rules and regulations! I'm not normally for bureauracy but as your app starts to grow you should have a way to organize things that provides more granular organization, separation and, importantly, is based on explicit rules and guidelines rather than guesswork or instinct.
+Hermes Conrad would agree that what your app needs is a good, one-hour bureaucratizing. Hooray for rules and regulations! I'm not normally for bureaucracy but as your app starts to grow you should have a way to organize things that provides more granular organization, separation and, importantly, is based on explicit rules and guidelines rather than guesswork or instinct.
 
 ### My Goal
 
@@ -368,7 +368,7 @@ export default function Category({name, description, category, categories, siden
 }
 ```
 
-For each page I'll pick both the template and the components to fill the template. These could be fairly general-use like the `UserHeader`, which is used on all pages. They can also be specific use like the `CategoryDetails` component. As mentioned in the Templates section, the `CategoryDetails` component *could* implement another template if needed! Heck, either of the other components could implement another template as well if the content were complex enough!
+For each page I'll pick both the template and the components to fill the template. These could be fairly general-use like the `UserHeader`, which is used on all pages. They can also be specific use like the `CategoryDetails` organism. As mentioned in the Templates section, `CategoryDetails` *could* implement another template if needed! Heck, either of the other components could implement another template as well if the content were complex enough!
 
 ### [Rules of Pages](#rules-of-pages)
 - A component that implements a particular template
@@ -381,6 +381,8 @@ For each page I'll pick both the template and the components to fill the templat
 You may find, depending on your particular framework, that Routes do more of the heavy lifting than pages. In Next.js this will probably be the case, since it is in the Routes where you have to work with the special `getStaticProps` and `getServerSideProps`. 
 
 That's not a problem, but I would pick just one, Pages **or** Routes, to put this logic. Whichever of those you **don't** pick should be a more basic implementation.
+
+In the sample app, I've put the data fetching and other logic into the Route to simplify the Page implementation.
 
 ## [Conclusion](#conclusion)
 
