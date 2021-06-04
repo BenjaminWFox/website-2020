@@ -10,7 +10,7 @@ image: 'images/blog/tech/how-to-organize-components-in-react/confused-penguins.j
 
 This is a quick reference guide to the rules I use for organizing components when building a React application. I have found that having a well-defined system helps not only with organization, but also helps better identify how components fit together and maximize reusability across the codebase.
 
-[Definitely check out the extended version of this guide](/blog/tech/atomic-design-for-developers) if you're interested in example code, a sample repository, and more information on Atomic Design.
+[Definitely check out the extended version of this article](/blog/tech/atomic-design-for-developers) if you're interested in example code, a sample repository, and more information on Atomic Design.
 
 ### Contents
 
@@ -70,7 +70,7 @@ The **molecule** composes atoms to create a more complex component, with its own
 - Should not implement any application-specific business logic
 
 ## [Rules of Organisms](#rules-of-organisms)
-Organisms are where the business logic of your application starts to come out. They might correspond to a specific feature or section of the app. They may also be generally applicable but tightly coupled with the application logic. Data fetching and reading/writing to application state should primarily happen here (or alternatively at the Page level). This could be like an entire form, or part of a shopping card, or a users profile:
+The **organism** is where the business logic of your application starts to come out. They might correspond to a specific feature or section of the app. They may also be generally applicable but tightly coupled with the application logic. Data fetching and reading/writing to application state should primarily happen here (or alternatively at the Page level). This could be like an entire form, or part of a shopping card, or a users profile:
 
 - It is more complex, made up of multiple atoms and/or molecules and/or other organisms
 - Can have its own markup & styles
@@ -81,7 +81,7 @@ Organisms are where the business logic of your application starts to come out. T
 - Can be organized into sub-folders by logical categorization (feature, page, etc...)
 
 ## [Rules of Templates](#rules-of-templates)
-Templates are a way to ensure that the Pages of your app are consistent. They handle creating the layout, and make it easy to know where specific areas of content or functionality need to go. There are a number of ways to create templates. I prefer having a single component that takes other components a props, and slots those prop-children into layout-specific markup:
+A **template** is a way to ensure that the Pages of your app are consistent. They handle creating the layout, and make it easy to know where specific areas of content or functionality need to go. There are a number of ways to create templates. I prefer having a single component that takes other components a props, and slots those prop-children into layout-specific markup:
 
 - It facilitates the layout of multiple organisms
 - Can have its own markup & styles.
@@ -91,7 +91,7 @@ Templates are a way to ensure that the Pages of your app are consistent. They ha
 - Should not implement any application-specific business logic
 
 ## [Rules of Pages](#rules-of-pages)
-Pages are the final piece of the puzzle, and each one will implement a specific Template. I prefer very simple Page components, but they can be more complex if you prefer simple Routes ([see next section](#rules-of-routes)). At the most basic, the page just implements a template, assigning the correct children to the correct template props:
+The **pages** are the last piece of the Atomic Design puzzle, and each one will implement a specific Template. I prefer very simple Page components, but they can be more complex if you prefer simple Routes ([see next section](#rules-of-routes)). At the most basic, the page just implements a template, assigning the correct children to the correct template props:
 
 - It implements a particular template
 - Can fetch application-specific data
@@ -100,7 +100,7 @@ Pages are the final piece of the puzzle, and each one will implement a specific 
 - Should not have its own markup & styles
 
 ## [Rules of Routes](#rules-of-routes)
-Routes are not part of Atomic Design per-se, but they're important to think about in React. Besides handling the routing for your website, routes can take on any of the responsibilities that pages *may* choose not to implement. One or the other of the Page or Route component should be relatively simple, and the other one should handle any complexity from data fetching, business logic, application state, and so on.
+Finally **routes**, while not part of Atomic Design per-se, are still important to think about in React. Besides handling the routing for your website, routes can take on any of the responsibilities that pages *may* choose not to implement. One or the other of the Page or Route component should be relatively simple, and the other one should handle any complexity from data fetching, business logic, application state, and so on.
 
 - It should handle things that are not handled by pages
 - Can fetch application-specific data (if not done in Pages)
