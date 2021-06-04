@@ -8,7 +8,9 @@ image: 'images/blog/tech/how-to-organize-components-in-react/confused-penguins.j
 
 ![Confused Penguins. Where did the component go?!](/public/images/blog/tech/how-to-organize-components-in-react/confused-penguins.jpg)
 
-This is a quick reference guide to the rules I use when building a React application. [Definitely check out the extended version of this guide](/blog/tech/atomic-design-for-developers) if you're interested in example code, a sample repository, and more information on Atomic Design.
+This is a quick reference guide to the rules I use for organizing components when building a React application. I have found that having a well-defined system helps not only with organization, but also helps better identify how components fit together and maximize reusability across the codebase.
+
+[Definitely check out the extended version of this guide](/blog/tech/atomic-design-for-developers) if you're interested in example code, a sample repository, and more information on Atomic Design.
 
 ### Contents
 
@@ -43,10 +45,10 @@ The `/routes` folder (which may be named differently, as in Next.js where it wou
 --|-/etc...
 ```
 
-Without further ado, how to decide which components get put where?
+***Without further ado, how to decide which components get put where?***
 
 ## [Rules of Atoms](#rules-of-atoms)
-The **atom** is the most basic component, as generic as can be:
+The **atom** is the most basic component, as generic as can be. Think buttons, inputs, or formatted title text:
 
 - It should not compose other components/only uses [native elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) or framework-specific components similar to native elements
 - Can have its own markup & styles 
@@ -57,7 +59,7 @@ The **atom** is the most basic component, as generic as can be:
 - Should not implement any application-specific business logic
 
 ## [Rules of Molecules](#rules-of-molecules)
-The **molecule** composes atoms to create a more complex component, with its own markup and styling added to the mix. Aside from that, the rules I use for molecules are virtually identical to those of atoms:
+The **molecule** composes atoms to create a more complex component, with its own markup and styling added to the mix. Very similar to atoms but think something like reusable piece of a form with input, label, and error validation messaging, or a product card with title, subtitle, and image:
 
 - It is made up of one or more Atoms
 - Can have its own markup & styles
@@ -68,7 +70,7 @@ The **molecule** composes atoms to create a more complex component, with its own
 - Should not implement any application-specific business logic
 
 ## [Rules of Organisms](#rules-of-organisms)
-Organisms are where the business logic of your application starts to come out. They might correspond to a specific feature or section of the app. They may also be generally applicable but tightly coupled with the application logic. Data fetching and reading/writing to application state should primarily happen here (or alternatively at the Page level):
+Organisms are where the business logic of your application starts to come out. They might correspond to a specific feature or section of the app. They may also be generally applicable but tightly coupled with the application logic. Data fetching and reading/writing to application state should primarily happen here (or alternatively at the Page level). This could be like an entire form, or part of a shopping card, or a users profile:
 
 - It is more complex, made up of multiple atoms and/or molecules and/or other organisms
 - Can have its own markup & styles
@@ -79,7 +81,7 @@ Organisms are where the business logic of your application starts to come out. T
 - Can be organized into sub-folders by logical categorization (feature, page, etc...)
 
 ## [Rules of Templates](#rules-of-templates)
-Templates are a way to ensure that the Pages of your app are consistent. They handle creating the layout, and make it easy to know where specific areas of content or functionality need to go. There are a number of ways to create templates. The way I'm going to show is very explicit, and I like it because it helps force high-level separation of application logic (into pages and organisms) and application layout (in templates):
+Templates are a way to ensure that the Pages of your app are consistent. They handle creating the layout, and make it easy to know where specific areas of content or functionality need to go. There are a number of ways to create templates. I prefer having a single component that takes other components a props, and slots those prop-children into layout-specific markup:
 
 - It facilitates the layout of multiple organisms
 - Can have its own markup & styles.
@@ -89,7 +91,7 @@ Templates are a way to ensure that the Pages of your app are consistent. They ha
 - Should not implement any application-specific business logic
 
 ## [Rules of Pages](#rules-of-pages)
-Pages are the final piece of the puzzle, and each one will implement a specific Template. Pages are distinctly separate from Routing, and while I'm not covering Routing in this article it should at least be said that in the same way each Page implements a Template, each Route should implement a Page.
+Pages are the final piece of the puzzle, and each one will implement a specific Template. I prefer very simple Page components, but they can be more complex if you prefer simple Routes ([see next section](#rules-of-routes)). At the most basic, the page just implements a template, assigning the correct children to the correct template props:
 
 - It implements a particular template
 - Can fetch application-specific data
