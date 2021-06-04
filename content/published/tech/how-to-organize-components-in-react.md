@@ -1,7 +1,7 @@
 ---
 title: "How to Organize Components in React"
 date: "2021-06-04"
-subtitle: "A highly opinionated set of rules, based on Atomic Design principles, to make sure you're components stay organized."
+subtitle: "A highly opinionated set of rules, based on Atomic Design principles, to make sure your components stay organized."
 category: "tech"
 image: 'images/blog/tech/how-to-organize-components-in-react/confused-penguins.jpg'
 ---
@@ -45,7 +45,7 @@ The `/routes` folder (which may be named differently, as in Next.js where it wou
 --|-/etc...
 ```
 
-***Without further ado, how to decide which components get put where?***
+***Without further ado, how to decide which components get put where 🤔***
 
 ## [Rules of Atoms](#rules-of-atoms)
 The **atom** is the most basic component, as generic as can be. Think buttons, inputs, or formatted title text:
