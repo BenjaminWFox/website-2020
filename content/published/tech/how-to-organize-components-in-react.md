@@ -26,7 +26,7 @@ This is a quick reference guide to the rules I use for organizing components whe
 
 When I initially create a React application, I put all code in a `/src` folder. The `/src/components` folder holds all React components segmented into the five Atomic Design categories: Atoms, Molecules, Organisms, Templates, and Pages. Conveniently, these are already in alphabetical order from smallest conceptual element to the largest!
 
-The `/routes` folder (which may be named differently, as in Next.js where it would *also* be named `pages`) I would recommend keeping it separate from `/components/pages` in order to separate page UI code from application routing code.
+The `/routes` folder (which may be named differently, as in Next.js where it would *also* be named `pages`) I would recommend keeping separate from `/components/pages` in order to separate page UI code from application routing code.
 
 ```text
 /..
