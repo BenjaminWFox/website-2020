@@ -111,7 +111,7 @@ Finally **routes**, while not part of Atomic Design per-se, are still important 
 
 ## Additional Detail <!-- omit in toc -->
 
-Again, if you want a more in depth look at how this works in practice, [read this next](/blog/tech/atomic-design-for-developers)!
+I've [written a longer article centered around these same rules](/blog/tech/atomic-design-for-developers), so read that next if you want a more in depth look at how this works in practice!
 
 ## Questions? Comments? <!-- omit in toc -->
 
