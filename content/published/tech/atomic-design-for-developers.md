@@ -6,11 +6,11 @@ category: "tech"
 image: 'images/blog/tech/atomic-design-for-developers/tetris-game-over.png'
 ---
 
-![Graphic of react logos consuming progressively smaller logos](/public/images/blog/tech/atomic-design-for-developers/tetris-game-over.png)
+![Chaotic game of Tetris in Game Over State](/public/images/blog/tech/atomic-design-for-developers/tetris-game-over.png)
 
 Organizing your application (or app/site, I'll use these interchangeably) can seem easy. A folder for components, one for assets, another for utility methods. Maybe even a separate folder for pages! Don't be fooled, it is almost never that easy...
 
-![Graphic of react logos consuming progressively smaller logos](/public/images/blog/tech/atomic-design-for-developers/leela-too-much-papers.png)
+![Futurama meme, leela trying to hide papers around the office in hermes absence](/public/images/blog/tech/atomic-design-for-developers/leela-too-much-papers.png)
 
 <!-- <p><img style="width: 100%;" alt="Futurama Meme: Too much papers! Not enough hiding plants!" src="/images/blog/tech/atomic-design-for-developers/leela-too-much-papers.png"/></p> -->
 
