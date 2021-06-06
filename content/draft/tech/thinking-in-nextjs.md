@@ -1,6 +1,6 @@
 ---
-title: "How to think in NextJS; From SPA to Serverless"
-date: "1900-12-24"
+title: "How to think in NextJS; From No Server to Serverless"
+date: "2021-06-06"
 subtitle: "A brief and informative blurb related to the post"
 category: "tech"
 canon: 'https://external.com?if=originally-published-elsewhere'
@@ -15,14 +15,16 @@ image: 'images/blog/tech/post-folder/image-name.jpg'
   - It's React!
 - SPA vs Traditional/Next
 
-- Budget more time
+<!-- - Budget more time
   - Things aren't as simple as they were in SPAs
   - CSS, for instance
-  - Examples resource: https://github.com/vercel/next.js/tree/master/examples
+  - Examples resource: https://github.com/vercel/next.js/tree/master/examples -->
 
-- Browser Only Code
+<!-- - Browser Only Code -->
 
-- Server Only Code
+<!-- - Server Only Code -->
+
+<!-- - Learn common Node APIs -->
 
 - Plan your pages
   - Think about your routing
@@ -32,14 +34,27 @@ image: 'images/blog/tech/post-folder/image-name.jpg'
   - Import apis used locally
     - Database, Filesystem, APIs
 
-- Learn common Node APIs
-
 - Watch your environment variables
 
 - Consider deployment options
 
-- Other points of awareness
-  - You can customize your webpack config
+<!-- - Other points of awareness
+  - You can customize your webpack config -->
+
+- [Outline](#outline)
+- [Preface](#preface)
+- [Intro](#intro)
+- [Server Stuff](#server-stuff)
+  - [Execution Context](#execution-context)
+  - [Node.js APIs](#nodejs-apis)
+- [Not Server Stuff](#not-server-stuff)
+  - [Time](#time)
+  - [Framework Specifics](#framework-specifics)
+    - [Files](#files)
+    - [Routing](#routing)
+  - [Serverless servers](#serverless-servers)
+- [What's in a website](#whats-in-a-website)
+- [Next.js Gotchas](#nextjs-gotchas)
 
 ## Preface
 
@@ -74,7 +89,7 @@ I'll start with some high-level differences between a Single Page Application an
 
 - Your code executes in the browser *only*
 - You have access to [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) and [the DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM)
-- It's easy know to exclude secret & sensitive information since *everything* is available to use end user
+- It's easy to know to exclude secret & sensitive information since *everything* is available to use end user
 
 *In Next.js*
 
@@ -83,35 +98,75 @@ I'll start with some high-level differences between a Single Page Application an
 - You *do* have access to a whole new set of [APIs in Node.js](https://nodejs.org/docs/latest/api/)
 - You *can* include secret & sensitive information (API keys, connection strings, passwords, etc...) on the server
 
-In addition to the above this also means implementing functionality which may have had a common best practicefor SPAs now has multiple approaches to choose from depending on a variety of factors related to how you design your application. 
+In addition to the above this also means implementing functionality which may have had a common best practice for SPAs now has multiple approaches to choose from depending on a variety of factors related to how you design your application. 
 
-Authentication is a good example of this kind of functionality. For further reading [Auth0 has a good overview article](https://auth0.com/blog/ultimate-guide-nextjs-authentication-auth0/) of some considerations around authentication in Next.js.
+Authentication is a good example of this kind of functionality. If you're interested in auth specifically, [Auth0 has a good overview article](https://auth0.com/blog/ultimate-guide-nextjs-authentication-auth0/) on some considerations for Next.js.
 
-## Not Server Related
+## Server Stuff
 
-I did say that virtually all considerations are server related - but there are some that aren't.
+### Execution Context
+
+Your code will execute both on the server and in the browser. There may be code you write that can *only* execute in one or the other of these. Common examples are:
+- The browser `window` & `document` globals are `undefined` on the server
+- The Node File system (fs) module is undefined in the browser
+
+Right off the bat do yourself a favor and create two utility functions you can use to run code in only one or the other of these places:
+
+```javascript
+export const isClient = () => typeof window !== 'undefined'
+export const isServer = () => !isClient()
+```
+
+⚠️ In React the `useEffect` (or `useLayoutEffect`) hook will *only* run in the browser.
+
+⚠️ Node.js modules that are unused in code but referenced via `import` or `require` with throw errors. The reference won't be removed before the code goes to the browser.
+
+### Node.js APIs
+
+There are a few Node.js APIs that you'll interact with a lot. The two objects used in [API Routes](https://nextjs.org/docs/api-routes/introduction) are:
+
+- `req` - An [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage)
+- `res` - An [http.ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse)
+
+⚠️ The `res` object *additionally* has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
+
+Another couple useful modules to be aware of are:
+- `fs` - The [File system](https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fs_file_system) API is *very* handy for creating content from static files (like markdown) stored locally in the project - documentation, legal disclaimers, blog posts, etc.... 
+- `path` - The [Path](https://nodejs.org/dist/latest-v16.x/docs/api/path.html#path_path) API is useful with `fs` to make sure you find the files you're looking for.
+
+
+
+## Not Server Stuff
+
+I did say that *virtually* all considerations are server related - but there are some that aren't.
 
 ### Time
 
-If you're learning Next on your own, hopefully you can take whatever time you need learn the ins and outs! If you're adopting it in a professional setting, however, be prepared to pad any estimates as you work to become more familiar with the framework.
+Expect that things will take longer, at least at first.
+
+If you're learning Next on your own, hopefully you can take whatever time you need learn the ins and outs! If you're adopting it in a professional setting, however, be prepared to pad any estimates until you become more familiar with the framework.
 
 This will set you up better for success by making sure you have the time needed to do things correctly the 'Next' way, and not just revert to SPA patterns on top of Next.
+
+Inevitably there will be places where adding functionality is just more complex when rendering occurs in both a server and a browser context. Examples include:
+- [Redux](https://redux.js.org/recipes/server-rendering#redux-on-the-server) where server state may need to be merged with client state.
+- [CSS-In-JS](https://cssinjs.org/server-side-rendering) where server-generated style tags need to be removed before render. 
 
 ### [Framework Specifics](#framework-specifics)
 
 By default, creating a new `Next` app puts all your folders in a top level directory.
 
-It also supports a `/src` directory, and I'd highly recommend creating one and moving in any new code as well as the default `/pages` & `/styles` directory ([see below](#routing)). This just allows for better separation of non-code related assets.
+It also supports a `/src` directory, and I'd highly recommend creating one and moving in any new code as well as the default `/styles` & `/pages` directory ([see 'Routing' below](#routing)) for better distinction between code & non-code assets.
 
 #### [Files](#files)
 
-[next.config.js](https://nextjs.org/docs/api-reference/next.config.js/introduction) - provides ways to customize build and server behaviors like webpack, url rewrites & redirects, and headers.
+Some framework-specific files to know about are:
 
-[_app.js file](https://nextjs.org/docs/advanced-features/custom-app) - application-wide page initialization, run *on client and server*
+- [next.config.js](https://nextjs.org/docs/api-reference/next.config.js/introduction) - provides ways to customize server functionality and build behaviors including webpack internals, url rewrites & redirects, and headers.
+- [_app.js file](https://nextjs.org/docs/advanced-features/custom-app) - application-wide page initialization, run *on client and server*
+- [_document.js](https://nextjs.org/docs/advanced-features/custom-document) - application-wide structure or markup, run *only on the server*
 
-[_document.js](https://nextjs.org/docs/advanced-features/custom-document) - application-wide structure or markup, run *only on the server*
-
-It's worth looking through the [advanced features](https://nextjs.org/docs/advanced-features/preview-mode) to see what else is possible.
+These are considered "[advanced features](https://nextjs.org/docs/advanced-features/preview-mode)" and it's worth reading through those to see what else is possible.
 
 #### [Routing](#routing)
 
@@ -120,6 +175,7 @@ Next uses a "magic" folder and file-system based router. This means that any fil
 I like it because the folder structure becomes a map of your site structure so it's easy understand where pages live in relation to one another.
 
 The only I don't like (personal pet peeve) is you may need a lot of `index.js` files (where the parent folder name would be the page name) when deeply nesting other pages.
+
 
 <!--> REGION: SNIP TO NEW ARTICLE? <-->
 
