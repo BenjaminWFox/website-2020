@@ -30,9 +30,9 @@ image: 'images/blog/tech/post-folder/image-name.jpg'
   - Think about your routing
   - How often do the pages change
 
-- Plan your APIs
+<!-- - Plan your APIs
   - Import apis used locally
-    - Database, Filesystem, APIs
+    - Database, Filesystem, APIs -->
 
 - Watch your environment variables
 
@@ -44,11 +44,13 @@ image: 'images/blog/tech/post-folder/image-name.jpg'
 - [Outline](#outline)
 - [Preface](#preface)
 - [Intro](#intro)
-- [Server Stuff](#server-stuff)
-  - [Execution Context](#execution-context)
-  - [Node.js APIs](#nodejs-apis)
-- [Not Server Stuff](#not-server-stuff)
+- [Before you Build](#before-you-build)
   - [Time](#time)
+  - [Execution Context](#execution-context)
+  - [Pages and API Routes](#pages-and-api-routes)
+  - [Node.js APIs](#nodejs-apis)
+  - [API Routes](#api-routes)
+- [Not Server Stuff](#not-server-stuff)
   - [Framework Specifics](#framework-specifics)
     - [Files](#files)
     - [Routing](#routing)
@@ -69,9 +71,7 @@ I'm not going to into much technical detail or code, as that's beyond the scope 
 
 As far as starting out, just remember like any new learning there will be a learning curve. If you haven't worked much with Node.js the curve will be even steeper.
 
-It's definitely worth it, so don't get discouraged if things fell extra complicated at first 😰
-
-My main goal is to give you an overview of things to be aware of to help help flatten the curve!
+My main goal is to give you an overview of things to be aware of to help help flatten the curve! It's definitely worth it, so don't get discouraged if things feel extra complicated at first 😰
 
 ## Intro
 
@@ -102,43 +102,7 @@ In addition to the above this also means implementing functionality which may ha
 
 Authentication is a good example of this kind of functionality. If you're interested in auth specifically, [Auth0 has a good overview article](https://auth0.com/blog/ultimate-guide-nextjs-authentication-auth0/) on some considerations for Next.js.
 
-## Server Stuff
-
-### Execution Context
-
-Your code will execute both on the server and in the browser. There may be code you write that can *only* execute in one or the other of these. Common examples are:
-- The browser `window` & `document` globals are `undefined` on the server
-- The Node File system (fs) module is undefined in the browser
-
-Right off the bat do yourself a favor and create two utility functions you can use to run code in only one or the other of these places:
-
-```javascript
-export const isClient = () => typeof window !== 'undefined'
-export const isServer = () => !isClient()
-```
-
-⚠️ In React the `useEffect` (or `useLayoutEffect`) hook will *only* run in the browser.
-
-⚠️ Node.js modules that are unused in code but referenced via `import` or `require` with throw errors. The reference won't be removed before the code goes to the browser.
-
-### Node.js APIs
-
-There are a few Node.js APIs that you'll interact with a lot. The two objects used in [API Routes](https://nextjs.org/docs/api-routes/introduction) are:
-
-- `req` - An [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage)
-- `res` - An [http.ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse)
-
-⚠️ The `res` object *additionally* has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
-
-Another couple useful modules to be aware of are:
-- `fs` - The [File system](https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fs_file_system) API is *very* handy for creating content from static files (like markdown) stored locally in the project - documentation, legal disclaimers, blog posts, etc.... 
-- `path` - The [Path](https://nodejs.org/dist/latest-v16.x/docs/api/path.html#path_path) API is useful with `fs` to make sure you find the files you're looking for.
-
-
-
-## Not Server Stuff
-
-I did say that *virtually* all considerations are server related - but there are some that aren't.
+## Before you Build
 
 ### Time
 
@@ -151,6 +115,118 @@ This will set you up better for success by making sure you have the time needed 
 Inevitably there will be places where adding functionality is just more complex when rendering occurs in both a server and a browser context. Examples include:
 - [Redux](https://redux.js.org/recipes/server-rendering#redux-on-the-server) where server state may need to be merged with client state.
 - [CSS-In-JS](https://cssinjs.org/server-side-rendering) where server-generated style tags need to be removed before render. 
+
+### Execution Context
+
+Your code will execute both on the server and in the client (browser). There may be code you write that can *only* execute in one or the other of these. Common examples are:
+- The browser globals `window` & `document` are `undefined` on the server
+- The Node File system (fs) module is undefined in the browser
+
+Right off the bat do yourself a favor and create two utility functions you can use to run code in only one or the other of these places:
+
+```javascript
+export const isClient = () => typeof window !== 'undefined'
+export const isServer = () => !isClient()
+```
+
+⚠️ In React the `useEffect` (or `useLayoutEffect`) hook will *only* run in the browser.
+
+⚠️ Node.js modules that are unused in code but referenced via `import` or `require` with throw errors because the reference won't be removed before the code goes to the client and the browser will choke on the Node.js code.
+
+### Pages and API Routes
+
+With Next.js you'll be building out *not only* pages *but also* API routes. Pages and API routes all live under a specific `/pages` folder, with APIs further nested into an `/apis` folder. Creating a file in either of these folders will automatically create a Page or API Route respectively.
+
+Before jumping in to building these it pays to step back and think about:
+- where does your content come from?
+- how often does your content change?
+- how much does a page depend on certain content?
+
+There are bigger implications to these answers when working in Next.js compared to working in a SPA
+
+Where your content comes from may change which Node.js modules you need to use and whether or not you will have to interact with a database directly (or via [an ORM](https://stackoverflow.com/a/1279678/1763258)).
+
+How often your content changes & how much of a page depends on it will change whether you want to implement the page via Static Site Generation (SSG), Server Side Rendering (SSR), or some combination of those mixed with client side rendering.
+
+**Pages**
+
+Remember that page code may be executed on both the server and client. If you have any sensitive information in environment variables or other stores be very careful that it doesn't get sent to the client.
+
+So which page type should you prefer and how do you know which to use when?
+
+- The fastest option is [Static Site Generation](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) since the server does little to no processing. It only has to return pre-built, static content. Use this option with content that doesn't change frequently (or ever). Blogs, marketing sites, policy documents, and FAQs all fall more or less in this category.
+
+- The next option is [Server Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) for pages that depends on particular input data and where it isn't feasible to statically generate all page combinations for given inputs. Input data might be something like user info, purchase/order history, weather, time, or traffic.
+
+- [Client Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side) can be *added* in addition to either of the strategies above if a part of the page has frequently updating or real-time data.
+
+**API Routes**
+
+These run entirely in the server context. You can 
+
+### Node.js APIs
+
+When I say APIs here I'm talking about programming interfaces on objects in code rather than REST APIs. These don't come up in SPA development since everything is in the client, no Node required, but in Next.js there are a few Node.js APIs you'll interact with a lot. In particular, the two objects used in [API Routes](https://nextjs.org/docs/api-routes/introduction):
+
+- `req` - An [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage), which is when the client (browser) requests something from the server via an API Route, as with `fetch`
+- `res` - An [http.ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse), which is when the server responds to a client `req`
+
+⚠️ The `res` object *additionally* has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
+
+Another couple useful modules to be aware of are:
+- `fs` - The [File system](https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fs_file_system) API is *very* handy for creating content from static files (like markdown) stored locally in the project - documentation, legal disclaimers, blog posts, etc.... 
+- `path` - The [Path](https://nodejs.org/dist/latest-v16.x/docs/api/path.html#path_path) API is useful with `fs` to make sure you find the files you're looking for.
+- `process` - [Process](https://nodejs.org/api/process.html#process_process) is a Node global. It's mostly worth mentioning since there is a particular instance where the `path.dirname()` (or `__dirname`) will give incorrect results, and [you should use `process.cwd()` instead](https://nextjs.org/docs/basic-features/data-fetching#reading-files-use-processcwd). 
+
+### API Routes
+
+Now we're talking about REST APIs! In a SPA all the APIs you call are external to your application. In Next.js, you're going to be building your own APIs on the server. This is where you can do filesystem, database, and external data interactions!
+
+These all live in a special `/src/pages/api` folder. This is a central concept to Next.js, and [the documentation is helpful](https://nextjs.org/docs/api-routes/introduction), but in short any file you create under that folder will be turned into an API route that you can call from other code.
+
+**API Routes in getServerSideProps**
+
+Using the API routes gets extra tricky if you want to use them in `getServerSideProps`, the method that specifies a Page should be server-side rendered (more below).
+
+There is an important best practice caveat [buried in the documentation](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) that is worth noting:
+
+> You should not use fetch() to call an API route in getServerSideProps. Instead, directly import the logic used inside your API route. You may need to slightly refactor your code for this approach. 
+
+So if your API routes are going to be used in `getServerSideProps` you should write them a little differently, but this introduces another bit of complexity.
+
+The Next.js API Routes are written as:
+
+`export default async function handler(req, res) { ... }`
+
+While `getServerSideProps` is written as:
+
+`export async function getServerSideProps({req, res}) { ... }`
+
+where `req` and `res` are destructured from a larger `context` object.
+
+This is mostly fine, and you can rewrite the documentation function like:
+
+```javascript
+// Via `fetch`
+export default function handler(req, res) {
+  res.status(200).json({ name: 'Next.js' })
+}
+
+// Via `import`
+export async function getUserName(req, res) {
+  return { name: 'John Doe' }
+}
+```
+
+⚠️ This becomes more complicated if you want to have ***both*** `fetch` and `import` styles available becasue the `res` object from `getServerSideProps` **does not have the extra helper methods** that Next adds on API Routes - it is just a plain Node.js `http.ServerResponse`.
+
+If you have that requirement I'd honestly suggest forgetting the `import` style and just use `fetch`. I haven't profiled it but I suspect any performance impact is negligible.
+
+In the one case I encountered this situation I ended up creating a middleware wrapper to end any response without use of the helper methods, using only Node.js built-ins, but that's beyond the scope of this article.
+
+## Not Server Stuff
+
+I did say that *virtually* all considerations are server related - but there are some that aren't.
 
 ### [Framework Specifics](#framework-specifics)
 
