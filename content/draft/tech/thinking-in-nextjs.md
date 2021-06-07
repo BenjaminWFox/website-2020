@@ -1,5 +1,5 @@
 ---
-title: "How to think in NextJS; From No Server to Serverless"
+title: "How to think in NextJS Part 2"
 date: "2021-06-06"
 subtitle: "A brief and informative blurb related to the post"
 category: "tech"
@@ -9,69 +9,31 @@ image: 'images/blog/tech/post-folder/image-name.jpg'
 
 ![Initial image used as anchor for article](/public/images/blog/tech/why-isnt-npm-link-working/why-isnt-npm-link-working-title-image.jpg)
 
-## Outline
+So you've decided to switch from building Single Page Applications (SPAs) to hybrid serverless application with Next.js? Very cool 🥳 IMO you're in for a good time! Even if you don't stick with Next (I didn't, the first time I picked it up) you're going to learn some cool new technology and architecture.
 
-- What's the same
-  - It's React!
-- SPA vs Traditional/Next
+If you're not familiar or haven't worked with a more traditional web application framework 
 
-<!-- - Budget more time
-  - Things aren't as simple as they were in SPAs
-  - CSS, for instance
-  - Examples resource: https://github.com/vercel/next.js/tree/master/examples -->
-
-<!-- - Browser Only Code -->
-
-<!-- - Server Only Code -->
-
-<!-- - Learn common Node APIs -->
-
-- Plan your pages
-  - Think about your routing
-  - How often do the pages change
-
-<!-- - Plan your APIs
-  - Import apis used locally
-    - Database, Filesystem, APIs -->
-
-- Watch your environment variables
-
-- Consider deployment options
-
-<!-- - Other points of awareness
-  - You can customize your webpack config -->
-
-- [Outline](#outline)
-- [Preface](#preface)
-- [Intro](#intro)
-- [Before you Build](#before-you-build)
-  - [Time](#time)
-  - [Execution Context](#execution-context)
-  - [Pages and API Routes](#pages-and-api-routes)
-  - [Node.js APIs](#nodejs-apis)
-  - [API Routes](#api-routes)
-- [Not Server Stuff](#not-server-stuff)
-  - [Framework Specifics](#framework-specifics)
-    - [Files](#files)
-    - [Routing](#routing)
-  - [Serverless servers](#serverless-servers)
-- [What's in a website](#whats-in-a-website)
-- [Next.js Gotchas](#nextjs-gotchas)
-
-## Preface
-
-So you've decided to switch from building Single Page Applications (SPAs) to hybrid serverless application with Next.js? Very cool 🥳 In my opinion you're in for a good time! Even if you don't stick with Next (I didn't, the first time I picked it up) you're going to learn some cool new technology and architecture.
-
-[Reword this if snipping out serverless details]
 If you're already familiar with serverless architecture go ahead and skip the next section, but if you're not I think it can be extremely helpful to have a high-level understanding of what it is and what it enables before getting too deep into Next.js.
 
 So let's talk about some things you should know before diving in head first; Next.js, and serverless applications generally, require a different mental model for creating an optimized application since the server (while 'serverless' 🤣) does a lot more than just pass back a bundle of markup, styles, and scripts.
 
-I'm not going to into much technical detail or code, as that's beyond the scope of this article. If you're looking to set up Next.js beyond the basic scaffold, [check on my guide to adding tests, linting, and absolute imports](https://benjaminwfox.com/blog/tech/nextjs-setup-config-testing-linting-absolute-imports) to Next.js.
-
 As far as starting out, just remember like any new learning there will be a learning curve. If you haven't worked much with Node.js the curve will be even steeper.
 
-My main goal is to give you an overview of things to be aware of to help help flatten the curve! It's definitely worth it, so don't get discouraged if things feel extra complicated at first 😰
+I'm going to assume some base knowledge like application structure and routing, and I'm not going to go into a lot of code or technical depth. 
+
+My main goal is to give you an overview of things to be aware of that may help flatten the curve! Learning a new framework is definitely worth it, so don't get discouraged if things feel complicated at first 😰
+
+At the end of the day remember that **this is all still React**! A majority of getting comfortable with Next.js, I've found, is just understanding where best to render components or fetch and process data.
+
+- [Intro](#intro)
+- [Time](#time)
+- [Execution Context](#execution-context)
+  - [Environment Variables](#environment-variables)
+- [Application Development Lifecycle](#application-development-lifecycle)
+- [Pages and API Routes](#pages-and-api-routes)
+  - [Pages](#pages)
+  - [API Routes](#api-routes)
+  - [Node.js Built-in modules](#nodejs-built-in-modules)
 
 ## Intro
 
@@ -102,9 +64,7 @@ In addition to the above this also means implementing functionality which may ha
 
 Authentication is a good example of this kind of functionality. If you're interested in auth specifically, [Auth0 has a good overview article](https://auth0.com/blog/ultimate-guide-nextjs-authentication-auth0/) on some considerations for Next.js.
 
-## Before you Build
-
-### Time
+## Time
 
 Expect that things will take longer, at least at first.
 
@@ -116,7 +76,7 @@ Inevitably there will be places where adding functionality is just more complex 
 - [Redux](https://redux.js.org/recipes/server-rendering#redux-on-the-server) where server state may need to be merged with client state.
 - [CSS-In-JS](https://cssinjs.org/server-side-rendering) where server-generated style tags need to be removed before render. 
 
-### Execution Context
+## Execution Context
 
 Your code will execute both on the server and in the client (browser). There may be code you write that can *only* execute in one or the other of these. Common examples are:
 - The browser globals `window` & `document` are `undefined` on the server
@@ -133,81 +93,105 @@ export const isServer = () => !isClient()
 
 ⚠️ Node.js modules that are unused in code but referenced via `import` or `require` with throw errors because the reference won't be removed before the code goes to the client and the browser will choke on the Node.js code.
 
-### Pages and API Routes
+### Environment Variables
 
-With Next.js you'll be building out *not only* pages *but also* API routes. Pages and API routes all live under a specific `/pages` folder, with APIs further nested into an `/apis` folder. Creating a file in either of these folders will automatically create a Page or API Route respectively.
+Next has some idiosyncracies around environment variables, and it's worth [reading through the documentation](https://nextjs.org/docs/basic-features/environment-variables#loading-environment-variables), but a couple things to call out specifically:
+- Environment variables are not public by default so if you want to use them in the browser prefix the name with `NEXT_PUBLIC_`.
+  - ⚠️ In a production site, non-prefixed variables that are carelessly rendered or logged on [SSG Pages](#pages) *are still be visible* for [a flash before being removed](https://github.com/vercel/next.js/discussions/23980).
+- [SSG Pages](#pages) require environment variables to be present at build time, while SSR pages require them at runtime.
 
-Before jumping in to building these it pays to step back and think about:
+## Application Development Lifecycle
+
+There are more moving parts here than when building a SPA. Development is mostly the same, but the build and deploy stages introduce additional complexity.
+
+**Development**
+
+The `next dev` command, for when you are buildling the site. Changes to React components are updated immediately via Fast Refresh.
+
+⚠️ Since you have *two* execution contexts, you'll have to pay attention where you `console.log()` for debugging. If the `log` is executing in the client context it will show up in the browser, but if the `log` is executing in the server context it will show up in the terminal where `npm run dev` is running!
+
+**Build**
+
+The `next build` command. During buildtime Next creates a deployment bundle. Any pages that use `getStaticProps` will be created as static content.
+
+The output from this command is very useful to see both how much data you're sending to the client on requests for various pages, and also to confirm that your pages were built the way you expected them to be with [either SSG or SSR](#pages).
+
+**Deployment**
+
+This is a manual step (or automated) to push all files required to run the site wherever they need to go. If you use the Vercel platform this is easy - push it and forget it. If you are *not* using the Vercel platform, there will be more work involved.
+
+⚠️ The bare minimum of [files that will need to be copied](https://github.com/vercel/next.js/discussions/14339#discussioncomment-28191) to the remote server in order to run the site are `next.config.js`, `node_modules`, `package.json`, and `.next` folder. Alternately you could skip copying `node_modules` and `npm install` directly on the remote server.
+
+**Run**
+
+The `next start` command. Code is running on the remote server. When a client makes a request, any pages that use `getServerSideProps` are pre-rendered on the server before being sent to the client. Any pages that were pre-build via `getStaticProps` are served immediately on request.
+
+## Pages and API Routes
+
+With Next.js you'll be building out *not only* pages *but also* API routes. Next uses a "magic" folder and file-system based router. This means that any file in the top-level `/pages` directory gets turned into [a client route](https://nextjs.org/docs/routing/introduction) on your site. Likewise, any file in the `/pages/api` folder will be turned into an [API route](https://nextjs.org/docs/api-routes/introduction).
+
+Before jumping in to building either of these it pays to step back and think about:
 - where does your content come from?
 - how often does your content change?
 - how much does a page depend on certain content?
 
-There are bigger implications to these answers when working in Next.js compared to working in a SPA
+There are bigger implications to these answers when working in Next.js compared to working on a SPA
 
-Where your content comes from may change which Node.js modules you need to use and whether or not you will have to interact with a database directly (or via [an ORM](https://stackoverflow.com/a/1279678/1763258)).
+Where your content comes from may change which Node.js modules you need to use or whether you will need to interact with a database.
 
-How often your content changes & how much of a page depends on it will change whether you want to implement the page via Static Site Generation (SSG), Server Side Rendering (SSR), or some combination of those mixed with client side rendering.
+How often your content changes & how much of a page depends on that content will change whether you want to implement the page via Static Site Generation (SSG), Server Side Rendering (SSR), or some combination of those mixed with client side rendering.
 
-**Pages**
+### Pages
 
-Remember that page code may be executed on both the server and client. If you have any sensitive information in environment variables or other stores be very careful that it doesn't get sent to the client.
+Remember that page code may be executed on both the server and client! If you have any sensitive information in environment variables or other stores be very careful that it doesn't get sent to the client. See the [environment variables](#environment-variables) section for more.
 
 So which page type should you prefer and how do you know which to use when?
 
 - The fastest option is [Static Site Generation](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) since the server does little to no processing. It only has to return pre-built, static content. Use this option with content that doesn't change frequently (or ever). Blogs, marketing sites, policy documents, and FAQs all fall more or less in this category.
 
-- The next option is [Server Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) for pages that depends on particular input data and where it isn't feasible to statically generate all page combinations for given inputs. Input data might be something like user info, purchase/order history, weather, time, or traffic.
+- The next option is [Server Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) for pages that depends on particular input data and where it isn't feasible to statically generate all page combinations for given inputs. Input data might be something like user details, purchase/order history, weather, time, or traffic.
 
 - [Client Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side) can be *added* in addition to either of the strategies above if a part of the page has frequently updating or real-time data.
 
-**API Routes**
-
-These run entirely in the server context. You can 
-
-### Node.js APIs
-
-When I say APIs here I'm talking about programming interfaces on objects in code rather than REST APIs. These don't come up in SPA development since everything is in the client, no Node required, but in Next.js there are a few Node.js APIs you'll interact with a lot. In particular, the two objects used in [API Routes](https://nextjs.org/docs/api-routes/introduction):
-
-- `req` - An [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage), which is when the client (browser) requests something from the server via an API Route, as with `fetch`
-- `res` - An [http.ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse), which is when the server responds to a client `req`
-
-⚠️ The `res` object *additionally* has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
-
-Another couple useful modules to be aware of are:
-- `fs` - The [File system](https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fs_file_system) API is *very* handy for creating content from static files (like markdown) stored locally in the project - documentation, legal disclaimers, blog posts, etc.... 
-- `path` - The [Path](https://nodejs.org/dist/latest-v16.x/docs/api/path.html#path_path) API is useful with `fs` to make sure you find the files you're looking for.
-- `process` - [Process](https://nodejs.org/api/process.html#process_process) is a Node global. It's mostly worth mentioning since there is a particular instance where the `path.dirname()` (or `__dirname`) will give incorrect results, and [you should use `process.cwd()` instead](https://nextjs.org/docs/basic-features/data-fetching#reading-files-use-processcwd). 
-
 ### API Routes
 
-Now we're talking about REST APIs! In a SPA all the APIs you call are external to your application. In Next.js, you're going to be building your own APIs on the server. This is where you can do filesystem, database, and external data interactions!
+These run entirely in the server context. You can use sensitive keys, secrets, passwords, and connection strings if required. You could interact with the filesystem, say, to pull in markdown documents for creating content. You could add an ORM like Prisma to interact with a database.
 
-These all live in a special `/src/pages/api` folder. This is a central concept to Next.js, and [the documentation is helpful](https://nextjs.org/docs/api-routes/introduction), but in short any file you create under that folder will be turned into an API route that you can call from other code.
+With API routes, keep in mind:
+- They always receive a request (`req`) and return a response (`res`), otherwise the client request will not resolve.
+- API routes can be used at runtime, but they can also be used only during buildtime to fetch & build static content.
+- `req` and `res` are Node.js built-in objects.
 
-**API Routes in getServerSideProps**
+The `req` object is an instance of [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage), which is when the client (browser) requests something from the server via an API Route, as with `fetch`.
 
-Using the API routes gets extra tricky if you want to use them in `getServerSideProps`, the method that specifies a Page should be server-side rendered (more below).
+The `res` object is an instance of [http.ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse), which is when the server responds to a client `req`.
+
+⚠️ The `res` object *additionally* has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next, which make building the response easier than default `http.ServerResponse` functionality. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
+
+**API Routes in getServerSideProps & getStaticProps**
 
 There is an important best practice caveat [buried in the documentation](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) that is worth noting:
 
-> You should not use fetch() to call an API route in getServerSideProps. Instead, directly import the logic used inside your API route. You may need to slightly refactor your code for this approach. 
+> You should not use fetch() to call an API route in getServerSideProps [or getStaticProps]. Instead, directly import the logic used inside your API route. You may need to slightly refactor your code for this approach. 
 
-So if your API routes are going to be used in `getServerSideProps` you should write them a little differently, but this introduces another bit of complexity.
-
-The Next.js API Routes are written as:
-
-`export default async function handler(req, res) { ... }`
-
-While `getServerSideProps` is written as:
-
-`export async function getServerSideProps({req, res}) { ... }`
-
-where `req` and `res` are destructured from a larger `context` object.
-
-This is mostly fine, and you can rewrite the documentation function like:
+API Routes in Next are written as:
 
 ```javascript
-// Via `fetch`
+export default async function handler(req, res) {...}
+```
+
+while `getServerSideProps` (similar to `getStaticProps`) is written as:
+
+```javascript
+export async function getServerSideProps({req, res}) {...}
+```
+
+The main difference being that in the latter, `req` and `res` are destructured from a larger `context` object.
+
+This is mostly fine, and borrowing the example from the documentation above you can rewrite the API route function like:
+
+```javascript
+// Via `fetch`, as in documentation
 export default function handler(req, res) {
   res.status(200).json({ name: 'Next.js' })
 }
@@ -218,105 +202,24 @@ export async function getUserName(req, res) {
 }
 ```
 
-⚠️ This becomes more complicated if you want to have ***both*** `fetch` and `import` styles available becasue the `res` object from `getServerSideProps` **does not have the extra helper methods** that Next adds on API Routes - it is just a plain Node.js `http.ServerResponse`.
+⚠️ This becomes more complicated if you want to have ***both*** `fetch` and `import` options available becasue the `res` object from `getServerSideProps` **does not have the extra helper methods** that Next adds to the `res` on API Routes - it is just a plain Node.js `http.ServerResponse`.
+- If you have that requirement I'd honestly suggest forgetting the `import` style function and just use `fetch`. I suspect any performance impact is negligible.
+- In the one case I encountered this situation I ended up creating a middleware wrapper to end any response without use of the helper methods, using only Node.js built-ins, but that's beyond the scope of this article.
 
-If you have that requirement I'd honestly suggest forgetting the `import` style and just use `fetch`. I haven't profiled it but I suspect any performance impact is negligible.
+### Node.js Built-in modules
 
-In the one case I encountered this situation I ended up creating a middleware wrapper to end any response without use of the helper methods, using only Node.js built-ins, but that's beyond the scope of this article.
+Node.js has [a whole lot of built-in modules](https://nodejs.org/dist/latest-v16.x/docs/api/). I wouldn't bother trying to learn or even read through them all, but it's worth knowing they exist and there are a few I think it's worth calling out in particular:
 
-## Not Server Stuff
+- `fs` - The [File system](https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fs_file_system) API is *very* handy for creating content from static files (like markdown) stored locally in the project - documentation, legal disclaimers, blog posts, etc.... 
+- `path` - The [Path](https://nodejs.org/dist/latest-v16.x/docs/api/path.html#path_path) API may be familiar if you've done much Webpack configuration. It's useful with `fs` to make sure you find the files you're looking for.
+- `process` - [Process](https://nodejs.org/api/process.html#process_process) is a Node global. It's mostly worth mentioning since there is a particular instance where the `path.dirname()` (or `__dirname`) will give incorrect results in `getStaticProps` so [you should use `process.cwd()` instead](https://nextjs.org/docs/basic-features/data-fetching#reading-files-use-processcwd).
 
-I did say that *virtually* all considerations are server related - but there are some that aren't.
+## Further Reading <!-- omit in toc -->
 
-### [Framework Specifics](#framework-specifics)
+I hope that this has given you some new insight as you get started with Next.js!
 
-By default, creating a new `Next` app puts all your folders in a top level directory.
+If you're looking to set up Next.js beyond the basic scaffold, [check on my tutorial on adding tests, linting, and absolute imports](https://benjaminwfox.com/blog/tech/nextjs-setup-config-testing-linting-absolute-imports) to a Next.js project.
 
-It also supports a `/src` directory, and I'd highly recommend creating one and moving in any new code as well as the default `/styles` & `/pages` directory ([see 'Routing' below](#routing)) for better distinction between code & non-code assets.
+## Questions? Comments? <!-- omit in toc -->
 
-#### [Files](#files)
-
-Some framework-specific files to know about are:
-
-- [next.config.js](https://nextjs.org/docs/api-reference/next.config.js/introduction) - provides ways to customize server functionality and build behaviors including webpack internals, url rewrites & redirects, and headers.
-- [_app.js file](https://nextjs.org/docs/advanced-features/custom-app) - application-wide page initialization, run *on client and server*
-- [_document.js](https://nextjs.org/docs/advanced-features/custom-document) - application-wide structure or markup, run *only on the server*
-
-These are considered "[advanced features](https://nextjs.org/docs/advanced-features/preview-mode)" and it's worth reading through those to see what else is possible.
-
-#### [Routing](#routing)
-
-Next uses a "magic" folder and file-system based router. This means that any file in the top-level `/pages` directory gets turned in to a route on your site. The [documentation explains it well](https://nextjs.org/docs/routing/introduction). I mention it because it's a departure from the way I alwyas thought of routes when building SPAs.
-
-I like it because the folder structure becomes a map of your site structure so it's easy understand where pages live in relation to one another.
-
-The only I don't like (personal pet peeve) is you may need a lot of `index.js` files (where the parent folder name would be the page name) when deeply nesting other pages.
-
-
-<!--> REGION: SNIP TO NEW ARTICLE? <-->
-
-### Serverless servers
-
-If you're thinking 💭 "How can this possibly work without servers?" I'm with you. To be candid I think this particular terminology is unhelpful and only serves to confuse people 🤔 So what is serverless?
-
-> Serverless computing is a cloud computing execution model in which the cloud provider allocates machine resources on demand, taking care of the servers on behalf of their customers. Serverless computing does not hold resources in volatile memory; computing is rather done in short bursts with the results persisted to storage. - [Wikipedia](https://en.wikipedia.org/wiki/Serverless_computing)
-
-Serverless, then, doesn't mean "without servers." It just means you don't have to think about the implementation details or in-memory state of the server. Since the servers are "stateless" they don't know anything about what's happening except:
-- what is specified in any given request
-- what is available in persistent storage, like a database or filesystem
-
-The benifit with this approach is that the server is available to do all kinds of pre-processing before responding to the request from the client. This can include:
-- Database i/o
-- Pre-rendering page markup
-- Handling secrets, passwords, or other sensitive information
-- Resource- or data-intensive processing that the client shouldn't have to handle
-
-## What's in a website
-
-In very simplified terms, a web browsers job is to translate raw HTML into human-consumable content. A browser is very good at this!
-
-Of course it's not quite that simple. The browser *also* has to be able to interpret other data like JavaScript and CSS.
-
-When you visit a URL your browser makes a request to a server to fetch data, and then process this data before displaying the final content on screen.
-
-Importantly, the more data that the browser has to fetch and process the longer it will take to display the final content. 
-
-**In a traditional, server-backed application:**
-- Browser sends request to server
-- Server processes the request, which *may* look like
-  - Additional processing (business logic, database i/o), and building out HTML dynamically
-  - Grabbing a pre-built HTML file
-- Server responds with
-  - HTML & CSS for displaying the pages
-  - JavaScript for interactivity
-- Browser receives and renders the HTML
-- Browser makes *additional* requests to the server for subsequent pages
-  - The browser has no context or awareness of the rest of the site
-  - The server maintains an in-memory state for every session 
-
-**The Single Page Application**
-- Browser sends request to server
-- Server responds immediately with a bundle<sup>*</sup> of stuff
-  - Mostly JavaScript, maybe some CSS
-  - Probably *not* any HTML
-- Browser receives the bundle and has to process it, executing JavaScript to generate HTML
-- Browser renders HTML, css, etc...
-- Browser does additional processing to render subsequent pages
-  - The browser has all the context & awareness for the rest of the site
-  - Additional data would be requested via APIs, rather than specific page requests
-
-**In a serverless application**
-- Similar to the traditional application, except that the server has no in-memory state
-
-<sup>*</sup> "Bundle" is the common term for what is sent to the browser with a SPA architecture.
-
-<!--> ENDREGION: SNIP TO NEW ARTICLE? <-->
-
-NextJS Flow
-
-## Next.js Gotchas
-
-
-
-* Good overview: https://christianfindlay.com/2020/07/09/blazor-vs-traditional-web-apps/
-
+Follow me on Twitter [@BenjaminWFox](https://twitter.com/BenjaminWFox) for more tech, leadership, and other content and reach out with any thoughts or questions!
