@@ -3,7 +3,6 @@ title: "How to think in NextJS Part 2"
 date: "2021-06-06"
 subtitle: "A brief and informative blurb related to the post"
 category: "tech"
-canon: 'https://external.com?if=originally-published-elsewhere'
 image: 'images/blog/tech/post-folder/image-name.jpg'
 ---
 
@@ -19,15 +18,15 @@ It can feel like a steep learning curve, especially if you haven't worked much w
 
 I'm going to assume some base knowledge like application structure and routing, and I'm not going to go into a lot of code or technical depth. My main goal is to give you an overview of things to be aware of that may help flatten the curve! Learning a new framework is definitely worth it, so don't get discouraged if things feel complicated at first 😰
 
-- [Intro](#intro)
-- [Time](#time)
-- [Execution Context](#execution-context)
-  - [Environment Variables](#environment-variables)
-- [Application Development Lifecycle](#application-development-lifecycle)
-- [Pages and API Routes](#pages-and-api-routes)
-  - [Pages](#pages)
-  - [API Routes](#api-routes)
-  - [Node.js Built-in modules](#nodejs-built-in-modules)
+1. [Intro](#intro)
+1. [Time](#time)
+1. [Execution Context](#execution-context)
+   1. [Environment Variables](#environment-variables)
+1. [Application Development Lifecycle](#application-development-lifecycle)
+1. [Pages and API Routes](#pages-and-api-routes)
+   1. [Pages](#pages)
+   1. [API Routes](#api-routes)
+   1. [Node.js Built-in modules](#nodejs-built-in-modules)
 
 ## Intro
 

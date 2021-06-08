@@ -3,7 +3,7 @@ title: "Sample Post Title"
 date: "1900-12-24"
 subtitle: "A brief and informative blurb related to the post"
 category: "tech"
-canon: 'https://external.com?if=originally-published-elsewhere'
+canon: 'REMOVE THIS PROBABLY || https://external.com?if=originally-published-elsewhere'
 image: 'images/blog/tech/post-folder/image-name.jpg'
 ---
 
