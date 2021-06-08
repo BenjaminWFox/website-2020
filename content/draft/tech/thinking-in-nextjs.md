@@ -1,44 +1,43 @@
 ---
-title: "How to think in NextJS Part 2"
+title: "How to think in Next.js"
 date: "2021-06-06"
-subtitle: "A brief and informative blurb related to the post"
+subtitle: "Moving from Single Page App development to Next.js requires a 180 degree shift in your mental model around how your application functions. This can be quite a headache."
 category: "tech"
 image: 'images/blog/tech/post-folder/image-name.jpg'
 ---
 
-![Initial image used as anchor for article](/public/images/blog/tech/why-isnt-npm-link-working/why-isnt-npm-link-working-title-image.jpg)
+![Initial image used as anchor for article](/public/images/blog/tech/thinking-in-nextjs/owl-head-backwards-180-degrees.jpg)
 
-So you've decided to switch from building Single Page Applications (SPAs) to hybrid serverless application with Next.js? Very cool 🥳 IMO you're in for a good time! Even if you don't stick with Next (I didn't, the first time I picked it up) you're going to learn some cool new technology and architecture.
+Single Page Applications and Next.js, like Apples & Oranges, Chocolate & Vanilla, or Mac & PC are very different creatures. And of course one is always better (Next, apples, chocolate, Mac 🤣).
 
-[link to overview of server function]()
+Starting with Next.js after working on SPAs can be challenging though, since you've now got this whole server thing to think about not to mention a node.js runtime 😱
 
-So let's talk about some things you should know before diving in head first; Next.js, and serverless applications generally, require a different mental model for creating an optimized application since the server (while possibly 'serverless' 🤣) does a lot more than just pass back a bundle of markup, styles, and scripts.
+It can feel like a steep learning curve, especially if you haven't worked much with Node.js, but at the end of the day remember that **this is mostly still React**! A majority of getting comfortable with Next.js, I've found, is understanding four things:
+- The difference between the client & server contexts
+- The Next.js application lifecycle
+- What kind of page to build
+- How the API routes work
 
-It can feel like a steep learning curve, especially if you haven't worked much with Node.js, but at the end of the day remember that **this is all still React**! A majority of getting comfortable with Next.js, I've found, is just understanding where best to fetch and process data, render components, and build pages.
-
-I'm going to assume some base knowledge like application structure and routing, and I'm not going to go into a lot of code or technical depth. My main goal is to give you an overview of things to be aware of that may help flatten the curve! Learning a new framework is definitely worth it, so don't get discouraged if things feel complicated at first 😰
+Next.js is a lot of fun to build with once you get a handle on how it works 🏗
 
 - [Intro](#intro)
 - [Time](#time)
 - [Execution Context](#execution-context)
   - [Environment Variables](#environment-variables)
-- [Application Development Lifecycle](#application-development-lifecycle)
 - [Pages and API Routes](#pages-and-api-routes)
   - [Pages](#pages)
   - [API Routes](#api-routes)
-  - [Node.js Built-in modules](#nodejs-built-in-modules)
+- [Application Development Lifecycle](#application-development-lifecycle)
 
 ## Intro
 
-While there are some Next.js specific organization & setup particulars, virtually all of the considerations you should be aware of when switching from developing SPAs to a framework like Next.js revolve around the fact that there is now a server you have to deal with.
+The considerations I want to focus on all revolve around the fact that there is now a server you have to deal with.
 
-That may seem like an obvious statement, but I think it's hard to overstate how important this is. The biggest gotcha?
+I think it's hard to overstate how important this is! The biggest gotcha?
 
 **Adding a server adds an execution context**
 
 Consider that you've essentially doubled the complexity of your application!
-
-I'll start with some high-level differences between a Single Page Application and Next.js:
 
 *In a SPA*
 
@@ -54,9 +53,12 @@ I'll start with some high-level differences between a Single Page Application an
 - You *do* have access to a whole new set of [APIs in Node.js](https://nodejs.org/docs/latest/api/)
 - You *can* include secret & sensitive information (API keys, connection strings, passwords, etc...) on the server
 
-In addition to the above this also means implementing functionality which may have had a common best practice for SPAs now has multiple approaches to choose from depending on a variety of factors related to how you design your application. 
+This *also* means implementing functionality which may have had a common approach for SPAs now has multiple approaches to choose from depending on a variety of factors related to how you design your application.
 
-Authentication is a good example of this kind of functionality. If you're interested in auth specifically, [Auth0 has a good overview article](https://auth0.com/blog/ultimate-guide-nextjs-authentication-auth0/) on considerations in Next.js.
+[TAKE OUT??]()
+Examples include:
+- Authentication. There's [a good article by Auth0](https://auth0.com/blog/ultimate-guide-nextjs-authentication-auth0/) explaining some considerations.
+- Deploying. You may do different thigns depending on how you've created your pages.
 
 ## Time
 
@@ -66,15 +68,17 @@ If you're learning Next on your own, hopefully you can take whatever time you ne
 
 This will set you up better for success by making sure you have the time needed to do things correctly the 'Next' way, and not just revert to SPA patterns on top of Next.
 
-Inevitably there will be places where adding functionality is just more complex when rendering occurs in both a server and a browser context. Examples include:
+Inevitably there will be places where adding functionality is just more complex when rendering occurs in both a server and a browser context.
+
+Examples include:
 - [Redux](https://redux.js.org/recipes/server-rendering#redux-on-the-server) where server state may need to be merged with client state.
 - [CSS-In-JS](https://cssinjs.org/server-side-rendering) where server-generated style tags need to be removed before rendering on the client. 
 
 ## Execution Context
 
-Your code will execute both on the server and in the client (browser). There may be code you write that can *only* execute in one or the other of these. Common examples are:
+Your code will execute both on the server and on the client (browser). There may be code you write that can *only* execute in one or the other of these. Common examples are:
 - The browser globals `window` & `document` are `undefined` on the server
-- The Node File system (fs) module is undefined in the browser
+- The Node.js File system (`fs`) module is `undefined` in the browser
 
 Right off the bat do yourself a favor and create two utility functions you can use to run code in only one or the other of these places:
 
@@ -85,7 +89,7 @@ export const isServer = () => !isClient()
 
 ⚠️ In React the `useEffect` (or `useLayoutEffect`) hook will *only* run in the browser.
 
-⚠️ Node.js modules that are unused in code but referenced via `import` or `require` with throw errors because the reference won't be removed before the code goes to the client and the browser will choke on the Node.js code.
+⚠️ Don't leave unused imports; Node.js modules that are imported and unused will throw errors. The reference won't be removed before the code goes to the client and the browser will choke on the Node.js code.
 
 ### Environment Variables
 
@@ -93,32 +97,6 @@ Next has some idiosyncracies around environment variables, and it's worth [readi
 - Environment variables are not public by default so if you want to use them in the browser you must prefix the name with `NEXT_PUBLIC_`.
   - ⚠️ In a production site, non-prefixed variables that are carelessly rendered or logged on [SSG Pages](#pages) *are still be visible* [for a flash](https://github.com/vercel/next.js/discussions/23980) before being removed.
 - [SSG Pages](#pages) require environment variables to be present at buildtime, while SSR pages require them at runtime.
-
-## Application Development Lifecycle
-
-There are more moving parts here than when building a SPA. Development is mostly the same, but the build and deploy stages introduce additional complexity.
-
-**Development**
-
-The `next dev` command, for when you are buildling the site. Fast Refresh is pretty nice.
-
-⚠️ Since you have *two* execution contexts, pay attention where you `console.log()` for debugging. If the `log` is executing in the client context it will show up in the browser, but if the `log` is executing in the server context it will show up in the terminal where `npm run dev` is running!
-
-**Build**
-
-The `next build` command. During buildtime Next creates a deployment bundle. Any pages that use `getStaticProps` will be created as static content. Depending on how complex or numerous your static pages are, there may be a lot of code that executes during this stage.
-
-The output from this command is very useful to see both how much data you're sending to the client on requests for various pages, and also to confirm that your pages were built the way you expected them to be with [either SSG or SSR](#pages).
-
-**Deployment**
-
-This is a step to push all files required to run the site wherever they need to go. If you use the Vercel platform this is easy - push it and forget it. If you are *not* using the Vercel platform, there will be more work involved.
-
-⚠️ The bare minimum files that will need to be copied to the remote server in order to run the site are `next.config.js`, `node_modules`, `package.json`, and `.next` folder. Alternately you could skip copying `node_modules` and `npm install` directly on the remote server.
-
-**Run**
-
-The `next start` command. Code is running on the remote server. When a client makes a request, any pages that use `getServerSideProps` are pre-rendered on the server before being sent to the client. Any pages that were pre-build via `getStaticProps` are served immediately on request.
 
 ## Pages and API Routes
 
@@ -137,15 +115,30 @@ How often your content changes and how much of a page depends on that content wi
 
 ### Pages
 
-Remember that page code may be executed on both the server and client! If you have any sensitive information in environment variables or other stores be very careful that it doesn't get sent to the client.
+[Think of it like starbucks...]
+- Drip coffee? Ready to go!
+- Espresso? Standard build, easy
+- TikTok special? 
+
+Remember that page code may be executed on both the server and client! If you have any sensitive information in environment variables or other stores be careful that it doesn't get sent to the client accidentally.
 
 So which page type should you prefer and how do you know which to use when?
 
-- The fastest option is [Static Site Generation](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) since the server does little to no processing. It only has to return pre-built, static content. Use this option with content that doesn't change frequently (or ever). Blogs, marketing sites, policy documents, and FAQs all fall more or less in this category.
+**SSG**
 
-- Otherwise use [Server Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) for pages that depends on particular input data and where it isn't feasible to statically generate all page combinations for given inputs. Input data might be something like user details, purchase/order history, weather, time, or traffic.
+The fastest option is [Static Site Generation](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) since the server does little to no processing. It only has to return pre-built, static content. Use this option with content that doesn't change frequently (or ever). Blogs, marketing sites, policy documents, and FAQs all fall more or less in this category.
 
-- [Client Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side) can be *added* in addition to either of the strategies above if a part of the page has frequently updating or real-time data.
+This can get cumbersome on sites with many (thousands or more) pages, but can be mitigated to some degree with [incremental static regeneration](https://vercel.com/docs/next.js/incremental-static-regeneration#).
+
+**SSR**
+
+[Server Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) will be generally a little slower to [first-contentful-paint](https://developer.mozilla.org/en-US/docs/Glossary/First_contentful_paint), but it's an excellent option for pages that depends on particular input data and where it isn't possible (or feasible) to statically generate all page combinations for given inputs. Input data might be something like user details, purchase/order history, weather, time, or traffic.
+
+**CSR**
+
+[Client Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side) can be *added* in addition to either of the strategies above if a part of the page has frequently updating or real-time data.
+
+This is essentially the same as a SPA page might render, although parts of the page surrounding client-rendered content may have already been generated via SSG or SSR.
 
 ### API Routes
 
@@ -200,6 +193,34 @@ The main difference being that here the `req` and `res` are destructured from a 
 - If you have that requirement I'd honestly suggest forgetting the `import` style function and just use `fetch`. I suspect any performance impact is negligible.
 - In the one case I encountered this situation I ended up creating a middleware wrapper to end any response without use of the helper methods, using only Node.js built-ins, but that's beyond the scope of this article.
 
+
+## Application Development Lifecycle
+
+There are more moving parts here than when building a SPA. Development is mostly the same, but the build and deploy stages introduce additional complexity.
+
+**Development**
+
+The `next dev` command, for when you are buildling the site. Fast Refresh is pretty nice.
+
+⚠️ Since you have *two* execution contexts, pay attention where you `console.log()` for debugging. If the `log` is executing in the client context it will show up in the browser, but if the `log` is executing in the server context it will show up in the terminal where `npm run dev` is running!
+
+**Build**
+
+The `next build` command. During buildtime Next creates a deployment bundle. Any pages that use `getStaticProps` will be created as static content. Depending on how complex or numerous your static pages are, there may be a lot of code that executes during this stage.
+
+The output from this command is very useful to see both how much data you're sending to the client on requests for various pages, and also to confirm that your pages were built the way you expected them to be with [either SSG or SSR](#pages).
+
+**Deployment**
+
+This is a step to push all files required to run the site wherever they need to go. If you use the Vercel platform this is easy - push it and forget it. If you are *not* using the Vercel platform, there will be more work involved.
+
+⚠️ The bare minimum files that will need to be copied to the remote server in order to run the site are `next.config.js`, `node_modules`, `package.json`, and `.next` folder. Alternately you could skip copying `node_modules` and `npm install` directly on the remote server.
+
+**Run**
+
+The `next start` command. Code is running on the remote server. When a client makes a request, any pages that use `getServerSideProps` are pre-rendered on the server before being sent to the client. Any pages that were pre-build via `getStaticProps` are served immediately on request.
+
+<!-->
 ### Node.js Built-in modules
 
 Node.js has [a whole lot of built-in modules](https://nodejs.org/dist/latest-v16.x/docs/api/). I wouldn't bother trying to learn or even read through them all, but it's worth knowing they exist and there are a few I think are worth calling out in particular:
@@ -207,6 +228,7 @@ Node.js has [a whole lot of built-in modules](https://nodejs.org/dist/latest-v16
 - `fs` - The [File system](https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fs_file_system) API is *very* handy for creating content from static files (like markdown) stored locally in the project - documentation, legal disclaimers, blog posts, etc.... 
 - `path` - The [Path](https://nodejs.org/dist/latest-v16.x/docs/api/path.html#path_path) API may be familiar if you've done much Webpack configuration. It's useful with `fs` to make sure you find the files you're looking for.
 - `process` - [Process](https://nodejs.org/api/process.html#process_process) is a Node global. It's mostly worth mentioning since there is a particular instance where the `path.dirname()` (or `__dirname`) will give incorrect results in `getStaticProps` so [you should use `process.cwd()` instead](https://nextjs.org/docs/basic-features/data-fetching#reading-files-use-processcwd).
+<-->
 
 ## Further Reading <!-- omit in toc -->
 

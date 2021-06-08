@@ -6,7 +6,7 @@ category: "tech"
 image: 'images/blog/tech/post-folder/image-name.jpg'
 ---
 
-![Initial image used as anchor for article](/public/images/blog/tech/server-no-server-serverless-apps/princess-bride-serverless-meme.jpg)
+![Princess Bride "serverless does not mean what you think it means" meme.](/public/images/blog/tech/server-no-server-serverless-apps/princess-bride-serverless-meme.jpg)
 
 ## Servers to No Servers to Serverless
 
@@ -90,7 +90,7 @@ Unlike the traditional all, this server is *not* stateful. It knows nothing abou
 
 If you're just getting started with Next.js, check out my thoughts on [How to Think in Next.js]().
 
-If you're setting up a new Next.js project, [check on my tutorial on adding tests, linting, and absolute imports](https://benjaminwfox.com/blog/tech/nextjs-setup-config-testing-linting-absolute-imports) to a Next.js project.
+If you're setting up a new project, check on my tutorial on [Next.js setup with tests, linting, and absolute imports](https://benjaminwfox.com/blog/tech/nextjs-setup-config-testing-linting-absolute-imports).
 
 Good luck and happy programming!
 
