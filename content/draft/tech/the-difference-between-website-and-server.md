@@ -6,7 +6,7 @@ category: "tech"
 image: 'images/blog/tech/post-folder/image-name.jpg'
 ---
 
-![Initial image used as anchor for article](/public/images/blog/tech/why-isnt-npm-link-working/why-isnt-npm-link-working-title-image.jpg)
+![Initial image used as anchor for article](/public/images/blog/tech/server-no-server-serverless-apps/princess-bride-serverless-meme.jpg)
 
 ## Servers to No Servers to Serverless
 
@@ -84,3 +84,16 @@ Like the traditional app where new pages are requested from the server, but ther
 
 Like the single page app a page can also still have large portions that need to be processed on the client.
 
+Unlike the traditional all, this server is *not* stateful. It knows nothing about a connection except what is provided in the incoming request.
+
+## Further Reading
+
+If you're just getting started with Next.js, check out my thoughts on [How to Think in Next.js]().
+
+If you're setting up a new Next.js project, [check on my tutorial on adding tests, linting, and absolute imports](https://benjaminwfox.com/blog/tech/nextjs-setup-config-testing-linting-absolute-imports) to a Next.js project.
+
+Good luck and happy programming!
+
+## Questions? Comments?
+
+Follow me on Twitter [@BenjaminWFox](https://twitter.com/BenjaminWFox) for more tech and leadership content, and reach out with any thoughts or questions!

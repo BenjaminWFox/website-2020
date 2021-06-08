@@ -18,15 +18,15 @@ It can feel like a steep learning curve, especially if you haven't worked much w
 
 I'm going to assume some base knowledge like application structure and routing, and I'm not going to go into a lot of code or technical depth. My main goal is to give you an overview of things to be aware of that may help flatten the curve! Learning a new framework is definitely worth it, so don't get discouraged if things feel complicated at first 😰
 
-1. [Intro](#intro)
-1. [Time](#time)
-1. [Execution Context](#execution-context)
-   1. [Environment Variables](#environment-variables)
-1. [Application Development Lifecycle](#application-development-lifecycle)
-1. [Pages and API Routes](#pages-and-api-routes)
-   1. [Pages](#pages)
-   1. [API Routes](#api-routes)
-   1. [Node.js Built-in modules](#nodejs-built-in-modules)
+- [Intro](#intro)
+- [Time](#time)
+- [Execution Context](#execution-context)
+  - [Environment Variables](#environment-variables)
+- [Application Development Lifecycle](#application-development-lifecycle)
+- [Pages and API Routes](#pages-and-api-routes)
+  - [Pages](#pages)
+  - [API Routes](#api-routes)
+  - [Node.js Built-in modules](#nodejs-built-in-modules)
 
 ## Intro
 
@@ -216,4 +216,4 @@ If you're looking to set up Next.js beyond the basic scaffold, [check on my tuto
 
 ## Questions? Comments? <!-- omit in toc -->
 
-Follow me on Twitter [@BenjaminWFox](https://twitter.com/BenjaminWFox) for more tech, leadership, and other content and reach out with any thoughts or questions!
+Follow me on Twitter [@BenjaminWFox](https://twitter.com/BenjaminWFox) for more tech and leadership content, and reach out with any thoughts or questions!
