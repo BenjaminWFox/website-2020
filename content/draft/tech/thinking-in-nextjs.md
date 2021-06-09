@@ -118,7 +118,7 @@ How often your content changes and how much of a page depends on that content wi
 [Think of it like starbucks...]
 - Drip coffee? Ready to go!
 - Espresso? Standard build, easy
-- TikTok special? 
+- TikTok special?
 
 Remember that page code may be executed on both the server and client! If you have any sensitive information in environment variables or other stores be careful that it doesn't get sent to the client accidentally.
 

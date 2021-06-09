@@ -41,9 +41,9 @@ There are three main players in this story, the:
 - Client (the browser) to interact with the server
 - Server to send pages and data to the client
 
-The client sends a request to the server for some stuff. The server sends that stuff back to the client. The client does things to it, and bam it's available to show to the screen.
+The client sends a request to the server for some stuff. The server sends that stuff back to the client. The client does things to it, and ***bam*** it's available to show on the screen.
 
-Exactly what happens at each of those steps differs a little depending on whether you're talking about a traditional, spa, or Next.js (which more generally is a hybrid/serverless) application.
+Exactly what happens at each of those steps differs a little depending on whether you're talking about a traditional, single page, or Next.js (which can more generally be called a hybrid/serverless) application.
 
 Let's dive in to a high level overview of what those differences are. In all cases, the first two steps and the final step are the same:
 
@@ -53,7 +53,7 @@ Let's dive in to a high level overview of what those differences are. In all cas
 4. ??
 5. Profit! The screen displays the page
 
-So let's look at steps 3 and 4 for each application!
+So let's look specifically at steps 3 and 4 for each application!
 
 ### Traditional Server App
 
@@ -62,7 +62,9 @@ So let's look at steps 3 and 4 for each application!
 3. Server grabs or builds the requested page
 4. Client receives ready-to-display page
 
-From here the process repeats itself. New page requested, new request fulfilled. In a traditional app servers were often stateful, and would use stored session data for each connection to build pages on each request. AJAX offered some additional flexibility but it never felt like a first-class citizen.
+This process will repeat itself every time. New page requested, new request fulfilled. In a traditional app servers were *also* often stateful, using stored session data for each connection to build pages on each request.
+
+Page loads were often slow and unoptimized. AJAX offered some additional flexibility but it was clunky to implement and rarely felt like a first-class citizen.
 
 ### Single Page App
 
@@ -71,7 +73,9 @@ From here the process repeats itself. New page requested, new request fulfilled.
 3. Server grabs a bundle of stuff (like JavaScript and CSS)
 4. Client receives & processes the bundle to build pages
 
-No more requests to the server need to be made *for pages*, which will all be built from the bundle that the browser now controls. Other requests might be made for data. These could be to the same server or to other APIs.
+Right up front the client has grabbed *everything* it needs, for better or worse. No more requests to the server need to be made *for pages*, which will all be built from the bundle that the browser now controls. Other requests might be made for data, either from the same server or other APIs.
+
+Bundles can grow quite large, increasing load times and degrading user experience. Bundle splitting was one solution to that problem, but it could get complex and was often poorly implemented, if at all.
 
 ### Next.js App
 
@@ -80,11 +84,17 @@ No more requests to the server need to be made *for pages*, which will all be bu
 3. Server grabs or builds the requested page
 4. Client receives a page that may requires some processing
 
-Like the traditional app where new pages are requested from the server, but there is *a lot* more flexibility. Fetching new data has first-class support. The types of pages available on the server have explicitly defined options and can be entirely ready-to-serve or generated at request-time.
+Like the traditional app where new pages are requested from the server, but there is *a lot* more flexibility. Fetching new data has first-class support. The types of pages available on the server have explicitly defined options and can be entirely ready-to-serve or generated at request-time. 
 
 Like the single page app a page can also still have large portions that need to be processed on the client.
 
-Unlike the traditional all, this server is *not* stateful. It knows nothing about a connection except what is provided in the incoming request.
+This flexibility comes with increased complexity, and unlike the traditional app, this server is *not* stateful. It knows nothing about a connection except what is provided in the incoming request.
+
+## At the End
+
+None of these approaches are inherently better or worse than the others, and don't let anyone tell you otherwise. All have pros and cons. One may work better for a particular usecase than another, but you'll have to do your homework once you determine your specific requirements.
+
+And you should ***definitely*** determine your requirements up front 😉
 
 ## Further Reading
 
