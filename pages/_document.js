@@ -1,4 +1,4 @@
-import Document from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { JssProvider, SheetsRegistry, createGenerateId } from 'react-jss'
 import React from 'react'
 
@@ -40,22 +40,27 @@ export default class CustomDocument extends Document {
     }
   }
 
-  // render() {
-  //   return (
-  //     <Html lang="en">
-  //       <Head>
-  //         <link
-  //           as="font"
-  //           crossOrigin=""
-  //           href="/fonts/Lato-Regular.ttf"
-  //           rel="preload"
-  //         />
-  //       </Head>
-  //       <body>
-  //         <Main />
-  //         <NextScript />
-  //       </body>
-  //     </Html>
-  //   )
-  // }
+  render() {
+    return (
+      <Html lang="en">
+        <Head>
+          <link href="https://fonts.gstatic.com" rel="preconnect" />
+          <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap"
+            media="print"
+            onLoad="this.media='all'" rel="stylesheet"
+          />
+
+          <noscript>
+            <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet" />
+          </noscript>
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
+  }
 }

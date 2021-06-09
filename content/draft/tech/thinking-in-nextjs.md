@@ -1,7 +1,7 @@
 ---
 title: "How to think in Next.js"
 date: "2021-06-06"
-subtitle: "Moving from Single Page App development to Next.js requires a 180 degree shift in your mental model around how your application functions. This can be quite a headache."
+subtitle: "Single Page App development to Next.js requires a 180 degree shift in your mental model around how your application functions. This can be quite a headache."
 category: "tech"
 image: 'images/blog/tech/post-folder/image-name.jpg'
 ---

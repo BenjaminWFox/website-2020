@@ -4,13 +4,13 @@ import { createUseStyles, useTheme } from 'react-jss'
 const useStyles = createUseStyles((theme) => ({
   '@global': {
     html: {
-      fontFamily: 'Helvetica, Arial, Tahoma',
+      fontFamily: '"Source Sans Pro", Helvetica, Arial, Tahoma',
     },
     body: {
       backgroundColor: theme.colors.body.primary,
       color: theme.colors.text.secondary,
-      fontSize: '1.125rem',
-      fontWeight: 400,
+      fontSize: '1.25rem',
+      fontWeight: 'inherit',
       lineHeight: '1.5rem',
       overflowWrap: 'break-word',
     },
@@ -34,7 +34,7 @@ const useStyles = createUseStyles((theme) => ({
       '& h1, & h2, & h3, & h4, & h5, & h6': {
         marginTop: '2rem',
         '& a, & a:hover, & a:visited, & a:active': {
-          fontWeight: 'bold',
+          fontWeight: 600,
           color: 'inherit',
           textDecoration: 'none',
         },
@@ -107,7 +107,7 @@ const useStyles = createUseStyles((theme) => ({
       }
     },
     strong: {
-      fontSize: '1rem',
+      // fontSize: '1.1rem',
     },
     blockquote: {
       borderLeft: '2px #ccc solid',
@@ -132,7 +132,7 @@ const useStyles = createUseStyles((theme) => ({
         background: '#2b2b2b',
         color: '#f8f8f2',
         display: 'block',
-        fontSize: '.875rem',
+        fontSize: '1rem',
         lineHeight: '1.125rem',
         overflowX: 'auto',
         padding: '0.5em',
@@ -144,7 +144,7 @@ const useStyles = createUseStyles((theme) => ({
     'p, li': {
       '& code': {
         fontFamily: 'monospace, "Courier New"',
-        fontSize: '1em',
+        fontSize: '1.125rem',
         backgroundColor: 'rgba(242, 242, 242, 1)',
         wordBreak: 'break-word',
         padding: '2px 4px',
