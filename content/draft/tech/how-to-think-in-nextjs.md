@@ -41,7 +41,7 @@ It can feel like a steep learning curve, especially if you haven't worked much w
 
 Next.js is powerful, and a lot of fun to build with once you get a handle on how it works 🏗
 
-⚠️ Expect that things will take longer, at least at first. If you're not learning at your own pace and have to make time estimtates, remember to pad those so that you have the time needed to do things correctly the 'Next' way, and not just revert to SPA patterns on top of Next.
+⚠️ Expect that things will take longer, at least at first. If you're not learning at your own pace and have to make time estimates, remember to pad those so that you have the time needed to do things correctly the 'Next' way, and not just revert to SPA patterns on top of Next.
 
 ⚠️ Inevitably there will be places where adding functionality is just more complex when rendering occurs in both a server and a browser context like [Redux](https://redux.js.org/recipes/server-rendering#redux-on-the-server) or [CSS-In-JS](https://cssinjs.org/server-side-rendering).
 
@@ -79,7 +79,7 @@ The *context* in which your code *executes* can be either the server or the clie
 - The browser globals `window` & `document` are `undefined` on the server
 - The Node.js File system (`fs`) module is `undefined` in the browser
 
-Right off the bat do yourself a favor and create two utility functions you can use to run code in only one or the other of these places:
+Right off the bat do yourself a favor and create two utility functions to wrap code that should run in only one context:
 
 ```javascript
 export const isClient = () => typeof window !== 'undefined'
@@ -108,11 +108,11 @@ Finally, there might be some things the server can't provide. In this case the c
 
 The server will do some work, and so does the client 🍻
 
-![Starbucks drinks: A doubleshot (as SSG), fancy tiktok special (as SSR), and coffe with a shot of whisky (as CSR).](/public/images/blog/tech/thinking-in-nextjs/starbucks-explains-nextjs-pages.jpg)
+![Starbucks drinks: A doubleshot (as SSG), fancy tiktok special (as SSR), and coffee with a shot of whisky (as CSR).](/public/images/blog/tech/thinking-in-nextjs/starbucks-explains-nextjs-pages.jpg)
 
-Can you guess who Starbucks is in the scenario above? Yes, Next.js!
+Can you guess who Starbucks is in the scenario above? It's Next.js 😆
 
-The three scenarios above are basically the same way you can choose to develop your pages in Next.js.
+The three scenarios above encompass the choices you have when building pages in Next.
 
 ## Pages
 
@@ -121,7 +121,7 @@ Before building any pages it pays to step back and think about:
 - how often does your content change?
 - how much of a page depends on certain content?
 
-How often your content changes and how much of a page depends on that content will change whether you want to implement the page via Static Site Generation (SSG), Server Side Rendering (SSR), or some combination of those mixed with client side rendering (CSR).
+How often your content changes and how much of a page depends on that content will impact whether you want to implement the page via Static Site Generation (SSG), Server Side Rendering (SSR), or some combination of those mixed with client side rendering (CSR).
 
 **SSG**
 
@@ -151,11 +151,11 @@ To shield the clients from the complexity of the espresso maker, the client make
 
 Until the response arrives, the client is free to doomscroll TikTok looking for cat videos and a new crazy coffee drink.
 
-Your API Routes in Next.js basically mirror that interaction. They won't get you coffee, but if you build them right they can get you cat memes.
+Your API Routes in Next.js mirror that interaction. They won't get you coffee, but if you build them right they can get you cat memes.
 
 ⚠️ Remember this is in the server context. You can use sensitive keys, secrets, passwords, and connection strings if required. You could interact with the filesystem, say, to pull in markdown documents for creating content. You could add an ORM like Prisma to interact with a database.
 
-⚠️ Server-only context extends beyond API Routes and includes the Data Fetching methods `getServerSideProps`, `getStaticProps`, and `getStaticPaths`. The Data Fetching methods are more specialized and I won't be going into more detail on them. The documentation linked in the [pages section](#pages) is a great resource.
+⚠️ Server-only context extends beyond API Routes. It also includes the Data Fetching methods `getServerSideProps`, `getStaticProps`, and `getStaticPaths`. These methods are more specialized and I won't be going into more detail on them here, but the documentation linked in the [pages section](#pages) for each of the three types are great resources.
 
 For reference, an API Route looks something like:
 
@@ -181,7 +181,7 @@ If you're doing [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_up
 
 The response, or `res` sends information back to the client. It's important to always send back a response or the browser request will never finish, drifting endlessly in the wind.
 
-Convenitently, when you're in an API Route, the `res` object has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next, which make building the response easier than default Node.js `http.ServerResponse` functionality. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
+Conveniently, when you're in an API Route, the `res` object has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next, which make building the response easier than default Node.js `http.ServerResponse` functionality. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
 
 And with the response sent you're all wrapped up and ready to get on with building something new and exciting!
 
