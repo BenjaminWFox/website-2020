@@ -181,8 +181,8 @@ The `res` object is an instance of [http.ServerResponse](https://nodejs.org/api/
 
 ⚠️ The `res` object *additionally* has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next, which make building the response easier than default `http.ServerResponse` functionality. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
 
-<!--> OLD CONTENT BELO <-->
-
+<!-- OLD CONTENT BELOW ->
+<!-- 
 ## Other Points of Note
 
 ### Environment Variables
@@ -216,9 +216,9 @@ This is a step to push all files required to run the site wherever they need to 
 
 **Run**
 
-The `next start` command. Code is running on the remote server. When a client makes a request, any pages that use `getServerSideProps` are pre-rendered on the server before being sent to the client. Any pages that were pre-build via `getStaticProps` are served immediately on request.
+The `next start` command. Code is running on the remote server. When a client makes a request, any pages that use `getServerSideProps` are pre-rendered on the server before being sent to the client. Any pages that were pre-build via `getStaticProps` are served immediately on request. -->
 
-<!-->
+<!--
 ### Node.js Built-in modules
 
 Node.js has [a whole lot of built-in modules](https://nodejs.org/dist/latest-v16.x/docs/api/). I wouldn't bother trying to learn or even read through them all, but it's worth knowing they exist and there are a few I think are worth calling out in particular:
@@ -226,7 +226,7 @@ Node.js has [a whole lot of built-in modules](https://nodejs.org/dist/latest-v16
 - `fs` - The [File system](https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fs_file_system) API is *very* handy for creating content from static files (like markdown) stored locally in the project - documentation, legal disclaimers, blog posts, etc.... 
 - `path` - The [Path](https://nodejs.org/dist/latest-v16.x/docs/api/path.html#path_path) API may be familiar if you've done much Webpack configuration. It's useful with `fs` to make sure you find the files you're looking for.
 - `process` - [Process](https://nodejs.org/api/process.html#process_process) is a Node global. It's mostly worth mentioning since there is a particular instance where the `path.dirname()` (or `__dirname`) will give incorrect results in `getStaticProps` so [you should use `process.cwd()` instead](https://nextjs.org/docs/basic-features/data-fetching#reading-files-use-processcwd).
-<-->
+-->
 
 ## Further Reading <!-- omit in toc -->
 

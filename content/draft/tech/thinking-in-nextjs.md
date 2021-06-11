@@ -20,14 +20,14 @@ It can feel like a steep learning curve, especially if you haven't worked much w
 
 Next.js is a lot of fun to build with once you get a handle on how it works 🏗
 
-- [Intro](#intro)
-- [Time](#time)
-- [Execution Context](#execution-context)
-  - [Environment Variables](#environment-variables)
-- [Pages and API Routes](#pages-and-api-routes)
-  - [Pages](#pages)
-  - [API Routes](#api-routes)
-- [Application Development Lifecycle](#application-development-lifecycle)
+1. [Intro](#intro)
+1. [Time](#time)
+1. [Execution Context](#execution-context)
+   1. [Environment Variables](#environment-variables)
+1. [Pages and API Routes](#pages-and-api-routes)
+   1. [Pages](#pages)
+   1. [API Routes](#api-routes)
+1. [Application Development Lifecycle](#application-development-lifecycle)
 
 ## Intro
 
