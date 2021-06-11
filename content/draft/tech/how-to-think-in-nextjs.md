@@ -1,12 +1,12 @@
 ---
-title: "How to think in Next.js 2"
+title: "How to 'Think in Next.js'"
 date: "2021-06-06"
 subtitle: "Understanding your client is important in any relationship. Now you also have to understand your server."
 category: "tech"
 image: 'images/blog/tech/post-folder/image-name.jpg'
 ---
 
-![Initial image used as anchor for article](/public/images/blog/tech/thinking-in-nextjs/thinking-in-nextjs-client-header.jpg)
+![Initial image used as anchor for article](/public/images/blog/tech/thinking-in-nextjs/thinking-in-nextjs-thinking-header.jpg)
 
 Let me tell you a story about a client.
 
@@ -30,7 +30,7 @@ It also happens to be the server 🤔
 
 ## Clients and Servers and Node Oh My
 
-Yes, now there is a server. Starting with Next.js after working on SPAs can be challenging with the whole server thing going on, not to mention the node.js runtime 😱
+Yes, now there is a server. Starting with Next.js after working on SPAs can be challenging (at least it was for me) with the whole server thing going on, not to mention the node.js runtime 😱
 
 It can feel like a steep learning curve, especially if you haven't worked much with Node.js, but at the end of the day remember that **the client is still React**! A majority of getting comfortable with Next.js, I've found, is understanding three things:
 - [Client vs server contexts](#execution-context) <!-- omit in toc -->
@@ -63,13 +63,13 @@ Next.js is powerful, and a lot of fun to build with once you get a handle on how
 - You *do* have access to a whole new set of [APIs in Node.js](https://nodejs.org/docs/latest/api/)
 - You *can* include secret & sensitive information (API keys, connection strings, passwords, etc...) on the server
 
-This *also* means implementing functionality which may have had a common approach for SPAs now has multiple approaches to choose from depending on a variety of factors related to how you design your application.
+This *also* means implementing functionality which may have had a common approach for SPAs, [like Authentication](https://auth0.com/blog/ultimate-guide-nextjs-authentication-auth0/), now has multiple approaches to choose from depending on a variety of factors related to how you design your application.
 
 ## Execution Context
 
-The considerations I want to focus on all revolve around the fact that there is now a server you have to deal with.
+The considerations I want to focus on all revolve around the fact that there is now a server you have to deal with. At the risk of sounding obvious, I think it's hard to overstate how important this is.
 
-I think it's hard to overstate how important this is! The biggest gotcha?
+The biggest gotcha?
 
 **Adding a server adds an execution context**
 
@@ -86,7 +86,7 @@ export const isClient = () => typeof window !== 'undefined'
 export const isServer = () => !isClient()
 ```
 
-⚠️ In React the `useEffect` (and `useLayoutEffect`) hook will *only* run in the browser.
+⚠️ Those methods aren't always necessary. The `useEffect` (and `useLayoutEffect`) React hooks will *only* run in the browser. The [API Routes](#api-routes) and [Data Fetching methods](https://nextjs.org/docs/basic-features/data-fetching) will *only* run on the server.
 
 ⚠️ Don't leave unused imports; Node.js modules that are imported and unused will throw errors. The reference won't be removed before the code goes to the client and the browser will choke on the Node.js code.
 
