@@ -3,7 +3,7 @@ title: "How to 'Think in Next.js'"
 date: "2021-06-06"
 subtitle: "Understanding your client is important in any relationship. Now you also have to understand your server."
 category: "tech"
-image: 'images/blog/tech/post-folder/image-name.jpg'
+image: 'images/blog/tech/thinking-in-nextjs/thinking-in-nextjs-thinking-header.jpg'
 ---
 
 ![Initial image used as anchor for article](/public/images/blog/tech/thinking-in-nextjs/thinking-in-nextjs-thinking-header.jpg)
@@ -39,7 +39,9 @@ It can feel like a steep learning curve, especially if you haven't worked much w
 
 ![The Count from Sesame Street saying "3 Things, Ah Ah Ah!."](/public/images/blog/tech/thinking-in-nextjs/the-count-3-things-4.jpg)
 
-Next.js is powerful, and a lot of fun to build with once you get a handle on how it works 🏗
+Next.js is powerful, and a lot of fun to build with once you get a handle on how it works 🏗 It combines some of the best features of traditional and single page web applications into a hybrid application.
+
+You can [check out the high-level differences between the three application types](/blog/tech/server-no-server-serverless-apps) if you want a refresher!
 
 ⚠️ Expect that things will take longer, at least at first. If you're not learning at your own pace and have to make time estimates, remember to pad those so that you have the time needed to do things correctly the 'Next' way, and not just revert to SPA patterns on top of Next.
 
