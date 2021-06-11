@@ -86,7 +86,7 @@ export const isClient = () => typeof window !== 'undefined'
 export const isServer = () => !isClient()
 ```
 
-⚠️ In React the `useEffect` (or `useLayoutEffect`) hook will *only* run in the browser.
+⚠️ In React the `useEffect` (and `useLayoutEffect`) hook will *only* run in the browser.
 
 ⚠️ Don't leave unused imports; Node.js modules that are imported and unused will throw errors. The reference won't be removed before the code goes to the client and the browser will choke on the Node.js code.
 
@@ -98,19 +98,19 @@ Our client (a customer) walks into a Starbucks. Our server (a barista) will be r
 
 Starbucks knows certain things about what the customer might want. Since there are things they can make ahead, they have a nice selection of canned beverages (like the DOUBLESHOT) that the customer can just grab and go!
 
-The server has to do almost no work, huzzah!
+The server has to do almost no work, huzzah 🥳
 
 But Starbucks also knows that the customer might be picky ([I'm looking at YOU Edward](https://nypost.com/2021/05/03/tiktoks-edward-trend-inspires-viral-starbucks-coffee-order/)) so they're ready to make something crazy (the TikTok Special) on the fly.
 
-The server has to do a lot of work, dang!
+The server has to do a lot of work, dang 😰
 
 Finally, there might be some things the server can't provide. In this case the client will sneak into the bathroom with their hip flask (don't try this at home, always drink responsibly) and add their own whisky to the coffee.
 
-The server will do some work, and so does the client!
+The server will do some work, and so does the client 🍻
 
 ![Starbucks drinks: A doubleshot (as SSG), fancy tiktok special (as SSR), and coffe with a shot of whisky (as CSR).](/public/images/blog/tech/thinking-in-nextjs/starbucks-explains-nextjs-pages.jpg)
 
-So did you guess who Starbucks was in our scenario above? Yes, Next.js!
+Can you guess who Starbucks is in the scenario above? Yes, Next.js!
 
 The three scenarios above are basically the same way you can choose to develop your pages in Next.js.
 
@@ -119,7 +119,7 @@ The three scenarios above are basically the same way you can choose to develop y
 Before building any pages it pays to step back and think about:
 - where does your content come from?
 - how often does your content change?
-- how much does a page depend on certain content?
+- how much of a page depends on certain content?
 
 How often your content changes and how much of a page depends on that content will change whether you want to implement the page via Static Site Generation (SSG), Server Side Rendering (SSR), or some combination of those mixed with client side rendering (CSR).
 
@@ -135,7 +135,7 @@ The TikTok Special: [Server Side Rendering](https://nextjs.org/docs/basic-featur
 
 **CSR**
 
-The BYOB: [Client Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side) can be *added* in addition to either of the strategies above if a part of the page has frequently updating or real-time data.
+The Hip Flask: [Client Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side) can be *added* in addition to either of the strategies above if a part of the page has frequently updating or real-time data like a stock chart, chatbar, or comment section.
 
 This is essentially the same as a SPA page might render, although parts of the page surrounding client-rendered content may have already been generated via SSG or SSR.
 
@@ -147,9 +147,9 @@ Let's extend our metaphor above even further! Consider an espresso maker, a beau
 
 ![Picture of a commercial espresso machine](/public/images/blog/tech/thinking-in-nextjs/espresso-machine-is-the-api-routes.jpg)
 
-To shield the clients from the complexity of the espresso maker, the client make a **request** of the server. After a while the order is ready, and the server gives a **response** which includes the coffee!
+To shield the clients from the complexity of the espresso maker, the client make a **request** of the server. The server goes off and deals with all the complicated bits, and after a while the order is ready. Then the server gives a **response**, "Edward, I have your Venti Caramel Crunch Frappuccino!"
 
-Until the response arrives, the client is free to doomscroll Instagram looking for cat memes 😽
+Until the response arrives, the client is free to doomscroll TikTok looking for cat videos and a new crazy coffee drink.
 
 Your API Routes in Next.js basically mirror that interaction. They won't get you coffee, but if you build them right they can get you cat memes.
 
@@ -171,9 +171,9 @@ Simple right? 😬
 
 **The Request**
 
-You're probably familiar with fetching data via APIs from the SPA architecture. Now you're on the API side of that transaction.
+You're probably familiar with fetching data from APIs from the SPA architecture. Now you're on the API side of that transaction.
 
-The request, or `req` object will have all kinds of information about the request that the client has made. This includes headers, cookies, referrers, browser information, and data like a `query` in `GET` requests, and a `body` for `POST`.
+The request, or `req` object, will have all kinds of information about the request that the client has made. This includes headers, cookies, referrers, browser information, and data like a `query` in `GET` requests, and a `body` for `POST`.
 
 If you're doing [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) pay especially close attention to the `method` the client is using, since [you'll want to respond differently to different methods](https://stackoverflow.com/q/6203231/1763258)!
 
@@ -183,7 +183,7 @@ The response, or `res` sends information back to the client. It's important to a
 
 Convenitently, when you're in an API Route, the `res` object has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next, which make building the response easier than default Node.js `http.ServerResponse` functionality. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
 
-And with the response sent you're all wrapped up!
+And with the response sent you're all wrapped up and ready to get on with building something new and exciting!
 
 ## Further Reading <!-- omit in toc -->
 
