@@ -26,25 +26,25 @@ There's a new client in town, though, and it only asks for what it *needs*.
 
 This client is Next.js.
 
-It's also the server.
+It also happens to be the server 🤔
 
 ## Clients and Servers and Node Oh My <!-- omit in toc -->
 
 Yes, now there is a server. Starting with Next.js after working on SPAs can be challenging with the whole server thing going on, not to mention the node.js runtime 😱
 
 It can feel like a steep learning curve, especially if you haven't worked much with Node.js, but at the end of the day remember that **the client is still React**! A majority of getting comfortable with Next.js, I've found, is understanding four things:
-- The difference between the client & server contexts
-- The Next.js application lifecycle
-- What kind of page to build
-- How the server context works
+- Client vs server contexts
+- Page types
+- API Routes
+- The application lifecycle
 
 ![The Count from Sesame Street saying "4 Things, Ah Ah Ah!."](/public/images/blog/tech/thinking-in-nextjs/the-count-4-things.jpg)
 
 Next.js is powerful, and a lot of fun to build with once you get a handle on how it works 🏗
 
-Expect that things will take longer, at least at first. If you're not learning at your own pace and have to make time estimtates, remember to pad those so that you have the time needed to do things correctly the 'Next' way, and not just revert to SPA patterns on top of Next.
+⚠️ Expect that things will take longer, at least at first. If you're not learning at your own pace and have to make time estimtates, remember to pad those so that you have the time needed to do things correctly the 'Next' way, and not just revert to SPA patterns on top of Next.
 
-Inevitably there will be places where adding functionality is just more complex when rendering occurs in both a server and a browser context like [Redux](https://redux.js.org/recipes/server-rendering#redux-on-the-server) or [CSS-In-JS](https://cssinjs.org/server-side-rendering).
+⚠️ Inevitably there will be places where adding functionality is just more complex when rendering occurs in both a server and a browser context like [Redux](https://redux.js.org/recipes/server-rendering#redux-on-the-server) or [CSS-In-JS](https://cssinjs.org/server-side-rendering).
 
 So what are some big differences between Single Page and Next.js applications?
 
@@ -156,45 +156,31 @@ Your API Routes in Next.js basically mirror that interaction. They won't get you
 
 ⚠️ Server-only context extends beyond API Routes and includes the Data Fetching methods `getServerSideProps`, `getStaticProps`, and `getStaticPaths`. The Data Fetching methods are more specialized and I won't be going into more detail on them. The documentation linked in the [pages section](#pages) is a great resource.
 
-For reference, and API Route looks something like this:
+For reference, an API Route looks something like:
 
 ```javascript
 export default function handler(req, res) {
+  // Do lots of processing...call apis...access database...
+
   res.status(200).json({ name: 'Next.js' })
 }
 ```
 
 **The Request**
 
-You should be familiar with fetching from APIs from the SPA model. Now you get to handle the other side of that fetch request!
+You should be familiar with fetching data via APIs from the SPA architecture, now you're on the API side of that transaction.
 
-API Routes will all have a `req` object
+The request, or `req` object will have all kinds of information about the request that the client has made. This includes headers, cookies, referrers, browser information, a `query` if it was a `GET` request, or a `body` if it was `POST`.
 
-With API routes, keep in mind:
-- They always receive a request (`req`) and return a response (`res`), otherwise the browser request will not finish.
-- API routes can be used at runtime, but they can also be used only during buildtime to fetch & build static content.
-- `req` and `res` are Node.js built-in objects.
+**The Response**
 
-The `req` object is an instance of [http.IncomingMessage](https://nodejs.org/api/http.html#http_class_http_incomingmessage), which is when the client (browser) requests something from the server via an API Route, as with `fetch`.
+The response, or `res` sends information back to the client. It's important to always send back a response or the browser request will never finish, drifting endlessly in the wind.
 
-The `res` object is an instance of [http.ServerResponse](https://nodejs.org/api/http.html#http_class_http_serverresponse), which is when the server responds to a client `req`.
+There are standard Node.js methods you can use to end the requset, but Next.js *also* [adds some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) which make building the response much more straight forward.
 
-⚠️ The `res` object *additionally* has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next, which make building the response easier than default `http.ServerResponse` functionality. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
+## Application Development Lifecycle
 
-<!--> OLD CONTENT BELO <-->
-
-## Other Points of Note
-
-### Environment Variables
-
-Next has some idiosyncracies around environment variables, and it's worth [reading through the documentation](https://nextjs.org/docs/basic-features/environment-variables#loading-environment-variables), but a couple things to call out specifically:
-- Environment variables are not public by default so if you want to use them in the browser you must prefix the name with `NEXT_PUBLIC_`.
-  - ⚠️ In a production site, non-prefixed variables that are carelessly rendered or logged on [SSG Pages](#pages) *are still be visible* [for a flash](https://github.com/vercel/next.js/discussions/23980) before being removed.
-- [SSG Pages](#pages) require environment variables to be present at buildtime, while SSR pages require them at runtime.
-
-### Application Development Lifecycle
-
-There are more moving parts here than when building a SPA. Development is mostly the same, but the build and deploy stages introduce additional complexity.
+As you've seen, there is some more complexity developing with Next.js than a SPA. If you're not using the Vercel platform (which really does make things easy), building and deploying the site can also be a bit tricky.
 
 **Development**
 
@@ -217,16 +203,6 @@ This is a step to push all files required to run the site wherever they need to 
 **Run**
 
 The `next start` command. Code is running on the remote server. When a client makes a request, any pages that use `getServerSideProps` are pre-rendered on the server before being sent to the client. Any pages that were pre-build via `getStaticProps` are served immediately on request.
-
-<!-->
-### Node.js Built-in modules
-
-Node.js has [a whole lot of built-in modules](https://nodejs.org/dist/latest-v16.x/docs/api/). I wouldn't bother trying to learn or even read through them all, but it's worth knowing they exist and there are a few I think are worth calling out in particular:
-
-- `fs` - The [File system](https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fs_file_system) API is *very* handy for creating content from static files (like markdown) stored locally in the project - documentation, legal disclaimers, blog posts, etc.... 
-- `path` - The [Path](https://nodejs.org/dist/latest-v16.x/docs/api/path.html#path_path) API may be familiar if you've done much Webpack configuration. It's useful with `fs` to make sure you find the files you're looking for.
-- `process` - [Process](https://nodejs.org/api/process.html#process_process) is a Node global. It's mostly worth mentioning since there is a particular instance where the `path.dirname()` (or `__dirname`) will give incorrect results in `getStaticProps` so [you should use `process.cwd()` instead](https://nextjs.org/docs/basic-features/data-fetching#reading-files-use-processcwd).
-<-->
 
 ## Further Reading <!-- omit in toc -->
 

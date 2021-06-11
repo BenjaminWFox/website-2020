@@ -4,12 +4,12 @@ import { createUseStyles, useTheme } from 'react-jss'
 const useStyles = createUseStyles((theme) => ({
   '@global': {
     html: {
-      fontFamily: '"Source Sans Pro", Helvetica, Arial, Tahoma',
+      fontFamily: 'Roboto, Helvetica, Arial, Tahoma',
     },
     body: {
       backgroundColor: theme.colors.body.primary,
       color: theme.colors.text.secondary,
-      fontSize: '1.25rem',
+      fontSize: '1.125rem',
       fontWeight: 'inherit',
       lineHeight: '1.5rem',
       overflowWrap: 'break-word',
@@ -34,7 +34,7 @@ const useStyles = createUseStyles((theme) => ({
       '& h1, & h2, & h3, & h4, & h5, & h6': {
         marginTop: '2rem',
         '& a, & a:hover, & a:visited, & a:active': {
-          fontWeight: 600,
+          fontWeight: 500,
           color: 'inherit',
           textDecoration: 'none',
         },
@@ -144,7 +144,7 @@ const useStyles = createUseStyles((theme) => ({
     'p, li': {
       '& code': {
         fontFamily: 'monospace, "Courier New"',
-        fontSize: '1.125rem',
+        fontSize: '1rem',
         backgroundColor: 'rgba(242, 242, 242, 1)',
         wordBreak: 'break-word',
         padding: '2px 4px',
