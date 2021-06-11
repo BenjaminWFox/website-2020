@@ -28,17 +28,16 @@ This client is Next.js.
 
 It also happens to be the server 🤔
 
-## Clients and Servers and Node Oh My <!-- omit in toc -->
+## Clients and Servers and Node Oh My
 
 Yes, now there is a server. Starting with Next.js after working on SPAs can be challenging with the whole server thing going on, not to mention the node.js runtime 😱
 
-It can feel like a steep learning curve, especially if you haven't worked much with Node.js, but at the end of the day remember that **the client is still React**! A majority of getting comfortable with Next.js, I've found, is understanding four things:
-- Client vs server contexts
-- Page types
-- API Routes
-- The application lifecycle
+It can feel like a steep learning curve, especially if you haven't worked much with Node.js, but at the end of the day remember that **the client is still React**! A majority of getting comfortable with Next.js, I've found, is understanding three things:
+- [Client vs server contexts](#execution-context) <!-- omit in toc -->
+- [Page types](#your-application-is-starbucks) <!-- omit in toc -->
+- [API Routes](#api-routes) <!-- omit in toc -->
 
-![The Count from Sesame Street saying "4 Things, Ah Ah Ah!."](/public/images/blog/tech/thinking-in-nextjs/the-count-4-things.jpg)
+![The Count from Sesame Street saying "3 Things, Ah Ah Ah!."](/public/images/blog/tech/thinking-in-nextjs/the-count-3-things-4.jpg)
 
 Next.js is powerful, and a lot of fun to build with once you get a handle on how it works 🏗
 
@@ -46,7 +45,7 @@ Next.js is powerful, and a lot of fun to build with once you get a handle on how
 
 ⚠️ Inevitably there will be places where adding functionality is just more complex when rendering occurs in both a server and a browser context like [Redux](https://redux.js.org/recipes/server-rendering#redux-on-the-server) or [CSS-In-JS](https://cssinjs.org/server-side-rendering).
 
-So what are some big differences between Single Page and Next.js applications?
+## Review: SPA vs Next.js
 
 ![Visual diagram of the following SPA vs Next.js comparison list.](/public/images/blog/tech/thinking-in-nextjs/next-vs-spa.jpg)
 
@@ -148,11 +147,13 @@ Let's extend our metaphor above even further! Consider an espresso maker, a beau
 
 ![Picture of a commercial espresso machine](/public/images/blog/tech/thinking-in-nextjs/espresso-machine-is-the-api-routes.jpg)
 
-To shield the clients from the complexity of the espresso maker, the client make a **request** of the server. After a while when the order is ready, the server gives a **response** which includes the coffee! Until the response, the client is free to doomscroll Instagram looking for cat memes 😽
+To shield the clients from the complexity of the espresso maker, the client make a **request** of the server. After a while the order is ready, and the server gives a **response** which includes the coffee!
 
-Your API Routes in Next.js basically mirror that interaction. They won't get you coffee, but if you build them right they will get you cat memes.
+Until the response arrives, the client is free to doomscroll Instagram looking for cat memes 😽
 
-⚠️ Remember we're now in the server context. You can use sensitive keys, secrets, passwords, and connection strings if required. You could interact with the filesystem, say, to pull in markdown documents for creating content. You could add an ORM like Prisma to interact with a database.
+Your API Routes in Next.js basically mirror that interaction. They won't get you coffee, but if you build them right they can get you cat memes.
+
+⚠️ Remember this is in the server context. You can use sensitive keys, secrets, passwords, and connection strings if required. You could interact with the filesystem, say, to pull in markdown documents for creating content. You could add an ORM like Prisma to interact with a database.
 
 ⚠️ Server-only context extends beyond API Routes and includes the Data Fetching methods `getServerSideProps`, `getStaticProps`, and `getStaticPaths`. The Data Fetching methods are more specialized and I won't be going into more detail on them. The documentation linked in the [pages section](#pages) is a great resource.
 
@@ -166,43 +167,23 @@ export default function handler(req, res) {
 }
 ```
 
+Simple right? 😬
+
 **The Request**
 
-You should be familiar with fetching data via APIs from the SPA architecture, now you're on the API side of that transaction.
+You're probably familiar with fetching data via APIs from the SPA architecture. Now you're on the API side of that transaction.
 
-The request, or `req` object will have all kinds of information about the request that the client has made. This includes headers, cookies, referrers, browser information, a `query` if it was a `GET` request, or a `body` if it was `POST`.
+The request, or `req` object will have all kinds of information about the request that the client has made. This includes headers, cookies, referrers, browser information, and data like a `query` in `GET` requests, and a `body` for `POST`.
+
+If you're doing [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) pay especially close attention to the `method` the client is using, since [you'll want to respond differently to different methods](https://stackoverflow.com/q/6203231/1763258)!
 
 **The Response**
 
 The response, or `res` sends information back to the client. It's important to always send back a response or the browser request will never finish, drifting endlessly in the wind.
 
-There are standard Node.js methods you can use to end the requset, but Next.js *also* [adds some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) which make building the response much more straight forward.
+Convenitently, when you're in an API Route, the `res` object has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next, which make building the response easier than default Node.js `http.ServerResponse` functionality. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
 
-## Application Development Lifecycle
-
-As you've seen, there is some more complexity developing with Next.js than a SPA. If you're not using the Vercel platform (which really does make things easy), building and deploying the site can also be a bit tricky.
-
-**Development**
-
-The `next dev` command, for when you are buildling the site. Fast Refresh is pretty nice.
-
-⚠️ Since you have *two* execution contexts, pay attention where you `console.log()` for debugging. If the `log` is executing in the client context it will show up in the browser, but if the `log` is executing in the server context it will show up in the terminal where `npm run dev` is running!
-
-**Build**
-
-The `next build` command. During buildtime Next creates a deployment bundle. Any pages that use `getStaticProps` will be created as static content. Depending on how complex or numerous your static pages are, there may be a lot of code that executes during this stage.
-
-The output from this command is very useful to see both how much data you're sending to the client on requests for various pages, and also to confirm that your pages were built the way you expected them to be with [either SSG or SSR](#pages).
-
-**Deployment**
-
-This is a step to push all files required to run the site wherever they need to go. If you use the Vercel platform this is easy - push it and forget it. If you are *not* using the Vercel platform, there will be more work involved.
-
-⚠️ The bare minimum files that will need to be copied to the remote server in order to run the site are `next.config.js`, `node_modules`, `package.json`, and `.next` folder. Alternately you could skip copying `node_modules` and `npm install` directly on the remote server.
-
-**Run**
-
-The `next start` command. Code is running on the remote server. When a client makes a request, any pages that use `getServerSideProps` are pre-rendered on the server before being sent to the client. Any pages that were pre-build via `getStaticProps` are served immediately on request.
+And with the response sent you're all wrapped up!
 
 ## Further Reading <!-- omit in toc -->
 
