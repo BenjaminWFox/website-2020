@@ -105,9 +105,9 @@ The first time I lobbied to build a site with Next.js I ended up stripping it ou
 
 ## [Further Reading](#further-reading)
 
-If you're just getting started with Next.js, check out my thoughts on [How to Think in Next.js]().
+If you're just getting started with Next.js, check out my thoughts on [How to Think in Next.js](/blog/tech/how-to-think-in-nextjs).
 
-If you're setting up a new project, check on my tutorial on [Next.js setup with tests, linting, and absolute imports](https://benjaminwfox.com/blog/tech/nextjs-setup-config-testing-linting-absolute-imports).
+If you're setting up a new project, check on my tutorial on [Next.js setup with tests, linting, and absolute imports](/blog/tech/nextjs-setup-config-testing-linting-absolute-imports).
 
 Good luck and happy programming!
 
