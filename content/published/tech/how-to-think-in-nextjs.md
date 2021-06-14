@@ -1,9 +1,10 @@
 ---
 title: "How to Think in Next.js"
-date: "2021-06-06"
+date: "2021-06-14"
 subtitle: "Understanding your client is important in any relationship. Now you also have to understand your server."
 category: "tech"
 image: 'images/blog/tech/thinking-in-nextjs/thinking-in-nextjs-thinking-header.jpg'
+tags: "next, react, web development, learning"
 ---
 
 ![Initial image used as anchor for article](/public/images/blog/tech/thinking-in-nextjs/thinking-in-nextjs-thinking-header.jpg)
