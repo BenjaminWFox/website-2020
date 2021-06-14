@@ -1,6 +1,6 @@
 ---
 title: "How Does a Website Get its Data?"
-date: "2021-06-14"
+date: "2021-06-13"
 subtitle: "From servers to no servers to serverless, what's the difference and how does it impact how the client gets data?"
 category: "tech"
 image: 'images/blog/tech/server-no-server-serverless-apps/princess-bride-serverless-meme.jpg'
