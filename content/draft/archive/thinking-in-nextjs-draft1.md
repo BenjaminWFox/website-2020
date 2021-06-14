@@ -1,6 +1,6 @@
 ---
-title: "How to think in Next.js"
-date: "2021-06-06"
+title: "Archived: How to think in Next.js"
+date: "1900-01-01"
 subtitle: "Single Page App development to Next.js requires a 180 degree shift in your mental model around how your application functions. This can be quite a headache."
 category: "tech"
 image: 'images/blog/tech/post-folder/image-name.jpg'
@@ -20,14 +20,14 @@ It can feel like a steep learning curve, especially if you haven't worked much w
 
 Next.js is a lot of fun to build with once you get a handle on how it works 🏗
 
-1. [Intro](#intro)
-1. [Time](#time)
-1. [Execution Context](#execution-context)
-   1. [Environment Variables](#environment-variables)
-1. [Pages and API Routes](#pages-and-api-routes)
-   1. [Pages](#pages)
-   1. [API Routes](#api-routes)
-1. [Application Development Lifecycle](#application-development-lifecycle)
+- [Intro](#intro)
+- [Time](#time)
+- [Execution Context](#execution-context)
+  - [Environment Variables](#environment-variables)
+- [Pages and API Routes](#pages-and-api-routes)
+  - [Pages](#pages)
+  - [API Routes](#api-routes)
+- [Application Development Lifecycle](#application-development-lifecycle)
 
 ## Intro
 
