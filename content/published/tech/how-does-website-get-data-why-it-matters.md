@@ -1,5 +1,5 @@
 ---
-title: "How Does a Website Get its Data?"
+title: "How Does a Website Get its Data, and Why Does it Matter?"
 date: "2021-06-13"
 subtitle: "From servers to no servers to serverless, what's the difference and how does it impact how the client gets data?"
 category: "tech"

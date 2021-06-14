@@ -42,7 +42,7 @@ It can feel like a steep learning curve, especially if you haven't worked much w
 
 Next.js is powerful, and a lot of fun to build with once you get a handle on how it works 🏗 It combines some of the best features of traditional and single page web applications into a hybrid application.
 
-If you want a refresher [check out the high-level differences between the three application types](/blog/tech/server-no-server-serverless-apps)!
+If you want a refresher [check out the high-level differences between the three application types](/blog/tech/how-does-website-get-data-why-it-matters)!
 
 ⚠️ Expect that things will take longer, at least at first. If you're not learning at your own pace and have to make time estimates, remember to pad those so that you have the time needed to do things correctly the 'Next' way, and not just revert to SPA patterns on top of Next.
 
