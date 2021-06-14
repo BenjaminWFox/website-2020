@@ -45,6 +45,8 @@ export default function PostTemplate({ post }) {
         <meta content={limitChars(post.meta.subtitle, 200)} name="twitter:description" />
         <meta content="summary_large_image" name="twitter:card" />
         <meta content="on" name="twitter:widgets:new-embed-design" />
+
+        <meta content={post.meta.updated} name="last-updated" />
       </Head>
 
       <main>
