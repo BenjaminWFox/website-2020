@@ -36,7 +36,7 @@ Thus Next.js was born.
 
 Ok, if the epic story of creation didn't do it, let's try again with pictures.
 
-I've been building on the web for what feels like a long time, but I haven't really thought about the basics of how a site works in recent memory. I've been working with Next.js a lot over the last year, so I thought I'd write some notes to refresh my memory on how my sites used to work, and how they work now.
+I've been building on the web for what feels like a long time, and I haven't reviewed the basics of how a site works in recent memory. I've been working with Next.js a lot over the last year, and I thought I'd write some notes to refresh my memory on how my sites used to work, and how they work now.
 
 The story of each application had three main players, the:
 - Screen (or other interface) to drive input on the client

@@ -195,7 +195,9 @@ Simple right? 😬
 
 You're probably familiar with [fetching data](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) from APIs from the SPA architecture. Now you're on the API side of that transaction.
 
-The request, or `req` object, will have all kinds of information about the request that the client has made. This includes headers, cookies, referrers, browser information, and data like a `query` in `GET` requests, and a `body` for `POST`.
+The request, or `req` object, will have all kinds of information about the request that the client has made. This includes headers, referrers, browser information.
+
+In API Routes there is also [extra data added by Next](https://nextjs.org/docs/api-routes/api-middlewares) which includes objects for `cookies`, `query`, and `body` if that information is present.
 
 If you're doing [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) pay especially close attention to the `method` the client is using, since [you'll want to respond differently to different methods](https://stackoverflow.com/q/6203231/1763258)!
 
@@ -203,7 +205,7 @@ If you're doing [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_up
 
 The response, or `res` sends information back to the client. It's important to always send back a response or the browser request will never finish, drifting endlessly in the wind.
 
-Conveniently, when you're in an API Route, the `res` object has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next, which make building the response easier than default Node.js `http.ServerResponse` functionality. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
+Similar to the `req` object, the `res` object in API Routes has [some extra helper methods](https://nextjs.org/docs/api-routes/response-helpers) added by Next, which make building the response easier than default Node.js `http.ServerResponse` functionality. It tripped me up when I saw these helpers used in tutorials but couldn't find them referenced in the Node.js documentation.
 
 And with the response sent you're all wrapped up and ready to get on with building something new and exciting!
 
