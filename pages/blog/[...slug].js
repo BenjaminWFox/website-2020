@@ -5,11 +5,19 @@ import React from 'react'
 import Header from '@/components/header/header'
 import PropTypes from 'prop-types'
 
+const limitChars = (string, limitInclusive = 200) => {
+  if (string.length < limitInclusive) {
+    return string
+  }
+
+  return `${string.substring(0, limitInclusive - 3)}...`
+}
+
 export default function PostTemplate({ post }) {
   return (
     <div>
       <Head>
-        <title>Benjamin W Fox</title>
+        <title>{post.meta.title} | Benjamin W Fox</title>
         <link
           href="/favicon.ico"
           rel="icon"
@@ -17,7 +25,7 @@ export default function PostTemplate({ post }) {
         {
           post.meta.canon
             ? <link href={post.meta.canon} rel="canonical" />
-            : ''
+            : <link href={post.absoluteUrl} rel="canonical" />
         }
         <meta content="Ben Fox" property="og:site_name" />
         <meta content={post.meta.title} property="og:title" />
@@ -25,6 +33,18 @@ export default function PostTemplate({ post }) {
         <meta content={post.meta.absoluteImage} property="og:image" />
         <meta content={post.absoluteUrl} property="og:url" />
         <meta content="article" property="og:type" />
+        <meta content="$ilp.uphold.com/YPyGRY7bJfP3" name="monetization" />
+
+        <meta content={limitChars(`${limitChars(post.meta.subtitle, 200)} Tagged with ${post.meta.tags}.`, 275)} name="description" />
+        <meta content={`${post.meta.tags}, ben fox, benjamin fox, software developer`} name="keywords" />
+
+        <meta content={post.meta.absoluteImage} name="twitter:image:src" />
+        <meta content="@BenjaminWFox" name="twitter:site" />
+        <meta content="@BenjaminWFox" name="twitter:creator" />
+        <meta content={post.meta.title} name="twitter:title" />
+        <meta content={limitChars(post.meta.subtitle, 200)} name="twitter:description" />
+        <meta content="summary_large_image" name="twitter:card" />
+        <meta content="on" name="twitter:widgets:new-embed-design" />
       </Head>
 
       <main>
