@@ -66,7 +66,9 @@
     "sort-imports": 0,
     "object-curly-spacing": ["error", "always"],
     "object-property-newline": ["error", { "allowAllPropertiesOnSameLine": true }],
-    "object-curly-newline": ["error", { "multiline": true }],
+    "object-curly-newline": ["error", {
+      "ObjectPattern": { "multiline": true }
+      }],
     "one-var": ["error", "never"],
     "quote-props": 0,
     "no-magic-numbers": 0,

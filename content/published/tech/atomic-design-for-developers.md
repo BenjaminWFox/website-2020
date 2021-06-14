@@ -4,6 +4,7 @@ date: "2021-05-08"
 subtitle: "A practical guide to developing component based sites and apps around the Atomic Design methodology."
 category: "tech"
 image: 'images/blog/tech/atomic-design-for-developers/tetris-game-over.png'
+tags: 'react, atomic design, web development, tutorial'
 ---
 
 ![Chaotic game of Tetris in Game Over State](/public/images/blog/tech/atomic-design-for-developers/tetris-game-over.png)

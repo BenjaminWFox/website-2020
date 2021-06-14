@@ -1,0 +1,42 @@
+  <title>Atomic Design for Developers: Better Component Composition and Organization | by Ben Fox | May, 2021 | Medium</title>
+
+  <meta data-rh="true" charset="utf-8">
+  <meta data-rh="true" name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta data-rh="true" name="theme-color" content="#000000">
+  <meta data-rh="true" name="twitter:app:name:iphone" content="Medium">
+  <meta data-rh="true" name="twitter:app:id:iphone" content="828256236">
+  <meta data-rh="true" property="al:ios:app_name" content="Medium">
+  <meta data-rh="true" property="al:ios:app_store_id" content="828256236">
+  <meta data-rh="true" property="al:android:package" content="com.medium.reader">
+  <meta data-rh="true" property="fb:app_id" content="542599432471018">
+  <meta data-rh="true" property="og:site_name" content="Medium">
+  <meta data-rh="true" property="al:android:app_name" content="Medium">
+  <meta property="og:type" content="article" data-rh="true">
+  <meta property="article:published_time" content="2021-05-09T03:03:59.642Z" data-rh="true">
+  <meta name="title" content="Atomic Design for Developers: Better Component Composition and Organization | by Ben Fox | May, 2021 | Medium" data-rh="true">
+  <meta property="og:title" content="Atomic Design for Developers: Better Component Composition and Organization" data-rh="true">
+  <meta property="twitter:title" content="Atomic Design for Developers: Better Component Composition and Organization" data-rh="true">
+  <meta name="twitter:site" content="@Medium" data-rh="true">
+  <meta name="twitter:app:url:iphone" content="medium://p/ce1eb4e82f11" data-rh="true">
+  <meta property="al:android:url" content="medium://p/ce1eb4e82f11" data-rh="true">
+  <meta property="al:ios:url" content="medium://p/ce1eb4e82f11" data-rh="true">
+  <meta name="description" content="Organizing your application (or app/site, I’ll use these interchangeably) can seem easy. A folder for components, one for assets, another for utility methods. Maybe even a separate folder for pages…" data-rh="true">
+  <meta property="og:description" content="A practical guide to developing component based sites and apps around the Atomic Design methodology." data-rh="true">
+  <meta property="twitter:description" content="A practical guide to developing component based sites and apps around the Atomic Design methodology." data-rh="true">
+  <meta property="og:url" content="https://benjaminwfox.medium.com/better-app-organization-with-atomic-design-for-developers-ce1eb4e82f11" data-rh="true">
+  <meta property="al:web:url" content="https://benjaminwfox.medium.com/better-app-organization-with-atomic-design-for-developers-ce1eb4e82f11" data-rh="true">
+  <meta property="og:image" content="https://miro.medium.com/max/1000/0*sKUXlRPWG73cKTKv.png" data-rh="true">
+  <meta name="twitter:image:src" content="https://miro.medium.com/max/1000/0*sKUXlRPWG73cKTKv.png" data-rh="true">
+  <meta name="twitter:card" content="summary_large_image" data-rh="true">
+  <meta property="article:author" content="https://benjaminwfox.medium.com" data-rh="true">
+  <meta name="twitter:creator" content="@BenjaminWFox" data-rh="true">
+  <meta name="author" content="Ben Fox" data-rh="true">
+  <meta name="robots" content="index,follow,max-image-preview:large" data-rh="true">
+  <meta name="referrer" content="unsafe-url" data-rh="true">
+  <meta name="twitter:label1" content="Reading time" data-rh="true">
+  <meta name="twitter:data1" content="14 min read" data-rh="true">
+  <meta name="parsely-post-id" content="ce1eb4e82f11" data-rh="true">
+
+  <link rel="author" href="https://benjaminwfox.medium.com" data-rh="true">
+  <link rel="canonical" href="https://benjaminwfox.com/blog/tech/atomic-design-for-developers" data-rh="true">
+  <link rel="alternate" href="android-app://com.medium.reader/https/medium.com/p/ce1eb4e82f11" data-rh="true">
