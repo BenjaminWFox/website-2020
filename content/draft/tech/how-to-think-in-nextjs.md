@@ -14,13 +14,13 @@ This client was demanding. They wanted *all* the things, and they wanted them *n
 
 Servers know this kind of client all too well. When the client comes in, asking for everything *and* the kitchen sink, a server just has to sigh.
 
-"A lot of that is just going to go to waste, you know.", says the server, softly.
+"A lot of that is just going to go to waste, you know," says the server, softly.
 
 Their comments go unheeded.
 
 Does this client sound familiar?
 
-This client is your Single Page Application.
+This client is your Single Page Application (SPA).
 
 There's a new client in town, though, and it only asks for what it *needs*.
 
@@ -28,9 +28,9 @@ This client is Next.js.
 
 It also happens to be the server 🤔
 
-## Clients and Servers and Node Oh My
+## [Clients and Servers and Node Oh My](#clients-and-servers-and-node-oh-my)
 
-Yes, now there is a server. Starting with Next.js after working on SPAs can be challenging (at least it was for me) with the whole server thing going on, not to mention the node.js runtime 😱
+Starting with Next.js after working on SPAs can be challenging (at least it was for me) with the whole server thing going on, not to mention the node.js runtime 😱
 
 It can feel like a steep learning curve, especially if you haven't worked much with Node.js, but at the end of the day remember that **the client is still React**! A majority of getting comfortable with Next.js, I've found, is understanding three things:
 - [Client vs server contexts](#execution-context) <!-- omit in toc -->
@@ -47,7 +47,7 @@ If you want a refresher [check out the high-level differences between the three 
 
 ⚠️ Inevitably there will be places where adding functionality is just more complex when rendering occurs in both a server and a browser context like [Redux](https://redux.js.org/recipes/server-rendering#redux-on-the-server) or [CSS-In-JS](https://cssinjs.org/server-side-rendering).
 
-## Review: SPA vs Next.js
+## [Review: SPA vs Next.js](#review-spa-vs-nextjs)
 
 ![Visual diagram of the following SPA vs Next.js comparison list.](/public/images/blog/tech/thinking-in-nextjs/next-vs-spa.jpg)
 
@@ -71,13 +71,13 @@ On the server:
 
 In the Browser:
 - The browser only gets the code it needs for the requested page
-- None of the sentitive data from the server is available
+- None of the sensitive data from the server is available
 - Subsequent pages make new requests to the server
 - You have access to [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) and [the DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM)
 
 This *also* means implementing functionality which may have had a common approach for SPAs, [like Authentication](https://auth0.com/blog/ultimate-guide-nextjs-authentication-auth0/), now has multiple approaches to choose from depending on a variety of factors related to how you design your application.
 
-## Execution Context
+## [Execution Context](#execution-context)
 
 The considerations I want to focus on all revolve around the fact that there is now a server you have to deal with. At the risk of sounding obvious, I think it's hard to overstate how important this is.
 
@@ -102,7 +102,7 @@ export const isServer = () => !isClient()
 
 ⚠️ Don't leave unused imports; Node.js modules that are imported and unused will throw errors. The reference won't be removed before the code goes to the client and the browser will choke on the Node.js code.
 
-## Your Application is Starbucks
+## [Your Application is Starbucks](#your-application-is-starbucks)
 
 Before we go further, let's go back to our metaphor from the beginning. 
 
@@ -120,13 +120,13 @@ Finally, there might be some things the server can't provide. In this case the c
 
 The server will do some work, and so does the client 🍻
 
-![Starbucks drinks: A doubleshot (as SSG), fancy tiktok special (as SSR), and coffee with a shot of whisky (as CSR).](/public/images/blog/tech/thinking-in-nextjs/starbucks-explains-nextjs-pages.jpg)
+![Starbucks drinks: A Doubleshot (as SSG), fancy TikTok special order (as SSR), and coffee with a shot of whisky (as CSR).](/public/images/blog/tech/thinking-in-nextjs/starbucks-explains-nextjs-pages.jpg)
 
 Can you guess who Starbucks is in the scenario above? It's Next.js 😆
 
 The three scenarios above encompass the choices you have when building pages in Next.
 
-## Pages
+## [Pages](#pages)
 
 Before building any pages it pays to step back and think about:
 - where does your content come from?
@@ -163,7 +163,7 @@ The deferred content might be frequently updating/real-time data like a stock ch
 
 ⚠️ Remember that page code may be executed on both the server and client! If you have any sensitive information in environment variables or other stores be careful that it doesn't get sent to the client accidentally.
 
-## API Routes
+## [API Routes](#api-routes)
 
 Let's extend our metaphor above even further! Consider an espresso maker, a beautiful and complex machine that you *definitely* do not want your customers, err I mean clients, touching.
 
@@ -193,7 +193,7 @@ Simple right? 😬
 
 **The Request**
 
-You're probably familiar with fetching data from APIs from the SPA architecture. Now you're on the API side of that transaction.
+You're probably familiar with [fetching data](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) from APIs from the SPA architecture. Now you're on the API side of that transaction.
 
 The request, or `req` object, will have all kinds of information about the request that the client has made. This includes headers, cookies, referrers, browser information, and data like a `query` in `GET` requests, and a `body` for `POST`.
 
@@ -207,12 +207,12 @@ Conveniently, when you're in an API Route, the `res` object has [some extra help
 
 And with the response sent you're all wrapped up and ready to get on with building something new and exciting!
 
-## Further Reading <!-- omit in toc -->
+## [Further Reading](#further-reading) <!-- omit in toc -->
 
 I hope that this has given you some new insight as you get started with Next.js!
 
 If you're looking to set up Next.js beyond the basic scaffold, [check on my tutorial on adding tests, linting, and absolute imports](https://benjaminwfox.com/blog/tech/nextjs-setup-config-testing-linting-absolute-imports) to a Next.js project.
 
-## Questions? Comments? <!-- omit in toc -->
+## [Questions? Comments?](#questions-comments) <!-- omit in toc -->
 
 Follow me on Twitter [@BenjaminWFox](https://twitter.com/BenjaminWFox) for more tech and leadership content, and reach out with any thoughts or questions!

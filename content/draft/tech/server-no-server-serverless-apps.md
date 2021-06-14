@@ -8,7 +8,7 @@ image: 'images/blog/tech/server-no-server-serverless-apps/princess-bride-serverl
 
 ![Princess Bride "serverless does not mean what you think it means" meme.](/public/images/blog/tech/server-no-server-serverless-apps/princess-bride-serverless-meme.jpg)
 
-## Servers to No Servers to Serverless
+## [Servers to No Servers to Serverless](#servers-to-no-servers-to-serverless)
 
 In the beginning, there were servers.
 
@@ -32,11 +32,13 @@ The servers were into it.
 
 Thus Next.js was born.
 
-## Say What Now?
+## [Say What Now?](#say-what-now)
 
 Ok, if the epic story of creation didn't do it, let's try again with pictures.
 
-There are three main players in this story, the:
+I've been building on the web for what feels like a long time, but I haven't really thought about the basics of how a site works in recent memory. I've been working with Next.js a lot over the last year, so I thought I'd write some notes to refresh my memory on how my sites used to work, and how they work now.
+
+The story of each application had three main players, the:
 - Screen (or other interface) to drive input on the client
 - Client (the browser) to interact with the server to get data
 - Server to send data to the client
@@ -55,7 +57,7 @@ Let's dive in to a high level overview of what those differences are. In all cas
 
 So let's look specifically at steps 3 and 4 for each application!
 
-### Traditional Server App
+### [Traditional Server App](#traditional-server-app)
 
 ![traditional app flow diagram](/public/images/blog/tech/server-no-server-serverless-apps/traditional-app.jpg)
 
@@ -66,7 +68,7 @@ This process will repeat itself every time. New page requested, new request fulf
 
 Page loads can be slow and unoptimized, and the UI refreshes for all transitions. [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) offered some additional flexibility but it was clunky to implement and rarely felt like a first-class citizen.
 
-### Single Page App
+### [Single Page App](#single-page-app)
 
 ![single page app flow diagram](/public/images/blog/tech/server-no-server-serverless-apps/single-page-app.jpg)
 
@@ -77,7 +79,7 @@ Right up front the client has grabbed *everything* it needs, for better or worse
 
 Bundles can grow quite large, increasing load times and degrading user experience. Bundle splitting was one solution to that problem, but it could get complex and was often poorly implemented, if at all.
 
-### Next.js (Hybrid) App
+### [Next.js or Hybrid App](#nextjs-or-hybrid-app)
 
 ![Next.js hybrid serverless app flow diagram](/public/images/blog/tech/server-no-server-serverless-apps/hybrid-serverless-app.jpg)
 
@@ -92,7 +94,7 @@ Like the single page app, a page in hybrid applications like Next.js can also st
 
 This flexibility comes with increased complexity, and unlike the traditional app, this server is *not* stateful. It knows nothing about a connection except what is provided in the incoming request.
 
-## At the End
+## [At the End](#at-the-end)
 
 None of these approaches are inherently better or worse than the others, and don't let anyone tell you otherwise. All have pros and cons. One may work better for a particular use case than another, but that will depend on project-specific requirements, so you'll have to do your homework once you determine what those are.
 
@@ -100,7 +102,7 @@ And you should ***definitely*** determine your requirements up front! 😉
 
 The first time I lobbied to build a site with Next.js I ended up stripping it out a month later 🤦‍♂️ it became clear that there was actually only a single page with different sections of the page that changed at certain times, so back to the single page app I went!
 
-## Further Reading
+## [Further Reading](#further-reading)
 
 If you're just getting started with Next.js, check out my thoughts on [How to Think in Next.js]().
 
@@ -108,6 +110,6 @@ If you're setting up a new project, check on my tutorial on [Next.js setup with 
 
 Good luck and happy programming!
 
-## Questions? Comments?
+## [Questions? Comments?](#questions-comments)
 
 Follow me on Twitter [@BenjaminWFox](https://twitter.com/BenjaminWFox) for more tech and leadership content, and reach out with any thoughts or questions!
