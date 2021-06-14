@@ -1,9 +1,10 @@
 ---
-title: "How Does a Website Get its Data?"
-date: "2021-06-06"
+title: "How Does a Website Get its Data, and Why Does it Matter?"
+date: "2021-06-13"
 subtitle: "From servers to no servers to serverless, what's the difference and how does it impact how the client gets data?"
 category: "tech"
 image: 'images/blog/tech/server-no-server-serverless-apps/princess-bride-serverless-meme.jpg'
+tags: "web development, web sites, review"
 ---
 
 ![Princess Bride "serverless does not mean what you think it means" meme.](/public/images/blog/tech/server-no-server-serverless-apps/princess-bride-serverless-meme.jpg)
@@ -104,9 +105,9 @@ The first time I lobbied to build a site with Next.js I ended up stripping it ou
 
 ## [Further Reading](#further-reading)
 
-If you're just getting started with Next.js, check out my thoughts on [How to Think in Next.js]().
+If you're just getting started with Next.js, check out my thoughts on [How to Think in Next.js](/blog/tech/how-to-think-in-nextjs).
 
-If you're setting up a new project, check on my tutorial on [Next.js setup with tests, linting, and absolute imports](https://benjaminwfox.com/blog/tech/nextjs-setup-config-testing-linting-absolute-imports).
+If you're setting up a new project, check on my tutorial on [Next.js setup with tests, linting, and absolute imports](/blog/tech/nextjs-setup-config-testing-linting-absolute-imports).
 
 Good luck and happy programming!
 
