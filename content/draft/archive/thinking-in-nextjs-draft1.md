@@ -1,6 +1,6 @@
 ---
 title: "Archived: How to think in Next.js"
-date: "1900-01-01"
+date: "1900-12-24"
 subtitle: "Single Page App development to Next.js requires a 180 degree shift in your mental model around how your application functions. This can be quite a headache."
 category: "tech"
 image: 'images/blog/tech/post-folder/image-name.jpg'

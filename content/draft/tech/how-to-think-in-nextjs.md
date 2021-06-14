@@ -14,7 +14,7 @@ This client was demanding. They wanted *all* the things, and they wanted them *n
 
 Servers know this kind of client all too well. When the client comes in, asking for everything *and* the kitchen sink, a server just has to sigh.
 
-"A lot of that is just going to go to waste, you know." says the server, softly.
+"A lot of that is just going to go to waste, you know.", says the server, softly.
 
 Their comments go unheeded.
 
@@ -41,7 +41,7 @@ It can feel like a steep learning curve, especially if you haven't worked much w
 
 Next.js is powerful, and a lot of fun to build with once you get a handle on how it works 🏗 It combines some of the best features of traditional and single page web applications into a hybrid application.
 
-You can [check out the high-level differences between the three application types](/blog/tech/server-no-server-serverless-apps) if you want a refresher!
+If you want a refresher [check out the high-level differences between the three application types](/blog/tech/server-no-server-serverless-apps)!
 
 ⚠️ Expect that things will take longer, at least at first. If you're not learning at your own pace and have to make time estimates, remember to pad those so that you have the time needed to do things correctly the 'Next' way, and not just revert to SPA patterns on top of Next.
 
@@ -53,17 +53,27 @@ You can [check out the high-level differences between the three application type
 
 ***In a SPA***
 
-- Your code executes in the browser *only*
-- You have access to [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) and [the DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM)
-- It's easy to know to exclude secret & sensitive information since *everything* is available to use end user
+Your code executes in the browser *only*
+  - The entire site code bundle is downloaded upfront
+  - You should not include sensitive information (API keys, passwords, etc...)
+  - Subsequent pages are all built from bundle code
+  - You have access to [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) and [the DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM)
 
 ***In Next.js***
 
-- Your code executes on the server *first* and in the browser *second*
-  - On the server, this could be at [buildtime or at runtime](#application-development-lifecycle)
+Your code executes on the server *first* and in the browser *second*
+
+On the server:
+- Pages are pre-built and/or pre-rendered (more on that later)
+- During API Routes & Data Fetching you *can* include sensitive information
 - You *do not* have access to Web APIs & the DOM *on the server*
 - You *do* have access to a whole new set of [APIs in Node.js](https://nodejs.org/docs/latest/api/)
-- You *can* include secret & sensitive information (API keys, connection strings, passwords, etc...) on the server
+
+In the Browser:
+- The browser only gets the code it needs for the requested page
+- None of the sentitive data from the server is available
+- Subsequent pages make new requests to the server
+- You have access to [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) and [the DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM)
 
 This *also* means implementing functionality which may have had a common approach for SPAs, [like Authentication](https://auth0.com/blog/ultimate-guide-nextjs-authentication-auth0/), now has multiple approaches to choose from depending on a variety of factors related to how you design your application.
 
@@ -96,7 +106,7 @@ export const isServer = () => !isClient()
 
 Before we go further, let's go back to our metaphor from the beginning. 
 
-Our client (a customer) walks into a Starbucks. Our server (a barista) will be ready help with whatever the client wants.
+Our client (a customer) walks into a Starbucks. Our server (a barista) will be ready to help with whatever the client wants.
 
 Starbucks knows certain things about what the customer might want. Since there are things they can make ahead, they have a nice selection of canned beverages (like the DOUBLESHOT) that the customer can just grab and go!
 
@@ -123,23 +133,33 @@ Before building any pages it pays to step back and think about:
 - how often does your content change?
 - how much of a page depends on certain content?
 
-How often your content changes and how much of a page depends on that content will impact whether you want to implement the page via Static Site Generation (SSG), Server Side Rendering (SSR), or some combination of those mixed with client side rendering (CSR).
+Answers to these questions will impact whether you want to implement the page via Static Site Generation (SSG), Server Side Rendering (SSR), or some combination of those mixed with client side rendering (CSR).
 
 **SSG**
 
-The Grab-and-Go: The fastest choice, [Static Site Generation](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) means little to no processing on the server. It only has to return pre-built, static content. Use this option with content that doesn't change frequently (or ever). Blogs, marketing sites, policy documents, and FAQs all fall more or less in this category.
+The Grab-and-Go: The fastest choice, [Static Site Generation](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) means little to no processing on the server & best for [SEO](https://moz.com/learn/seo/what-is-seo) & [Core Web Vitals](https://web.dev/vitals/). The server only has to return pre-built, static content.
+
+> "Statically generated pages are still reactive: Next.js will [hydrate](https://reactjs.org/docs/react-dom.html#hydrate) your application client-side to give it full interactivity." - [Next.js Documentation](https://nextjs.org/docs/advanced-features/automatic-static-optimization)
+
+Use this option with content that doesn't change frequently (or ever). Blogs, marketing sites, policy documents, and FAQs all fall more or less in this category.
 
 This can get cumbersome on sites with many (thousands or more) pages, but can be mitigated to some degree with [incremental static regeneration](https://vercel.com/docs/next.js/incremental-static-regeneration#).
 
 **SSR**
 
-The TikTok Special: [Server Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) will be generally a little slower to [first-contentful-paint](https://developer.mozilla.org/en-US/docs/Glossary/First_contentful_paint), but it's an excellent option for pages that depends on particular input data and where it isn't possible (or feasible) to statically generate all page combinations for given inputs. Input data might be something like user details, purchase/order history, weather, time, or traffic.
+The TikTok Special: [Server Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) means rather than serving pre-built pages, the server builds the page when it is requested. The browser still gets static content, but data fetching & processing likely means longer time to [largest contentful paint](https://web.dev/lcp/).
+
+It's an excellent option for pages that depend on particular input data and where it isn't possible (or feasible) to statically generate all page combinations for given inputs.
+
+Input data might be something like user details, purchase/order history, weather, time, or traffic.
 
 **CSR**
 
-The Hip Flask: [Client Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side) can be *added* in addition to either of the strategies above if a part of the page has frequently updating or real-time data like a stock chart, chatbar, or comment section.
+The Hip Flask: [Client Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side) can be *added* in addition to either of the strategies above. It can serve as a strategy to defer loading *some* page content so that *most* content can be ready faster via SSG or SSR.
 
-This is essentially the same as a SPA page might render, although parts of the page surrounding client-rendered content may have already been generated via SSG or SSR.
+The deferred content might be frequently updating/real-time data like a stock chart or chatbar, or content with a particularly long load time.
+
+⚠️ Be mindful that if some content is not readily available there may be impact to SEO and issues with [cumulative layout shift](https://web.dev/cls/).
 
 ⚠️ Remember that page code may be executed on both the server and client! If you have any sensitive information in environment variables or other stores be careful that it doesn't get sent to the client accidentally.
 
@@ -149,7 +169,7 @@ Let's extend our metaphor above even further! Consider an espresso maker, a beau
 
 ![Picture of a commercial espresso machine](/public/images/blog/tech/thinking-in-nextjs/espresso-machine-is-the-api-routes.jpg)
 
-To shield the clients from the complexity of the espresso maker, the client make a **request** of the server. The server goes off and deals with all the complicated bits, and after a while the order is ready. Then the server gives a **response**, "Edward, I have your Venti Caramel Crunch Frappuccino!"
+To shield the clients from the complexity of the espresso maker, the client makes a **request** of the server. The server goes off and deals with all the complicated bits, and after a while the order is ready. Then the server gives a **response**, "Edward, I have your Venti Caramel Crunch Frappuccino!"
 
 Until the response arrives, the client is free to doomscroll TikTok looking for cat videos and a new crazy coffee drink.
 
