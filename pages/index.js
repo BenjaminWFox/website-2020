@@ -73,7 +73,7 @@ export default function Home({ postData }) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const postsToShow = 8
+  const postsToShow = Infinity
   const postsOfStatus = postStatuses.published
   const postData = await getPostManifest(postsToShow, postsOfStatus)
 
