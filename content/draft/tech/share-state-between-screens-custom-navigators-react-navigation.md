@@ -3,13 +3,14 @@ title: "Share state between screens with custom navigators in React Navigation"
 date: "2019-04-19"
 subtitle: "Expose your React Navigation navigators for simple state sharing between any child screens in React Native."
 category: "tech"
+canon: "https://benjaminwfox.medium.com/share-state-between-screens-with-custom-navigators-in-react-navigation-62a34e3c7f97"
+tags: "react native, react, state, tutorial"
 ---
 
 ![](https://cdn-images-1.medium.com/max/5120/1*rVkhYjY_ug8nKb9rKroCyw.jpeg)
 
-### **Update 1/7/2020:**
-
-Please note that this was written with Expo 32.x & React-Navigation 3.x. I believe the same general ideas apply, but due to changes (modularization in particular) in the packages the code as-written will not be exactly the same.
+> ### **Update 1/7/2020:**
+> Please note that this was written with Expo 32.x & React-Navigation 3.x. I believe the same general ideas apply, but due to changes (modularization in particular) in the packages the code as-written will not be exactly the same.
 
 I’ve been using React Navigation in my React Native projects lately and liking it a lot. It has all of the features I’ve needed and is relatively straight forward to work with out of the box. If you’re here you‘ve probably been working with it too, so I’m going to assume a basic working knowledge of both React Navigation and React Native.
 
@@ -151,7 +152,7 @@ class CustomReactNavigationNavigator extends React.Component {
 export default CustomReactNavigationNavigator
 ```
 
-The **gotcha **here is that the props can not be assigned directly on MainTabNavigator. In order for them to be correctly passed down to the screens they must be assigned via screenProps.
+The **gotcha** here is that the props can not be assigned directly on MainTabNavigator. In order for them to be correctly passed down to the screens they must be assigned via screenProps.
 
 ## Step Three
 
@@ -193,7 +194,6 @@ export default class BaseScreen extends React.Component {
 ```
 
 ## Thanks!
-[**BenjaminWFox/react-navigation-sharing-screen-state**
-*Contribute to BenjaminWFox/react-navigation-sharing-screen-state development by creating an account on GitHub.*github.com](https://github.com/BenjaminWFox/react-navigation-sharing-screen-state)
+[BenjaminWFox/react-navigation-sharing-screen-state](https://github.com/BenjaminWFox/react-navigation-sharing-screen-state)
 
 I hope you found this writeup useful. It’s the first piece I’ve published here, and I would welcome any thoughts on the content or suggestions for improvement!
