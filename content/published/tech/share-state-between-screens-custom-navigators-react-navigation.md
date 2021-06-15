@@ -7,10 +7,13 @@ canon: "https://benjaminwfox.medium.com/share-state-between-screens-with-custom-
 tags: "react native, react, state, tutorial"
 ---
 
-![](https://cdn-images-1.medium.com/max/5120/1*rVkhYjY_ug8nKb9rKroCyw.jpeg)
+![A collection of fruits and vegetables that have been cut in half and stapled back together differently, appearing like 2-part wholes of different items.](https://cdn-images-1.medium.com/max/5120/1*rVkhYjY_ug8nKb9rKroCyw.jpeg)
 
-> ### **Update 1/7/2020:**
+> **Update 1/7/2020:**
 > Please note that this was written with Expo 32.x & React-Navigation 3.x. I believe the same general ideas apply, but due to changes (modularization in particular) in the packages the code as-written will not be exactly the same.
+
+> **Update 6/14/2021:**
+> React Native links updated to point to 3.x documentation.
 
 I’ve been using React Navigation in my React Native projects lately and liking it a lot. It has all of the features I’ve needed and is relatively straight forward to work with out of the box. If you’re here you‘ve probably been working with it too, so I’m going to assume a basic working knowledge of both React Navigation and React Native.
 
@@ -34,7 +37,7 @@ export const MainTabNavigator = createBottomTabNavigator({
 export default createAppContainer(MainTabNavigator);
 ```
 
-In the above example MainTabNavigator is a React component, but explicitly rendering it is an [anti-pattern/common mistake](https://reactnavigation.org/docs/en/common-mistakes.html). By default, the only navigator that gets directly exposed to the markup is the root component AppContainer which is rendered in [App.js](https://github.com/BenjaminWFox/react-navigation-sharing-screen-state/blob/master/App.js).
+In the above example MainTabNavigator is a React component, but explicitly rendering it is an [anti-pattern/common mistake](https://reactnavigation.org/docs/3.x/common-mistakes/#explicitly-rendering-more-than-one-navigator). By default, the only navigator that gets directly exposed to the markup is the root component AppContainer which is rendered in [App.js](https://github.com/BenjaminWFox/react-navigation-sharing-screen-state/blob/master/App.js).
 
 So what if you wanted to go about sharing some state between all of the child screens of your MainTabNavigator?
 
@@ -58,8 +61,8 @@ Create the custom navigator. At its most basic, this component needs to do two t
 
 1. It needs to import and render the built-in navigator component.
 
-**First **let’s set up a router to tell React Navigation how this custom navigator will function.
-> Routers define a component’s navigation state, and they allow the developer to define paths and actions that can be handled. — [React Navigation](https://reactnavigation.org/docs/en/routers.html)
+**First** let’s set up a router to tell React Navigation how this custom navigator will function.
+> Routers define a component’s navigation state, and they allow the developer to define paths and actions that can be handled. — [React Navigation](https://reactnavigation.org/docs/3.x/routers)
 
 There is a pre-existing TabRouter in the MainTabNavigator and that is what we should use for our custom navigator. All of the paths and actions are already defined, and it will provide the same behavior as if we were using MainTabNavigator on its own.
 
@@ -80,7 +83,7 @@ class CustomReactNavigationNavigatorSimple extends React.Component {
 export default CustomReactNavigationNavigatorSimple
 ```
 
-**Second** we need to render MainTabNavigation while ensuring that it maintains access to the [navigation property](https://reactnavigation.org/docs/en/navigation-prop.html).
+**Second** we need to render MainTabNavigation while ensuring that it maintains access to the [navigation property](https://reactnavigation.org/docs/3.x/navigation-prop/).
 
 In the above snippet, we effectively cut off our MainTabNavigator from React Navigations navigation object, and our app will throw an error if we try to run it. We can fix that by explicitly assigning navigation to MainTabNavigator
 
@@ -103,7 +106,7 @@ class CustomReactNavigationNavigatorSimple extends React.Component {
 export default CustomReactNavigationNavigatorSimple
 ```
 
-If you prefer, you could accomplish the same thing by instead wrapping MainTabNavigator with the [withNavigation HOC](https://reactnavigation.org/docs/en/with-navigation.html).
+If you prefer, you could accomplish the same thing by instead wrapping MainTabNavigator with the [withNavigation HOC](https://reactnavigation.org/docs/3.x/with-navigation/).
 
 ## Step Two
 
