@@ -15,7 +15,7 @@
     "highlight.js": "^10.4.1",
     "next": "^10.2.3",
     "prism-themes": "^1.4.0",
-    "prismjs": "^1.23.0",
+    "prismjs": "^1.24.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "remark": "^13.0.0",
