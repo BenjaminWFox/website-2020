@@ -9,6 +9,8 @@ image: 'images/blog/tech/nextjs-setup-config-testing-linting/nextjs-configuratio
 
 ![Seven almost identical buildings under construction in a row](/public/images/blog/tech/nextjs-setup-config-testing-linting/nextjs-configuration-construction-title-image.jpg)
 
+**Update: 06/28/21:** Next.js v11 has some improvements when it comes to adding and using ESLint in a project, including some Next-specific linting rules. Some changes have been made to the original article based on the assumption that anyone reading new is going to be starting from Next.js v11+ rather than a previous version.
+
 Next.js is amazing when it comes to installing, learning the framework, and jumping into the code. Its superb documentation & zero-config philosophy make this possible, and not having to think about configuration is wonderful…right up to the point when you want to add some additional configuration.
 
 The configuration I want to add is, technically speaking, useless to your final product. It won’t make it faster, or reduce your bundle size, or add amazing new features.
@@ -69,19 +71,23 @@ To start, in your terminal of choice, cd into a folder where you want to install
 
     npm init next-app
 
-Give your project a name like nextjs-base (this will also be the folder name), then select Default starter app when prompted to pick a template. Once the install completes, cd nextjs-base into your project folder.
+Give your project a name like "nextjs-base" (this will also be the folder name). Once the install completes, cd nextjs-base into your project folder.
 
 ## <a name="install-eslint"></a>[ESLint: Install & Configure](#install-eslint)
 
-For configuration, let’s start with eslint — that’ll ensure that any future code we write is linted right away and we don’t need to go back and make edits. This will also include a plugin for specifically linting React, and another for linting import/export statements:
+For configuration, let’s start with eslint — that’ll ensure that any future code we write is linted right away and we don’t need to go back and make edits. This will also include a plugin for specifically linting React, and another for linting import/export statements. You'll already have `eslint` and `eslint-config-next` - so let's add two more:
 
-    npm i -D eslint eslint-plugin-react eslint-plugin-import
+    npm i -D eslint-plugin-react eslint-plugin-import
 
-While that’s running, create a file .eslintrc at the root of your site. Add the configuration below to this file. [There are a ton of options for configuring ESLint](https://eslint.org/docs/user-guide/configuring). This is, approximately, the bare minimum to get ESLint working with the default Next.js code, without having to make any manual changes:
+While that’s running, open up the .eslintrc file that is at the root of your site. Replace the contents with the configuration below. [There are a ton of options for configuring ESLint](https://eslint.org/docs/user-guide/configuring). 
+
+You ***can*** just extend `next` and `next/core-web-vitals` if you want, leaving out the others. If you do, you can also omit the everything in the `rules` property. Personally, I like the extra structure and what's there feel to me like a good default baseline. A number of the `react/` specific rules are disabled to prevent conflicts with the default `next-app` code style:
 
 ```json
 {
   "extends": [
+    "next",
+    "next/core-web-vitals",
     "eslint:all",
     "plugin:react/all",
     "plugin:import/errors",
@@ -103,7 +109,9 @@ While that’s running, create a file .eslintrc at the root of your site. Add th
     "indent": ["error", 2],
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
+    "func-style": 0,
     "max-len": 0,
+    "no-magic-numbers": 0,
     "max-lines-per-function": 0,
     "space-before-function-paren": ["error", {
       "anonymous": "never",
@@ -121,13 +129,16 @@ While that’s running, create a file .eslintrc at the root of your site. Add th
     "object-curly-spacing": ["error", "always"],
     "one-var": ["error", "never"],
     "quote-props": 0,
+    "react/prop-types": 0,
     "react/jsx-indent": [2, 2],
     "react/jsx-indent-props": [2, 2],
     "react/jsx-filename-extension": 0,
     "react/react-in-jsx-scope": 0,
     "react/jsx-no-literals": 0,
     "react/jsx-one-expression-per-line": 0,
-    "react/jsx-max-depth": 0
+    "react/jsx-max-depth": 0,
+    "react/jsx-newline": 0,
+    "react/jsx-props-no-spreading": 0
   },
   "ignorePatterns": ["node_modules/", ".next/"]
 }
@@ -149,13 +160,13 @@ So…that’s a lot! But it will let us lint the Next.js project we have now wit
 
 ### Add & Run the Lint Script
 
-Now add two new scripts to your **package.json** file under the start script:
+Now add one new script to your **package.json** file under the start script:
 
-    "start": "next start"**,
-    "lint": "eslint --ext .js ./",
-    "lint.fix": "eslint --fix --ext .js ./"**
+    "start": "next start",
+    "lint": "next lint",
+    "lint.fix": "next lint --fix"
 
-**^** Don’t forget the , (comma) at the end of the start line! If you have integrated your IDE with ESLint you’ll already have seen a bunch of errors if you open **pages/index.js.** The **pages/api/hello.js** should be error-free!
+**^** Don’t forget the , (comma) at the end of the "lint" line! If you have integrated your IDE with ESLint you’ll already have seen a bunch of errors if you open **pages/index.js.** The **pages/api/hello.js** should be error-free!
 
 If you npm run lint now, you can also see all the errors in the console.
 
