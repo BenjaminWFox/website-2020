@@ -150,11 +150,11 @@ You ***can*** just extend `next` and `next/core-web-vitals` if you want, leaving
 
 * [env](https://eslint.org/docs/2.0.0/user-guide/configuring#specifying-environments) tells ESLint what global variables & special syntax to expect. Since this is for Next.js, we’re adding the **browser** and **node**. The **es2020** (which is ecmaVersion 11 (which basically means JavaScript version 11)) allows for using newer JavaScript syntax, and **jest** is for global variables used when writing tests.
 
-* [parserOptions](https://eslint.org/docs/2.0.0/user-guide/configuring#specifying-parser-options) is specifically for allowing additional JavaScript language features. **sourceType **will prevent errors from import syntax, and **ecmaFeatures **allows for additional features outside the standard ecma syntax.
+* [parserOptions](https://eslint.org/docs/2.0.0/user-guide/configuring#specifying-parser-options) is specifically for allowing additional JavaScript language features. **sourceType** will prevent errors from import syntax, and **ecmaFeatures** allows for additional features outside the standard ecma syntax.
 
 * [rules](https://eslint.org/docs/2.0.0/user-guide/configuring#configuring-rules) is where you can configure the linting behavior to your liking. Any that are prefixed with react/ are [specific to the ESLint react plugin](https://github.com/yannickcr/eslint-plugin-react#list-of-supported-rules), similarly import/ would prefix any [rules for the import plugin](https://github.com/benmosher/eslint-plugin-import#rules) — we just don’t need to add any here. Otherwise they are [standard ESLint rules](https://eslint.org/docs/rules/).
 
-* [ignorePatterns](https://eslint.org/docs/user-guide/configuring#ignorepatterns-in-config-files) lets you define specific files, folders, or patterns to exclude from linting. Both the **node_modules **and **.next** folders are actually excluded be default, and added here only as examples.
+* [ignorePatterns](https://eslint.org/docs/user-guide/configuring#ignorepatterns-in-config-files) lets you define specific files, folders, or patterns to exclude from linting. Both the **node_modules** and **.next** folders are actually excluded be default, and added here only as examples.
 
 So…that’s a lot! But it will let us lint the Next.js project we have now with the --fix flag enabled to automatically format our code (next step!).
 
@@ -192,7 +192,7 @@ Next up let’s add testing capabilities. Start with the install:
 
 ### Create Config Files
 
-Create two new files at the project root for Jest: **jest.config.js** & **jest.setup.js**. Add this content to the **jest.config.js **file:
+Create two new files at the project root for Jest: **jest.config.js** & **jest.setup.js**. Add this content to the **jest.config.js** file:
 
 ```javascript
 // Jest.config.js
@@ -206,7 +206,7 @@ module.exports = {
 }
 ```
 
-^ There are [a huge number of configuration options ](https://jestjs.io/docs/en/configuration)for Jest. This is a very small subset. **clearMocks **can prevent headaches with unintended [persistence of mock data](https://jestjs.io/docs/en/manual-mocks) between tests. **coverageDirectory** is for generating [test coverage](https://jestjs.io/docs/en/cli.html#--coverageboolean), running jest with the --coverage flag. The most important piece here is **setupFilesAfterEnv**, which will run before each test file. Add this to the **jest.setup.js** file:
+^ There are [a huge number of configuration options ](https://jestjs.io/docs/en/configuration)for Jest. This is a very small subset. **clearMocks** can prevent headaches with unintended [persistence of mock data](https://jestjs.io/docs/en/manual-mocks) between tests. **coverageDirectory** is for generating [test coverage](https://jestjs.io/docs/en/cli.html#--coverageboolean), running jest with the --coverage flag. The most important piece here is **setupFilesAfterEnv**, which will run before each test file. Add this to the **jest.setup.js** file:
 
     // Jest.setup.js
     import '@testing-library/jest-dom'
@@ -215,7 +215,7 @@ module.exports = {
 
 ### Create One More Config File 😬
 
-The last config file we need is called **.babelrc **(create it at the root of the project). We don’t need to add any packages for Babel to run — it’s handled automagically by Next.js — but Jest needs this file to auto-detect how to transform the code before running tests. Add this to the file:
+The last config file we need is called **.babelrc** (create it at the root of the project). We don’t need to add any packages for Babel to run — it’s handled automagically by Next.js — but Jest needs this file to auto-detect how to transform the code before running tests. Add this to the file:
 
     {
       "presets": ["next/babel"]
@@ -244,10 +244,12 @@ describe('The Home Page Component', () => {
 
 ### Add a Test Script
 
-The last change for Jest is to the **package.json **file; Update it to add a test script under the lint script you added earlier:
+The last change for Jest is to the **package.json** file; Update it to add a test script under the lint script you added earlier:
 
-    "lint.fix": "eslint --fix --ext .js ./"**,**
-    **"test": "jest"**
+```json
+"lint.fix": "eslint --fix --ext .js ./",
+"test": "jest"
+```
 
 Then in the project root in the terminal you can npm run test — and should see it passing!
 
@@ -269,11 +271,11 @@ import { Method } from '@/classes/method
 
 ^ Note that the syntax I’m using, @/folder/path, is arbitrary — the @ may look fancy but it is only there to make it obvious that this isn’t an npm package or a relative import — you could name the alias paths however you like!
 
-The challenge setting these up is that once you start using them in your application *and* in your tests, *all* the different systems in your code that have to [resolve imports](https://www.typescriptlang.org/docs/handbook/module-resolution.html) (<-- good explanation of resolving modules — ignore the TypeScript parts 😅) need to understand these aliases. For us, that means adding configuration for Next.js, Jest, ESLint, and VSCode 😰 … so a lot of updates to the configuration we’ve done thus far but don’t worry —it’s not *too *drastic.
+The challenge setting these up is that once you start using them in your application *and* in your tests, *all* the different systems in your code that have to [resolve imports](https://www.typescriptlang.org/docs/handbook/module-resolution.html) (<-- good explanation of resolving modules — ignore the TypeScript parts 😅) need to understand these aliases. For us, that means adding configuration for Next.js, Jest, ESLint, and VSCode 😰 … so a lot of updates to the configuration we’ve done thus far but don’t worry —it’s not *too* drastic.
 
 ### Create a Test Component
 
-In order to verify the aliased paths are working we need something to import. Typically you would alias the top-level folders to reference the import path from there, but the only two top-level folders we have currently aren’t really something we need to alias; Anything in pages/ probably shouldn’t be imported anywhere else, and anything in public/ can already be referenced by absolute path in ‘src’ or ‘href’ attributes.
+In order to verify the aliased paths are working we need something to import. Typically you would alias the top-level folders to reference the import path from there, but the only two top-level folders we have currently aren’t really something we need to alias; Anything in pages/ probably shouldn’t be imported anywhere else, and anything in public/ can already be referenced by absolute path in `src` or `href` attributes.
 
 Instead, let’s create a new section in the code specifically for components. This will be two new folders and a file: **components/callout/callout.js**. Add this to the **callout.js** file:
 
@@ -293,20 +295,26 @@ Callout.propTypes = {
 
 If you import that component in **pages/index.js** via a relative import, you can confirm it’s working:
 
-    **import Callout from '../components/callout/callout'**
-    import Head from 'next/head'
+```javascript
+import Callout from '../components/callout/callout'
+import Head from 'next/head'
+```
 
 Then wrap the component around the “Welcome…” message in the h1 tag:
 
-    <h1 className="title">
-      **<Callout>Welcome to <a href="[https://nextjs.org](https://nextjs.org)">Next.js!</a></Callout>**
-    </h1>
+```javascript
+<h1 className="title">
+  <Callout>Welcome to <a href="[https://nextjs.org](https://nextjs.org)">Next.js!</a></Callout>
+</h1>
+```
 
 Then npm run dev and see: ❗️️ Welcome to Next.js! ❗️
 
 Now change **pages/index.js** to use the aliased absolute import:
 
-    import Callout from '@/components/callout/callout'
+```javascript
+import Callout from '@/components/callout/callout'
+```
 
 ![](https://cdn-images-1.medium.com/max/2948/1*qwtcIk5THQuMRMz7pN98zw.png)
 
@@ -316,14 +324,16 @@ Now change **pages/index.js** to use the aliased absolute import:
 
 Now that we have a component to test and we can see it’s not working, let’s start the configuration updates. Create a file in the project root named **jsconfig.json**. This will let us [nab two birds with one stone](https://idioms.thefreedictionary.com/kill+two+birds+with+one+stone) since both [VSCode](https://code.visualstudio.com/docs/languages/jsconfig#_using-webpack-aliases) and [Next.js](https://nextjs.org/docs/advanced-features/module-path-aliases) use this format for aliases. Add this to the file you just created:
 
-    {
-      "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-          "@/components/*": ["components/*"]
-        }
-      }
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"]
     }
+  }
+}
+```
 
 ^ This won’t trigger a HRM refresh, so you’ll have to stop the dev server and npm run dev again, but after that — your component should be up and running again!
 
@@ -333,19 +343,21 @@ In the IDE, if you’ve integrated ESLint, you’ll probably see an error still 
 
 The configuration for ESLint will be added to **.eslintrc**, but first we need to install another package:
 
-    npm i -D eslint-import-resolver-alias
+`npm i -D eslint-import-resolver-alias`
 
 ^ this package adds the functionality for ESLint to handle the resolution of aliased paths, which it can’t do by default. Update the **.eslintrc** file by adding the following at the bottom, after the ignorePatterns property:
 
-    "ignorePatterns": ["node_modules/", ".next/"]**,**
-    **"settings": {
-      "import/resolver": {
-        "alias": [
-            ["@/components", "./components"],
-            ["@/classes", "./classes"]
-        ]
-      }
-    }**
+```json
+"ignorePatterns": ["node_modules/", ".next/"],
+"settings": {
+  "import/resolver": {
+    "alias": [
+        ["@/components", "./components"],
+        ["@/classes", "./classes"]
+    ]
+  }
+}
+```
 
 ^ I’ve added an additional entry for a hypothetical **/classes** directory to show the syntax for multiple aliases. The need for each entry to be its own array was not intuitive for me.
 
@@ -355,10 +367,12 @@ If you npm run lint now, there shouldn’t be any module import errors (you may 
 
 Finally we need to update Jest. In the file **pages/index.test.js** add an import for our Callout component:
 
-    **import Callout from '@/components/callout/callout'**
-    *import* Home *from* './index'
-    *import* { render } *from* '@testing-library/react'
-    ...
+```javascript
+import Callout from '@/components/callout/callout'
+import Home from './index'
+import { render } from '@testing-library/react'
+...
+```
 
 … then try npm run test. You should see an error about the module:
 
