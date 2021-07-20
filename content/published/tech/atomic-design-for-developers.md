@@ -3,17 +3,15 @@ title: "Atomic Design for Developers: Better Component Composition and Organizat
 date: "2021-05-08"
 subtitle: "A practical guide to developing component based sites and apps around the Atomic Design methodology."
 category: "tech"
-image: 'images/blog/tech/atomic-design-for-developers/tetris-game-over.png'
+image: 'images/blog/tech/atomic-design-for-developers/tetris-game-over.jpg'
 tags: 'react, atomic design, web development, tutorial'
 ---
 
-![Chaotic game of Tetris in Game Over State](/public/images/blog/tech/atomic-design-for-developers/tetris-game-over.png)
+![Chaotic game of Tetris in Game Over State](/public/images/blog/tech/atomic-design-for-developers/tetris-game-over.jpg)
 
 Organizing your application (or app/site, I'll use these interchangeably) can seem easy. A folder for components, one for assets, another for utility methods. Maybe even a separate folder for pages! Don't be fooled, it is almost never that easy...
 
-![Futurama meme, leela trying to hide papers around the office in hermes absence](/public/images/blog/tech/atomic-design-for-developers/leela-too-much-papers.png)
-
-<!-- <p><img style="width: 100%;" alt="Futurama Meme: Too much papers! Not enough hiding plants!" src="/images/blog/tech/atomic-design-for-developers/leela-too-much-papers.png"/></p> -->
+![Futurama meme, leela trying to hide papers around the office in hermes absence](/public/images/blog/tech/atomic-design-for-developers/leela-too-much-papers.jpg)
 
 > "It's alright. This place just needs a one-hour bureaucratizing."
 >  
@@ -136,7 +134,7 @@ export default function BlockLink({href, children}) {
 
 For whatever reason, the demo site I built has a frequent need for block-display links! In this case importing a framework primitive is fine. It's smaller than an Atom. You can call it a *neurotron* if you want, that's a cool-sounding made-up word 😎 ⚛️. The `Link` is just an abstraction of the `a` tag with framework-specific functionality. It doesn't do anything from a style or markup perspective.
 
-![Screenshot.](/public/images/blog/tech/atomic-design-for-developers/atoms-example.png)
+![Screenshot.](/public/images/blog/tech/atomic-design-for-developers/atoms-example.jpg)
 *Visual example of Atoms: `BlockLink`, `Button`, and `Icon` components.*
 
 ### [Rules of Atoms](#rules-of-atoms)
@@ -198,7 +196,7 @@ export default function BannerImage({ src, title, subtitle, height }) {
 
 Compare the `BannerImage` here (stretched to the top & side margins) against the `ImageWithOverlay` in the previous screenshot:
 
-![Image showing the `BannerImage` component.](/public/images/blog/tech/atomic-design-for-developers/molecules-example.png)
+![Image showing the `BannerImage` component.](/public/images/blog/tech/atomic-design-for-developers/molecules-example.jpg)
 
 ### [A Nebulous Molecule](#a-nebulous-molecule)
 
@@ -322,7 +320,7 @@ export default function TemplateSidebarContent({ header, sidebar, content }) {
 
 The component really doesn't do much right?! The css import does most of the heavy lifting, but even then it's not much - primarily setting `flex` properties, widths, and heights. It's not until this component is composed into Pages that the good times start rolling 🥳 as each of those props (`header`/`sidebar`/`content`) will be an individual component that we can count on to be placed on screen exactly as intended. 🤓
 
-![Screenshot.](/public/images/blog/tech/atomic-design-for-developers/template-example.png)
+![Screenshot.](/public/images/blog/tech/atomic-design-for-developers/template-example.jpg)
 *A template, highlighting the Header, Sidebar, and Content*
 
 ### [Template Variations](#template-variations)
@@ -399,7 +397,7 @@ To that end I have one more rule that probably deserves its own post, but has ca
 
 Why not? Consider that each component you create should be a self contained unit that functions predictably within its own bounds. Margins break this pattern by creating space *outside* of the element itself, and can lead to unpredictability or variable behavior [due to margin collapsing](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing).
 
-![Screenshot example showing a div with margin, border, and padding.](/public/images/blog/tech/atomic-design-for-developers/margin-example.png)
+![Screenshot example showing a div with margin, border, and padding.](/public/images/blog/tech/atomic-design-for-developers/margin-example.jpg)
 
 Consider the above `div` with margin, padding, and a border. The *border* of the element is essentially where the component should end. If the *margin* is applied to the `div` component itself, reusing the component in other contexts may have unintended layout and display consequences.
 
