@@ -49,7 +49,7 @@ Let’s look at what it takes.
 
 6. [Configuring Path Aliases/Absolute Imports](#configure-path-alias)
 
-## <a name="assumptions"></a>[Assumptions](#assumptions)
+## [Assumptions](#assumptions)
 
 I’m going to assume you have familiarity running commands in a terminal, and I’m going to use npm commands. None of the commands are anything fancy, so you should be able to [convert to yarn](https://alligator.io/nodejs/npm-yarn-cheatsheet/) if needed.
 
@@ -61,11 +61,11 @@ I’m not going to talk about IDE-specific integrations or setup. I’m using VS
 
 Some of the configuration files we create ([jest.config.js](https://jestjs.io/docs/en/configuration) [.eslintrc](https://eslint.org/docs/user-guide/configuring), & [.babelrc](https://babeljs.io/docs/en/configuration#packagejson)) can be included within package.json rather than using separate files, if that feels cleaner to you. That will require additional wrapping syntax, which you can find at their respective links. The jsconfig.json & jest.setup.js files will have to be separate.
 
-## <a name="final"></a>[Final Repository](#final)
+## [Final Repository](#final)
 
 [https://github.com/BenjaminWFox/nextjs-base](https://github.com/BenjaminWFox/nextjs-base)
 
-## <a name="install-nextjs"></a>[Next.js: Installing](#install-nextjs)
+## [Next.js: Installing](#install-nextjs)
 
 To start, in your terminal of choice, cd into a folder where you want to install this project. A new subfolder will be created be after you run the setup:
 
@@ -73,7 +73,7 @@ To start, in your terminal of choice, cd into a folder where you want to install
 
 Give your project a name like "nextjs-base" (this will also be the folder name). Once the install completes, cd nextjs-base into your project folder.
 
-## <a name="install-eslint"></a>[ESLint: Install & Configure](#install-eslint)
+## [ESLint: Install & Configure](#install-eslint)
 
 For configuration, let’s start with eslint — that’ll ensure that any future code we write is linted right away and we don’t need to go back and make edits. This will also include a plugin for specifically linting React, and another for linting import/export statements. You'll already have `eslint` and `eslint-config-next` - so let's add two more:
 
@@ -162,9 +162,11 @@ So…that’s a lot! But it will let us lint the Next.js project we have now wit
 
 Now add one new script to your **package.json** file under the start script:
 
+```json
     "start": "next start",
     "lint": "next lint",
     "lint.fix": "next lint --fix"
+```
 
 **^** Don’t forget the , (comma) at the end of the "lint" line! If you have integrated your IDE with ESLint you’ll already have seen a bunch of errors if you open **pages/index.js.** The **pages/api/hello.js** should be error-free!
 
@@ -180,13 +182,15 @@ If you npm run lint now, you can also see all the errors in the console.
 
 * Assuming you use this base template in new projects, if you find yourself making updates to the .estlintrc file to accommodate your style preferences, remember to copy those back to the base project!
 
-## <a name="install-configure-jest-testing-library"></a>[Jest & Testing Library: Install, Configure, Implement](#install-configure-jest-testing-library)
+## [Jest & Testing Library: Install, Configure, Implement](#install-configure-jest-testing-library)
 
 ### Install Dependencies
 
 Next up let’s add testing capabilities. Start with the install:
 
-    npm i -D jest @types/jest @testing-library/react @testing-library/jest-dom
+```
+npm i -D jest @types/jest @testing-library/react @testing-library/jest-dom
+```
 
 ^ [jest](https://jestjs.io/) for running the tests & [@types/jest](https://www.npmjs.com/package/@types/jest) to help with IDE auto-complete when writing tests. [@testing-library/react](https://github.com/testing-library/react-testing-library) to render components in the testing environment & test them in a way that tries to mimic how users interact with them. [@testing-library/jest-dom](https://github.com/testing-library/jest-dom#readme) for additional DOM-related [assertions](https://www.tutorialspoint.com/software_testing_dictionary/assertion_testing.htm).
 
@@ -208,8 +212,10 @@ module.exports = {
 
 ^ There are [a huge number of configuration options ](https://jestjs.io/docs/en/configuration)for Jest. This is a very small subset. **clearMocks** can prevent headaches with unintended [persistence of mock data](https://jestjs.io/docs/en/manual-mocks) between tests. **coverageDirectory** is for generating [test coverage](https://jestjs.io/docs/en/cli.html#--coverageboolean), running jest with the --coverage flag. The most important piece here is **setupFilesAfterEnv**, which will run before each test file. Add this to the **jest.setup.js** file:
 
-    // Jest.setup.js
-    import '@testing-library/jest-dom'
+```
+// Jest.setup.js
+import '@testing-library/jest-dom'
+```
 
 ^ This enables access to the additional assertions provided by the[@testing-library/jest-do](https://github.com/testing-library/jest-dom#readme)m package.
 
@@ -217,9 +223,11 @@ module.exports = {
 
 The last config file we need is called **.babelrc** (create it at the root of the project). We don’t need to add any packages for Babel to run — it’s handled automagically by Next.js — but Jest needs this file to auto-detect how to transform the code before running tests. Add this to the file:
 
-    {
-      "presets": ["next/babel"]
-    }
+```
+{
+  "presets": ["next/babel"]
+}
+```
 
 ### Write a Test File
 
@@ -255,7 +263,7 @@ Then in the project root in the terminal you can npm run test — and should see
 
 ![](https://cdn-images-1.medium.com/max/3548/1*FlTB0Avl89dbpuz19_Hi4g.png)
 
-## <a name="configure-path-alias"></a>[Configuring Path Aliases/Absolute Imports](#configure-path-alias)
+## [Configuring Path Aliases/Absolute Imports](#configure-path-alias)
 
 I have seen some debate that leads me to believe path aliases are a love-it or hate-it addition to a codebase. I personally hate having to remember which particular file I’m working in and how many levels it is to import some other component or method…so I love aliasing my import paths. The difference is:
 
@@ -339,7 +347,7 @@ Now that we have a component to test and we can see it’s not working, let’s 
 
 In the IDE, if you’ve integrated ESLint, you’ll probably see an error still about how it is “Unable to resolve path to module,” so let’s update ESLint next.
 
-### ESLint
+### Update ESLint
 
 The configuration for ESLint will be added to **.eslintrc**, but first we need to install another package:
 
@@ -363,7 +371,7 @@ The configuration for ESLint will be added to **.eslintrc**, but first we need t
 
 If you npm run lint now, there shouldn’t be any module import errors (you may have some spacing/minor issues from copy-pasting, so maybe npm run lint.fix), and the IDE error should have disappeared!
 
-### Jest
+### Update Jest
 
 Finally we need to update Jest. In the file **pages/index.test.js** add an import for our Callout component:
 
