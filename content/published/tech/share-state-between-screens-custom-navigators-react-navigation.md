@@ -21,7 +21,7 @@ Recently I ran into an annoying issue that took me a while to solve — the need
 
 This was a challenge because React Navigation doesn’t, by default, expose most of the navigators you’re creating as components that could be used directly in markup, so there is no obvious way to pass a state object down as a prop to child screens. A basic React Navigation implementation might look something like this:
 
-```js
+```javascript
 import { createAppContainer, createBottomTabNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';

@@ -70,7 +70,7 @@ Ok...[one more walkthrough from Microsoft on creating the User Flow](https://doc
 
 > Note that you may want to add additional properties to be either collected or returned from the user flow!
 
-![shows extra properties selected when creating the User Flow, like Email Address (collected) and Email Addresses(returned)](/images/blog/tech/how-to-configure-azure-b2c-with-nextjs/azure-ad-b2c-user-flow-additional-properties.png)
+![shows extra properties selected when creating the User Flow, like Email Address (collected) and Email Addresses(returned)](/images/blog/tech/how-to-configure-azure-b2c-with-nextjs/azure-ad-b2c-user-flow-additional-properties.jpg)
 
 The basic pre-generated user flows are enough to get started, but as needs evolve the user flows can be fully customized to provide any functionality desired during the registration/authentication process.
 
