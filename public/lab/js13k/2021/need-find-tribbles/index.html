@@ -4,6 +4,7 @@
 <head>
   <meta name="monetization" content="$coil.xrptipbot.com/[COIL-ID-HERE]">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=.75">
+
   <title>[js13Kgames]</title>
 </head>
 
@@ -19,11 +20,14 @@
               <div class="info">
                 <p>This is a decentralized application (dApp) created by for the 2021 js13k games competition by <a
                     href="https://benjaminwfox.com" target="_blank">Benjamin Fox</a>.</p>
+
                 <p>It makes use of the <a href="https://near.org/" target="_blank">NEAR Protocol</a> for on-chain
                   storage of NFT metadata - all the information for each tribble.</p>
+
                 <p>Long-term off-chain storage of images is provided by <a href="https://nft.storage/"
                     target="_blank">nft.storage</a>. Images for quick-access storage are stored in an <a
                     href="https://aws.amazon.com/s3/" target="_blank">AWS S3 Bucket</a>.</p>
+
                 <p>You can <a href="https://twitter.com/BenjaminWFox" target="_blank">follow me on Twitter</a> in case I
                   ever tweet anything interesting. Or ever tweet anything at all for that matter.</p>
                 <button onclick="fn.closeOverlay()">CLOSE</button>
@@ -88,6 +92,7 @@
         <div id="display"></div>
         <div id="loading"><img id="spinner"
             src="https://js13k-2021-tribbles-other.s3.us-west-2.amazonaws.com/tribble-spinner.png" /></div>
+        <div id="download"><button onclick="fn.downloadStuffedTribble()"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYAQMAAADaua+7AAAABlBMVEX///////9VfPVsAAAAAXRSTlMAQObYZgAAADNJREFUeAFjwArqGBiYGw8w2AChAwMTQ4CNFUOAExB3AtmtQNwIxU4gOSawGvv/f7CZBAD0mQsFPv861gAAAABJRU5ErkJggg=="></button></div>
 
         <div id="details" class="empty">
           <div class="tabs">
@@ -209,10 +214,9 @@
   <div id="bottom">
 
   </div>
-  <script src="https://js13kgames.com/src/near-api-js.js" type="text/javascript"></script>
+  <script src="https://js13kgames.com/src/near-api-js.js" type="text/javascript" type="text/javascript"></script>
   <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.9/runtime.min.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/lib/alea.min.js" type="text/javascript"></script>
-  <script src="./o.js" type="text/javascript"></script>
-</body>
+<script src="./o.js"></script></body>
 
 </html>
