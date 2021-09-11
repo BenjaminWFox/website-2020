@@ -124,7 +124,7 @@ export default function DisplayTribbles({ data, page, per, baseUrl, seen }) {
   return (
     <div className="container">
       <Head>
-        <title>Benjamin W Fox</title>
+        <title>Tribbles | A NFT Collection for the 2021 js13k Game Comp</title>
         <link
           href="/favicon.ico"
           rel="icon"
