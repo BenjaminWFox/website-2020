@@ -162,7 +162,7 @@ export default function DisplayTribbles({ data, page, per, baseUrl, seen }) {
 
 export async function getServerSideProps() {
   const page = 1
-  const per = 10
+  const per = process.env.TRIBBLES_PER_PAGE
   const { result, seen } = await getTribbles(page, per)
   const baseUrl = process.env.SITE_ROOT
   const data = result
@@ -181,5 +181,5 @@ export async function getServerSideProps() {
 DisplayTribbles.propTypes = {
   data: PropTypes.array.isRequired,
   page: PropTypes.number.isRequired,
-  per: PropTypes.number.isRequired,
+  per: PropTypes.string.isRequired,
 }
