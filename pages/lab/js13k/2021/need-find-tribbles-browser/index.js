@@ -101,7 +101,7 @@ export default function DisplayTribbles({ data, page, per, baseUrl, seen }) {
     const pageToLoad = currentPage + 1
     const response = await fetch(`${baseUrl}/api/tribble?page=${pageToLoad}&per=${per}&seen=${indexesSeen.join(',')}`, {
       method: 'GET',
-      headers: `{ "Origin": ${process.env.NEXT_PUBLIC_SITE_ROOT}}`
+      headers: { 'Origin': `${process.env.NEXT_PUBLIC_SITE_ROOT}` },
     })
     const result = await response.json()
 
@@ -113,7 +113,7 @@ export default function DisplayTribbles({ data, page, per, baseUrl, seen }) {
   async function handleLoadMoreRandom() {
     const response = await fetch(`${baseUrl}/api/tribble?per=${per}&seen=${indexesSeen.join(',')}`, {
       method: 'GET',
-      headers: `{ "Origin": ${process.env.NEXT_PUBLIC_SITE_ROOT}}`
+      headers: { 'Origin': `${process.env.NEXT_PUBLIC_SITE_ROOT}` },
     })
     const resultObj = await response.json()
 
