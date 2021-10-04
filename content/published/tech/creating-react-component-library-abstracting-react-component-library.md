@@ -6,20 +6,20 @@ category: "tech"
 canon: "https://medium.com/@benjaminwfox/creating-a-react-component-library-by-abstracting-a-react-component-library-45290114d22a"
 ---
 
-![Graphic of react logos consuming progressively smaller logos](https://cdn-images-1.medium.com/max/3200/1*fOLLMlLkYKS72dBihyBBdQ.png)
+![Graphic of react logos consuming progressively smaller logos](/public/images/blog/tech/create-component-library-abstraction/create-component-library-abstraction-title.png)
 
 Component libraries are useful. They allow developers to add features quickly and with confidence that they will have consistent style & functionality. Libraries may be built in-house or by a third party. The former offers complete control over implementation but takes more time and resources to build; The latter can be implemented quickly, but relies on the existing implementation.
 
 I like third party libraries, and have found that almost any limitations can be overcome by abstracting the library components on the side of the implementing application. When the library to implementing application ratio is 1 to 1, like in personal projects or on a small team, this process is relatively straight forward. With larger or multiple teams, however, where multiple applications are relying on the same underlying library, one-off customizations quickly lead to inconsistent implementations:
 
-![Multiple applications creating different custom implementations from a 3rd party library component.](https://cdn-images-1.medium.com/max/2000/1*WXHkK3ZvQdiqvq-llSMfdw.png)
+![Multiple applications creating different custom implementations from a 3rd party library component.](/public/images/blog/tech/create-component-library-abstraction/custom-component-implementation.png)
 *Multiple applications creating different custom implementations from a 3rd party library component.*
 
 So, what if you want 🎂🍰🥄👄😋? […to have your cake and eat it too!]
 
 Create your own component library…by abstracting an entire component library!
 
-![Multiple applications using the same custom implementation, abstracted from a 3rd party component.](https://cdn-images-1.medium.com/max/2000/1*ZK7tY-q7okG3JRnO6fpREg.png)
+![Multiple applications using the same custom implementation, abstracted from a 3rd party component.](/public/images/blog/tech/create-component-library-abstraction/standard-component-implementation.png)
 *Multiple applications using the same custom implementation, abstracted from a 3rd party component.*
 
 When might you want to do this?

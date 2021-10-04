@@ -14,46 +14,6 @@ const useStyles = createUseStyles((theme) => ({
       lineHeight: '1.5rem',
       overflowWrap: 'break-word',
     },
-    '.markdown-body': {
-      boxSizing: 'border-box',
-      margin: '0 auto',
-      maxWidth: '740px',
-      minWidth: '320px',
-      padding: theme.spacing.base,
-      [theme.breakpoints.queries.tabletAndUp]: {
-        padding: theme.layout.lg,
-      },
-      [theme.breakpoints.queries.desktopAndUp]: {
-        padding: theme.layout.xl,
-      },
-      '& h1 + p': {
-        fontSize: '1.5rem',
-        fontStyle: 'italic',
-        color: theme.colors.text.lightest,
-      },
-      '& h1, & h2, & h3, & h4, & h5, & h6': {
-        marginTop: '2rem',
-        '& a, & a:hover, & a:visited, & a:active': {
-          fontWeight: 500,
-          color: 'inherit',
-          textDecoration: 'none',
-        },
-        '& a:hover': {
-          position: 'relative',
-          '&::before': {
-            position: 'absolute',
-            opacity: 0.25,
-            content: '"🔗"',
-            left: '102%',
-            right: 'auto',
-            [theme.breakpoints.queries.tabletAndUp]: {
-              left: 'auto',
-              right: '101%',
-            }
-          }
-        }
-      },
-    },
     'h1': {
       lineHeight: theme.spacing.xl2,
     },
@@ -148,6 +108,88 @@ const useStyles = createUseStyles((theme) => ({
         backgroundColor: 'rgba(242, 242, 242, 1)',
         wordBreak: 'break-word',
         padding: '2px 4px',
+      }
+    },
+    '.markdown-body': {
+      boxSizing: 'border-box',
+      margin: '0 auto',
+      maxWidth: '740px',
+      minWidth: '320px',
+      padding: theme.spacing.base,
+      [theme.breakpoints.queries.tabletAndUp]: {
+        padding: theme.layout.lg,
+      },
+      [theme.breakpoints.queries.desktopAndUp]: {
+        padding: theme.layout.xl,
+      },
+      '& h1 + p': {
+        fontSize: '1.5rem',
+        fontStyle: 'italic',
+        color: theme.colors.text.lightest,
+      },
+      '& h1, & h2, & h3, & h4, & h5, & h6': {
+        marginTop: '2rem',
+        '& a, & a:hover, & a:visited, & a:active': {
+          fontWeight: 500,
+          color: 'inherit',
+          textDecoration: 'none',
+        },
+        '& a:hover': {
+          position: 'relative',
+          '&::before': {
+            position: 'absolute',
+            opacity: 0.25,
+            content: '"🔗"',
+            left: '102%',
+            right: 'auto',
+            [theme.breakpoints.queries.tabletAndUp]: {
+              left: 'auto',
+              right: '101%',
+            }
+          }
+        }
+      },
+      '& img': {
+        cursor: 'pointer',
+      }
+    },
+    '.overlaid .overlay': {
+      backgroundColor: '#000',
+      opacity: 0.95,
+      width: '100vw',
+      height: '100vh',
+    },
+    '.overlay': {
+      position: 'fixed',
+      width: 0,
+      height: 0,
+      left: 0,
+      top: 0,
+      opacity: 0,
+      transition: 'opacity .25s',
+      zIndex: 999,
+    },
+    '@keyframes fadeIn': {
+      '0%': {
+        opacity: 0,
+      },
+      '100%': {
+        opacity: 100,
+      }
+    },
+    '.lightbox': {
+      position: 'fixed',
+      left: '50%',
+      top: '50%',
+      transform: 'translate(-50%, -50%)',
+      transition: 'opacity .25s',
+      animation: 'fadeIn .25s',
+      zIndex: 1000,
+    },
+    '@media (min-width: 1024px)': {
+      '.lightbox': {
+        maxWidth: '80vw',
+
       }
     }
   }

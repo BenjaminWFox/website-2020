@@ -1,7 +1,7 @@
 import { getDynamicPaths, getPost } from '@/lib/posts'
 import Head from 'next/head'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '@/components/header/header'
 import PropTypes from 'prop-types'
 
@@ -14,6 +14,46 @@ const limitChars = (string, limitInclusive = 200) => {
 }
 
 export default function PostTemplate({ post }) {
+  const lightboxImage = (e) => {
+    e.stopPropagation()
+
+    const [body] = document.getElementsByTagName('body')
+    const image = document.createElement('img')
+
+    function removeImage(event) {
+      if (event.keyCode === 27 || !event.keyCode) {
+        body.classList.remove('overlaid')
+        body.removeChild(image)
+        body.removeEventListener('click', removeImage)
+        body.removeEventListener('keydown', removeImage)
+      }
+    }
+
+    image.src = e.target.src
+    image.classList.add('lightbox')
+
+    body.classList.add('overlaid')
+    body.appendChild(image)
+    body.addEventListener('click', removeImage)
+    body.addEventListener('keydown', removeImage)
+  }
+
+  useEffect(() => {
+    const images = document.getElementsByTagName('img')
+
+    if (images) {
+      [...images].forEach((img) => {
+        img.addEventListener('click', lightboxImage)
+      })
+    }
+
+    return () => {
+      [...images].forEach((img) => {
+        img.removeEventListener('click', lightboxImage)
+      })
+    }
+  }, [])
+
   return (
     <div>
       <Head>
@@ -55,20 +95,25 @@ export default function PostTemplate({ post }) {
         <div
           className="markdown-body"
         >
-          <div style={{ textAlign: 'right',
-            marginBottom: '.5rem' }}
+          <div style={{
+            textAlign: 'right',
+            marginBottom: '.5rem'
+          }}
           >{post.meta.dateLong}
           </div>
           <h1>{post.meta.title}</h1>
           <p>{post.meta.subtitle}</p>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
         </div>
-        <div style={{ textAlign: 'center',
-          padding: '20px' }}
+        <div style={{
+          textAlign: 'center',
+          padding: '20px'
+        }}
         ><Link href="/"><a>Home</a></Link> | <a href="#top">Top of Page</a>
         </div>
       </main>
 
+      <div className="overlay" />
     </div>
   )
 }
