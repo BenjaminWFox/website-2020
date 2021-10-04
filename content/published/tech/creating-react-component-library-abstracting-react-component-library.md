@@ -6,20 +6,20 @@ category: "tech"
 canon: "https://medium.com/@benjaminwfox/creating-a-react-component-library-by-abstracting-a-react-component-library-45290114d22a"
 ---
 
-![Graphic of react logos consuming progressively smaller logos](https://cdn-images-1.medium.com/max/3200/1*fOLLMlLkYKS72dBihyBBdQ.png)
+![Graphic of react logos consuming progressively smaller logos](/public/images/blog/tech/create-component-library-abstraction/create-component-library-abstraction-title.png)
 
 Component libraries are useful. They allow developers to add features quickly and with confidence that they will have consistent style & functionality. Libraries may be built in-house or by a third party. The former offers complete control over implementation but takes more time and resources to build; The latter can be implemented quickly, but relies on the existing implementation.
 
 I like third party libraries, and have found that almost any limitations can be overcome by abstracting the library components on the side of the implementing application. When the library to implementing application ratio is 1 to 1, like in personal projects or on a small team, this process is relatively straight forward. With larger or multiple teams, however, where multiple applications are relying on the same underlying library, one-off customizations quickly lead to inconsistent implementations:
 
-![Multiple applications creating different custom implementations from a 3rd party library component.](https://cdn-images-1.medium.com/max/2000/1*WXHkK3ZvQdiqvq-llSMfdw.png)
+![Multiple applications creating different custom implementations from a 3rd party library component.](/public/images/blog/tech/create-component-library-abstraction/custom-component-implementation.png)
 *Multiple applications creating different custom implementations from a 3rd party library component.*
 
 So, what if you want 🎂🍰🥄👄😋? […to have your cake and eat it too!]
 
 Create your own component library…by abstracting an entire component library!
 
-![Multiple applications using the same custom implementation, abstracted from a 3rd party component.](https://cdn-images-1.medium.com/max/2000/1*ZK7tY-q7okG3JRnO6fpREg.png)
+![Multiple applications using the same custom implementation, abstracted from a 3rd party component.](/public/images/blog/tech/create-component-library-abstraction/standard-component-implementation.png)
 *Multiple applications using the same custom implementation, abstracted from a 3rd party component.*
 
 When might you want to do this?
@@ -42,23 +42,23 @@ When might you want to do this?
 > Regarding the word ‘abstract[ion]/[ing]/[ed]’ — I’m going to use it a lot, and essentially what I mean in this context is ‘wrapping’. I’m going to ‘wrap’ a 3rd-party component library with my own component library, specifically by ‘wrapping’ any components from that library with my own components.
 
 ## What I'll Cover <!-- omit in toc -->
-1. [Final Repositories](#final-repositories)
-2. [Selection of a 3rd-party Library](#selection-of-a-3rd-party-library)
-3. [Library: Initial Setup](#library-initial-setup)
-   1. [Project folder, npm, and git](#project-folder-npm-and-git)
-   2. [Folder structure & files](#folder-structure--files)
-4. [Library: Install Rollup](#library-install-rollup)
-5. [Library: Install Babel](#library-install-babel)
-6. [Library: Install React](#library-install-react)
-7. [Library: Install Carbon](#library-install-carbon)
-8. [Library: Configure Rollup](#library-configure-rollup)
-9. [Library: Configure Babel](#library-configure-babel)
-10. [Library: Add a component to test](#library-add-a-component-to-test)
-11. [Library: Add a Build Script](#library-add-a-build-script)
-12. [Consumer: Setup & Consumption](#consumer-setup--consumption)
-13. [Library: Add Another Component](#library-add-another-component)
-14. [Consumer: Add the Message Component](#consumer-add-the-message-component)
-15. [Library: Importing Carbon SASS Styles](#library-importing-carbon-sass-styles)
+- [Final Repositories](#final-repositories)
+- [Selection of a 3rd-party Library](#selection-of-a-3rd-party-library)
+- [Library: Initial Setup](#library-initial-setup)
+  - [Project folder, npm, and git](#project-folder-npm-and-git)
+  - [Folder structure & files](#folder-structure--files)
+- [Library: Install Rollup](#library-install-rollup)
+- [Library: Install Babel](#library-install-babel)
+- [Library: Install React](#library-install-react)
+- [Library: Install Carbon](#library-install-carbon)
+- [Library: Configure Rollup](#library-configure-rollup)
+- [Library: Configure Babel](#library-configure-babel)
+- [Library: Add a component to test](#library-add-a-component-to-test)
+- [Library: Add a Build Script](#library-add-a-build-script)
+- [Consumer: Setup & Consumption](#consumer-setup--consumption)
+- [Library: Add Another Component](#library-add-another-component)
+- [Consumer: Add the Message Component](#consumer-add-the-message-component)
+- [Library: Importing Carbon SASS Styles](#library-importing-carbon-sass-styles)
 
 <a name="final-repositories"></a>
 

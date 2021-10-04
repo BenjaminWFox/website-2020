@@ -7,7 +7,7 @@ canon: "https://benjaminwfox.medium.com/share-state-between-screens-with-custom-
 tags: "react native, react, state, tutorial"
 ---
 
-![A collection of fruits and vegetables that have been cut in half and stapled back together differently, appearing like 2-part wholes of different items.](https://cdn-images-1.medium.com/max/5120/1*rVkhYjY_ug8nKb9rKroCyw.jpeg)
+![A collection of fruits and vegetables that have been cut in half and stapled back together differently, appearing like 2-part wholes of different items.](/public/images/blog/tech/share-state-between-react-native-screens/share-state-screens-react-native-title.jpg)
 
 > **Update 1/7/2020:**
 > Please note that this was written with Expo 32.x & React-Navigation 3.x. I believe the same general ideas apply, but due to changes (modularization in particular) in the packages the code as-written will not be exactly the same.
