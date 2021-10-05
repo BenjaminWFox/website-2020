@@ -3,7 +3,8 @@
     "eslint:all",
     "plugin:react/all",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "plugin:@next/next/recommended"
   ],
   "env": {
     "browser": true,
@@ -86,7 +87,8 @@
     "react/function-component-definition": 0,
     "react/jsx-props-no-spreading": 0,
     "react/jsx-max-props-per-line": [2, { "maximum": 4 }],
-    "react/no-danger": 0
+    "react/no-danger": 0,
+    "@next/next/no-img-element": 0
   },
   "ignorePatterns": ["node_modules/", ".next/", "public/", "build/", "introduction-to-algorithms/"],
   "settings": {
