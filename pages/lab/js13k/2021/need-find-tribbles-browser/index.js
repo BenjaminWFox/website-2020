@@ -154,7 +154,7 @@ export default function DisplayTribbles({ data, page, per, baseUrl, seen }) {
 
           <p>Tribbles are randomly created, one-of-a-kind NFTs for the JS13K Games 2021 Decentralized category.</p>
 
-          <p>Check out the game and collect some tribbles at: <a href="https://js13kgames.com/entries/need-find-tribbles" target="_blank">https://js13kgames.com/entries/need-find-tribbles</a></p>
+          <p>Check out the game and collect some tribbles at: <a href="https://js13kgames.com/entries/need-find-tribbles" rel="noreferrer" target="_blank">https://js13kgames.com/entries/need-find-tribbles</a></p>
 
         </div>
         <div className={classes.tribbles}>
@@ -206,7 +206,9 @@ export async function getServerSideProps() {
 }
 
 DisplayTribbles.propTypes = {
+  baseUrl: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   page: PropTypes.number.isRequired,
   per: PropTypes.string.isRequired,
+  seen: PropTypes.array.isRequired,
 }

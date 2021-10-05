@@ -13,11 +13,11 @@
   "dependencies": {
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.4.1",
-    "next": "^10.2.3",
+    "next": "^11.1.2",
     "prism-themes": "^1.4.0",
     "prismjs": "^1.23.0",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "remark": "^13.0.0",
     "remark-autolink-headings": "^6.0.1",
     "remark-external-links": "^8.0.0",
@@ -27,16 +27,17 @@
     "unist-util-visit": "^2.0.3"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^11.1.2",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/react": "^10.0.4",
     "@types/jest": "^25.2.3",
-    "eslint": "^7.1.0",
+    "eslint": "^7.32.0",
     "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-no-autofix": "^1.1.2",
-    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react": "^7.26.1",
     "gray-matter": "^4.0.2",
     "jest": "^26.0.1",
-    "react-jss": "^10.3.0"
+    "react-jss": "^10.8.0"
   }
 }

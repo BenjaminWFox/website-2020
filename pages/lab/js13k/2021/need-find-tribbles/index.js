@@ -173,7 +173,9 @@ export async function getServerSideProps() {
 }
 
 DisplayTribbles.propTypes = {
+  baseUrl: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   page: PropTypes.number.isRequired,
   per: PropTypes.number.isRequired,
+  seen: PropTypes.array.isRequired,
 }

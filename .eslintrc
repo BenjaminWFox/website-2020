@@ -3,7 +3,8 @@
     "eslint:all",
     "plugin:react/all",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "plugin:@next/next/recommended"
   ],
   "env": {
     "browser": true,
@@ -47,6 +48,7 @@
     "max-statements": 0,
     "multiline-ternary": ["error", "always-multiline"],
     "no-ternary": 0,
+    "max-lines": 0,
     "max-lines-per-function": 0,
     "multiline-comment-style": 0,
     "space-before-function-paren": ["error", {
@@ -85,10 +87,18 @@
     "react/function-component-definition": 0,
     "react/jsx-props-no-spreading": 0,
     "react/jsx-max-props-per-line": [2, { "maximum": 4 }],
-    "react/no-danger": 0
+    "react/no-danger": 0,
+    "react/jsx-newline": 0,
+    "react/jsx-no-bind": 0,
+    "react/display-name": 0,
+    "react/require-optimization": 0,
+    "@next/next/no-img-element": 0
   },
-  "ignorePatterns": ["node_modules/", ".next/"],
+  "ignorePatterns": ["node_modules/", ".next/", "public/", "build/", "introduction-to-algorithms/"],
   "settings": {
+    "react": {
+      "version": "detect"
+    },
     "import/resolver": {
       "alias": [
           ["@/components", "./components"],
