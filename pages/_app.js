@@ -18,7 +18,7 @@ import PropTypes from 'prop-types'
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = React.useState(themes.light)
 
-  const handleChangeTheme = function handleChangeTheme() {
+  function handleChangeTheme() {
     if (theme.id === themes.ids.light) {
       setTheme(themes.dark)
     }

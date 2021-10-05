@@ -47,6 +47,7 @@
     "max-statements": 0,
     "multiline-ternary": ["error", "always-multiline"],
     "no-ternary": 0,
+    "max-lines": 0,
     "max-lines-per-function": 0,
     "multiline-comment-style": 0,
     "space-before-function-paren": ["error", {
@@ -87,8 +88,11 @@
     "react/jsx-max-props-per-line": [2, { "maximum": 4 }],
     "react/no-danger": 0
   },
-  "ignorePatterns": ["node_modules/", ".next/"],
+  "ignorePatterns": ["node_modules/", ".next/", "public/", "build/", "introduction-to-algorithms/"],
   "settings": {
+    "react": {
+      "version": "detect"
+    },
     "import/resolver": {
       "alias": [
           ["@/components", "./components"],

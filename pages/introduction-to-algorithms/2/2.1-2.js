@@ -39,8 +39,6 @@ const isDecreasing = (arr) => {
     }
     arr[i + 1] = key
   }
-
-  console.log(arr)
 }
 
 isDecreasing(array1)

@@ -16,8 +16,6 @@ export default async function tribbleTransfer(req, res) {
     headers: { 'Content-Type': 'application/json' },
   })
 
-  console.log(response)
-
   try {
     const result = await response.json()
 
@@ -25,15 +23,11 @@ export default async function tribbleTransfer(req, res) {
       res.status(200).json({ status: 'Success' })
     }
     else {
-      console.log(result)
-
       res.status(500).json({ status: 'Error' })
     }
 
   }
   catch (err) {
-    console.log(err)
-
     res.status(500).json({ status: 'Error' })
   }
 
