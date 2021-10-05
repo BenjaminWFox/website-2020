@@ -24,6 +24,7 @@ export default function Home({ postData }) {
   const classes = useStyles(useTheme())
 
   if (isProduction()) {
+    console.log('It is production!')
 
     return <Error404 />
   }
