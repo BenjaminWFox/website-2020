@@ -60,7 +60,7 @@ export default function Home({ postData }) {
               <h2>
                 <Link
                   as={`/blog/draft/${post.meta.category}/${post.name}`}
-                  href={`/blog/draft/${post.meta.category}/[slug]`}
+                  href="/blog/[...slug]"
                 ><a>{post.meta.title || post.name}</a>
                 </Link>
               </h2>
