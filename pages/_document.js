@@ -41,23 +41,9 @@ export default class CustomDocument extends Document {
   }
 
   render() {
-    const fontUrl = 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,300;1,500&display=swap'
-
     return (
       <Html lang="en">
-        <Head>
-          <link href="https://fonts.gstatic.com" rel="preconnect" />
-          <link href={fontUrl} rel="stylesheet" />
-          <link
-            href={fontUrl}
-            media="print"
-            onLoad="this.media='all'" rel="stylesheet"
-          />
-
-          <noscript>
-            <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,300;1,500&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet" />
-          </noscript>
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />

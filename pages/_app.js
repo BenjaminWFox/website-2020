@@ -4,6 +4,7 @@
 // import 'prismjs/themes/prism.css'
 // import 'prism-themes/themes/prism-a11y-dark.css'
 import 'highlight.js/styles/a11y-dark.css'
+import '../styles/fonts.css'
 
 /**
  * ResetStyles MUST be imported before GlobalStyles

@@ -19,6 +19,7 @@ const useStyles = createUseStyles((theme) => ({
 }))
 
 export default function Home({ postData }) {
+  console.log('postdata', postData)
   const clientPostData = postData
   const classes = useStyles(useTheme())
 
@@ -76,6 +77,8 @@ export const getStaticProps = async ({ params }) => {
   const postsToShow = Infinity
   const postsOfStatus = postStatuses.published
   const postData = await getPostManifest(postsToShow, postsOfStatus)
+
+  console.log(params)
 
   return {
     props: {

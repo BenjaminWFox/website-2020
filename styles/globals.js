@@ -4,7 +4,7 @@ import { createUseStyles, useTheme } from 'react-jss'
 const useStyles = createUseStyles((theme) => ({
   '@global': {
     html: {
-      fontFamily: 'Roboto, Helvetica, Arial, Tahoma',
+      fontFamily: 'ReallySansSmall',
     },
     body: {
       backgroundColor: theme.colors.body.primary,
@@ -32,9 +32,10 @@ const useStyles = createUseStyles((theme) => ({
         color: theme.colors.text.lightest,
       },
       '& h1, & h2, & h3, & h4, & h5, & h6': {
+        fontFamily: 'ReallySansLarge',
         marginTop: '2rem',
         '& a, & a:hover, & a:visited, & a:active': {
-          fontWeight: 500,
+          fontWeight: 400,
           color: 'inherit',
           textDecoration: 'none',
         },
