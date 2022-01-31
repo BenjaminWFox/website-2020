@@ -1,8 +1,4 @@
 // import App from 'next/app'
-
-// import 'github-markdown-css'
-// import 'prismjs/themes/prism.css'
-// import 'prism-themes/themes/prism-a11y-dark.css'
 import 'highlight.js/styles/a11y-dark.css'
 
 /**
