@@ -97,10 +97,17 @@ export default function PostTemplate({ post }) {
         >
           <div style={{
             textAlign: 'right',
-            marginBottom: '.5rem'
+            fontSize: '.875rem'
           }}
-          >{post.meta.dateLong}
+          >Published: {post.meta.datePublish}
           </div>
+          {post.meta.dateUpdate &&
+            <div style={{
+              textAlign: 'right',
+              fontSize: '.875rem'
+            }}
+            >Updated: {post.meta.dateUpdate}
+            </div>}
           <h1>{post.meta.title}</h1>
           <p>{post.meta.subtitle}</p>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
