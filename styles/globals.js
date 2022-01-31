@@ -116,11 +116,14 @@ const useStyles = createUseStyles((theme) => ({
       maxWidth: '740px',
       minWidth: '320px',
       padding: theme.spacing.base,
+      paddingTop: 0,
       [theme.breakpoints.queries.tabletAndUp]: {
         padding: theme.layout.lg,
+        paddingTop: 0
       },
       [theme.breakpoints.queries.desktopAndUp]: {
         padding: theme.layout.xl,
+        paddingTop: 0
       },
       '& h1 + p': {
         fontSize: '1.5rem',
