@@ -1,6 +1,7 @@
 ---
 title: "Why isn't the npm link command working?"
 date: "2021-04-06"
+update: "2022-01-30"
 subtitle: "I don't know, this thing's complicated! Understanding more about what's going on under the hood and looking at some common issues may help."
 category: "tech"
 image: "images/blog/tech/why-isnt-npm-link-working/why-isnt-npm-link-working-meta-image.jpg"
@@ -10,17 +11,19 @@ image: "images/blog/tech/why-isnt-npm-link-working/why-isnt-npm-link-working-met
 
 This article is for anyone testing npm packages locally and who has struggled (or is struggling) to get to projects connected via `npm link`. It's also for myself, so that I have one place to refer back to all the notes I've made in various places when was trying to get it to work for one project or another.
 
+[Jump straight down to the TL;DR](#tldr---things-to-check) if you'd like a quick troubleshooting checklist. Otherwise read on for a little deeper dive into the `npm link` command.
+
 ## Table of Contents <!-- omit in toc -->
-- [Definitions and an Example](#definitions-and-an-example)
-- [What Is npm link](#what-is-npm-link)
-- [What Does npm link Do](#what-does-npm-link-do)
-  - [The Commands](#the-commands)
-  - [Under the Hood](#under-the-hood)
-- [If You Use NVM...](#if-you-use-nvm)
-- [If You Use React...](#if-you-use-react)
-- [To Undo Linking](#to-undo-linking)
-- [TL;DR - Things to Check](#tldr---things-to-check)
-- [Flowchart Graphic](#flowchart-graphic)
+1. [Definitions and an Example](#definitions-and-an-example)
+1. [What Is npm link](#what-is-npm-link)
+1. [What Does npm link Do](#what-does-npm-link-do)
+   1. [The Commands](#the-commands)
+   1. [Under the Hood](#under-the-hood)
+1. [If You Use NVM...](#if-you-use-nvm)
+1. [If You Use React...](#if-you-use-react)
+1. [To Undo Linking](#to-undo-linking)
+1. [TL;DR - Things to Check](#tldr---things-to-check)
+1. [Flowchart Graphic](#flowchart-graphic)
 
 ## [Definitions and an Example](#definitions-and-an-example)
 
@@ -120,8 +123,8 @@ In both your *my-project* and *my-package* directories run `npm unlink` followed
 - You ran the correct commands in the correct order:
   - `npm link` in the *my-package* directory
   - `npm link my-package` in the *my-project* directory
-- If you're using the shorthand command, did you run it from the *my-project* (not package) directory?
-- After running those commands, did you confirm that the *global node_modules* folder listed was the same?
+- If you're using the shorthand command, did you run it from the *my-project* (not package) directory? (see [The Commands](#the-commands))
+- After running those commands, did you confirm that the *global node_modules* folder listed was the same? (see [Under The Hood](#under-the-hood))
 - Did you check that *my-package* does indeed exist in the *global node_modules* folder?
 - When all else fails and I realize I'm repetedly rerunning `npm link` frantically in each directory hoping something starts working I will try to clean up & start over in both project & package directories:
   -  `npm unlink && rm -rf node_modules && npm install`
