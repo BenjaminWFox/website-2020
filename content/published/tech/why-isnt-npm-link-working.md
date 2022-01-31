@@ -11,7 +11,7 @@ image: "images/blog/tech/why-isnt-npm-link-working/why-isnt-npm-link-working-met
 
 This article is for anyone testing npm packages locally and who has struggled (or is struggling) to get to projects connected via `npm link`. It's also for myself, so that I have one place to refer back to all the notes I've made in various places when was trying to get it to work for one project or another.
 
-[Jump straight down to the TL;DR](#tldr---things-to-check) if you'd like a quick troubleshooting checklist. Otherwise read on for a little deeper dive into the `npm link` command.
+[Jump straight down to the TL;DR](#tldr---things-to-check) if you'd like a quick troubleshooting checklist. Otherwise read on for a deeper dive into the `npm link` command.
 
 ## Table of Contents <!-- omit in toc -->
 1. [Definitions and an Example](#definitions-and-an-example)
