@@ -28,20 +28,20 @@ Body content is nothing special, any [links in the body content](#) are straight
 
 ## Table of Contents <!-- omit in toc -->
 
-The ToC should link to Section Titles. This can be auto-generated using the "Markdown All in One" extension. Additional links are wired up using packages `remark-slug` and `remark-autolink-headings`
-- [Important Section](#important-section)
-  - [Section SubHead](#section-subhead)
-    - [Distinct SubHead Content](#distinct-subhead-content)
-      - [Level 5 Heading](#level-5-heading)
-        - [Level 6 Heading](#level-6-heading)
-- [Various Formatting Elements](#various-formatting-elements)
-    - [A list](#a-list)
-    - [A block quote](#a-block-quote)
-    - [A code block](#a-code-block)
-    - [Images](#images)
-- [Some Other Section](#some-other-section)
-  - [Section SubHeading](#section-subheading)
-    - [Other Callout](#other-callout)
+The ToC should link to Section Titles. This can be auto-generated using the "Markdown All in One" extension. Additional links are wired up using packages `remark-slug` and `remark-autolink-headings` a comment (<!-- no_toc --> but remove the underscore) can also be added to remove the TOC.
+1. [Important Section](#important-section)
+   1. [Section SubHead](#section-subhead)
+      1. [Distinct SubHead Content](#distinct-subhead-content)
+         1. [Level 5 Heading](#level-5-heading)
+            1. [Level 6 Heading](#level-6-heading)
+1. [Various Formatting Elements](#various-formatting-elements)
+      1. [A list](#a-list)
+      1. [A block quote](#a-block-quote)
+      1. [A code block](#a-code-block)
+      1. [Images](#images)
+1. [Some Other Section](#some-other-section)
+   1. [Section SubHeading](#section-subheading)
+      1. [Other Callout](#other-callout)
 
 ## [Important Section](#important-section)
 
