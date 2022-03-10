@@ -343,7 +343,7 @@ Then wrap the component around the “Welcome…” message in the h1 tag:
 
 ```javascript
 <h1 className={styles.title}>
-  <Callout>Welcome to <a href="[https://nextjs.org](https://nextjs.org)">Next.js!</a></Callout>
+  <Callout>Welcome to <a href="https://nextjs.org">Next.js!</a></Callout>
 </h1>
 ```
 
