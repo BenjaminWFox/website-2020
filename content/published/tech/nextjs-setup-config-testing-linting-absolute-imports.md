@@ -62,7 +62,7 @@ I’m not going to talk about IDE-specific integrations or setup. I’m using VS
 
 ### A note before we start
 
-Some of the configuration files we create ([jest.config.js](https://jestjs.io/docs/en/configuration) [.eslintrc](https://eslint.org/docs/user-guide/configuring) can be included within package.json rather than using separate files, if that feels cleaner to you. That will require additional wrapping syntax, which you can find at their respective links. The jsconfig.json & jest.setup.js files will have to be separate.
+Some of the configuration files we create ([jest.config.js](https://jestjs.io/docs/en/configuration) [.eslintrc](https://eslint.org/docs/user-guide/configuring)) can be included within package.json rather than using separate files, if that feels cleaner to you. That will require additional wrapping syntax, which you can find at their respective links. The jsconfig.json & jest.setup.js files will have to be separate.
 
 ## [Final Repository](#final)
 
