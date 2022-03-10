@@ -1,7 +1,8 @@
 ---
-title: "Next.js Setup & Config for Testing, Linting, and Absolute Imports"
+title: "Next.js Setup | ESLint Jest React Testing Library and Absolute Imports"
 date: "2020-05-29"
-subtitle: "A comprehensive step-by-step guide to configuring Jest, React Testing Library, ESLint, and Path Aliases in a Next.js project."
+update: "2022-03-08"
+subtitle: "A comprehensive step-by-step guide to configuring Jest, React Testing Library, ESLint, and Absolute Path Aliases in a Next.js project."
 category: "tech"
 canon: 'https://medium.com/@benjaminwfox/next-js-setup-config-for-testing-linting-and-absolute-imports-605959d7bd6f'
 image: 'images/blog/tech/nextjs-setup-config-testing-linting/nextjs-configuration-construction-meta-image.jpg'
@@ -9,9 +10,11 @@ image: 'images/blog/tech/nextjs-setup-config-testing-linting/nextjs-configuratio
 
 ![Seven almost identical buildings under construction in a row](/public/images/blog/tech/nextjs-setup-config-testing-linting/nextjs-configuration-construction-title-image.jpg)
 
-**Update: 06/28/21:** Next.js v11 has some improvements when it comes to adding and using ESLint in a project, including some Next-specific linting rules. Some changes have been made to the original article based on the assumption that anyone reading new is going to be starting from Next.js v11+ rather than a previous version.
+**Update: 03/08/22:** Next.js 12 is virtually identical in terms of getting things set up. I've made a couple updates here including the use of the `src` directory, and a few minor changes to the ESLint ruleset and the Jest/React Testing Library based on my updated preferences and new best practices. Also no more need for an explicit `.babelrc` file!
 
-Next.js is amazing when it comes to installing, learning the framework, and jumping into the code. Its superb documentation & zero-config philosophy make this possible, and not having to think about configuration is wonderful…right up to the point when you want to add some additional configuration.
+**Update: 06/28/21:** Next.js 11 has some improvements when it comes to adding and using ESLint in a project, including some Next-specific linting rules. Some changes have been made to the original article based on the assumption that anyone reading new is going to be starting from Next.js v11+ rather than a previous version.
+
+**Next.js is amazing** when it comes to installing, learning the framework, and jumping into the code. Its superb documentation & zero-config philosophy make this possible, and not having to think about configuration is wonderful…right up to the point when you want to add some additional configuration.
 
 The configuration I want to add is, technically speaking, useless to your final product. It won’t make it faster, or reduce your bundle size, or add amazing new features.
 
@@ -59,7 +62,7 @@ I’m not going to talk about IDE-specific integrations or setup. I’m using VS
 
 ### A note before we start
 
-Some of the configuration files we create ([jest.config.js](https://jestjs.io/docs/en/configuration) [.eslintrc](https://eslint.org/docs/user-guide/configuring), & [.babelrc](https://babeljs.io/docs/en/configuration#packagejson)) can be included within package.json rather than using separate files, if that feels cleaner to you. That will require additional wrapping syntax, which you can find at their respective links. The jsconfig.json & jest.setup.js files will have to be separate.
+Some of the configuration files we create ([jest.config.js](https://jestjs.io/docs/en/configuration) [.eslintrc](https://eslint.org/docs/user-guide/configuring) can be included within package.json rather than using separate files, if that feels cleaner to you. That will require additional wrapping syntax, which you can find at their respective links. The jsconfig.json & jest.setup.js files will have to be separate.
 
 ## [Final Repository](#final)
 
@@ -73,15 +76,37 @@ To start, in your terminal of choice, cd into a folder where you want to install
 
 Give your project a name like "nextjs-base" (this will also be the folder name). Once the install completes, cd nextjs-base into your project folder.
 
+Now, [for better organization](https://nextjs.org/docs/advanced-features/src-directory), create a new folder called `src` and then move the `pages` and `styles` folders into `src`. Your project should look like this:
+
+```text
+.next/
+node_modules/
+public/
+src/
+ - pages/
+  - api/
+ - styles/
+.eslint.json
+.gitignore
+next.config.js
+package-lock.json
+package.json
+README.md
+```
+
 ## [ESLint: Install & Configure](#install-eslint)
 
 For configuration, let’s start with eslint — that’ll ensure that any future code we write is linted right away and we don’t need to go back and make edits. This will also include a plugin for specifically linting React, and another for linting import/export statements. You'll already have `eslint` and `eslint-config-next` - so let's add two more:
 
     npm i -D eslint-plugin-react eslint-plugin-import
 
-While that’s running, open up the .eslintrc file that is at the root of your site. Replace the contents with the configuration below. [There are a ton of options for configuring ESLint](https://eslint.org/docs/user-guide/configuring). 
+While that’s running, open up the `.eslintrc.json` file that is at the root of your site. Replace the contents with the configuration below.
 
-You ***can*** just extend `next` and `next/core-web-vitals` if you want, leaving out the others. If you do, you can also omit the everything in the `rules` property. Personally, I like the extra structure and what's there feel to me like a good default baseline. A number of the `react/` specific rules are disabled to prevent conflicts with the default `next-app` code style:
+Note that [there are a ton of options for configuring ESLint](https://eslint.org/docs/user-guide/configuring).
+
+You ***can*** just extend `next` and `next/core-web-vitals` if you want, leaving out the others. If you do, you can also omit the everything in the `rules` property. Personally, I like the extra structure and what's there feel to me like a good default baseline. A number of the `react/` specific rules are disabled to prevent conflicts with the default `next-app` code style.
+
+If you're working anyone else I'd highly recommend leaving the rules in place, it goes a long way towards keeping a codebase stylistically consistent:
 
 ```json
 {
@@ -138,9 +163,13 @@ You ***can*** just extend `next` and `next/core-web-vitals` if you want, leaving
     "react/jsx-one-expression-per-line": 0,
     "react/jsx-max-depth": 0,
     "react/jsx-newline": 0,
-    "react/jsx-props-no-spreading": 0
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-max-props-per-line": ["error", {"maximum": {"single": 3, "multi": 1}}]
   },
-  "ignorePatterns": ["node_modules/", ".next/"]
+  "ignorePatterns": [
+    "node_modules/",
+    ".next/"
+  ]
 }
 ```
 
@@ -168,11 +197,11 @@ Now add one new script to your **package.json** file under the start script:
     "lint.fix": "next lint --fix"
 ```
 
-**^** Don’t forget the , (comma) at the end of the "lint" line! If you have integrated your IDE with ESLint you’ll already have seen a bunch of errors if you open **pages/index.js.** The **pages/api/hello.js** should be error-free!
+**^** Don’t forget the , (comma) at the end of the `"lint"` line! If you've integrated your IDE with ESLint you’ll already have seen a bunch of errors if you open **src/pages/index.js.** The **src/pages/api/hello.js** should be error-free!
 
-If you npm run lint now, you can also see all the errors in the console.
+If you `npm run lint` now, you can also see all the errors in the console. I've tweaked the eslint config over time, so the exact set of errors may be slightly different.
 
-![](https://cdn-images-1.medium.com/max/3552/1*aCb1Y6V6IDusI3c6fc7Fmw.png)
+![errors shown from running eslint, mostly about sorting props alphabetically](https://cdn-images-1.medium.com/max/3552/1*aCb1Y6V6IDusI3c6fc7Fmw.png)
 
 …now do npm run lint.fix and you’ll see a number of formatting changes to align the code with the linter rules, and no more errors!
 
@@ -200,14 +229,26 @@ Create two new files at the project root for Jest: **jest.config.js** & **jest.s
 
 ```javascript
 // Jest.config.js
-module.exports = {
+const nextJest = require('next/jest')
+
+const createJestConfig = nextJest({
+  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
+  dir: './'
+})
+
+// Jest.config.js
+const customConfig = {
   // Automatically clear mock calls and instances between every test
   'clearMocks': true,
   // The directory where Jest should output its coverage files
   'coverageDirectory': '.coverage',
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  'setupFilesAfterEnv': ['./jest.setup.js']
+  'setupFilesAfterEnv': ['./jest.setup.js'],
+  // By default jest will use a node environment, so DOM elements (like document) will be undefined without this
+  'testEnvironment': 'jsdom'
 }
+
+module.exports = createJestConfig(customConfig)
 ```
 
 ^ There are [a huge number of configuration options ](https://jestjs.io/docs/en/configuration)for Jest. This is a very small subset. **clearMocks** can prevent headaches with unintended [persistence of mock data](https://jestjs.io/docs/en/manual-mocks) between tests. **coverageDirectory** is for generating [test coverage](https://jestjs.io/docs/en/cli.html#--coverageboolean), running jest with the --coverage flag. The most important piece here is **setupFilesAfterEnv**, which will run before each test file. Add this to the **jest.setup.js** file:
@@ -219,31 +260,21 @@ import '@testing-library/jest-dom'
 
 ^ This enables access to the additional assertions provided by the[@testing-library/jest-do](https://github.com/testing-library/jest-dom#readme)m package.
 
-### Create One More Config File 😬
-
-The last config file we need is called **.babelrc** (create it at the root of the project). We don’t need to add any packages for Babel to run — it’s handled automagically by Next.js — but Jest needs this file to auto-detect how to transform the code before running tests. Add this to the file:
-
-```
-{
-  "presets": ["next/babel"]
-}
-```
-
 ### Write a Test File
 
-Create a file **pages/index.test.js** and add some test code:
+Create a file **src/page-tests/index.test.js** and add some test code:
 
 ```javascript
-import Home from './index'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import Home from '../pages/index'
 
 // `describe` is not required, but it helps the tests read nicely
 describe('The Home Page Component', () => {
   // Each test for the component will get an `it` block
   it('should have exactly 1 `main` section', () => {
     // The getByRole will error if there are less or more than 1 element found
-    const { getByRole } = render(<Home />)
-    const main = getByRole('main')
+    render(<Home />)
+    const main = screen.getByRole('main')
 
     expect(main).toBeInTheDocument()
   })
@@ -285,7 +316,7 @@ The challenge setting these up is that once you start using them in your applica
 
 In order to verify the aliased paths are working we need something to import. Typically you would alias the top-level folders to reference the import path from there, but the only two top-level folders we have currently aren’t really something we need to alias; Anything in pages/ probably shouldn’t be imported anywhere else, and anything in public/ can already be referenced by absolute path in `src` or `href` attributes.
 
-Instead, let’s create a new section in the code specifically for components. This will be two new folders and a file: **components/callout/callout.js**. Add this to the **callout.js** file:
+Instead, let’s create a new section in the code specifically for components. This will be two new folders and a file: **src/components/callout/callout.js**. Add this to the **callout.js** file:
 
 ```javascript
 import PropTypes from 'prop-types'
@@ -301,7 +332,7 @@ Callout.propTypes = {
 
 ### Try The Component
 
-If you import that component in **pages/index.js** via a relative import, you can confirm it’s working:
+If you import that component in **src/pages/index.js** via a relative import, you can confirm it’s working:
 
 ```javascript
 import Callout from '../components/callout/callout'
@@ -311,14 +342,14 @@ import Head from 'next/head'
 Then wrap the component around the “Welcome…” message in the h1 tag:
 
 ```javascript
-<h1 className="title">
+<h1 className={styles.title}>
   <Callout>Welcome to <a href="[https://nextjs.org](https://nextjs.org)">Next.js!</a></Callout>
 </h1>
 ```
 
 Then npm run dev and see: ❗️️ Welcome to Next.js! ❗️
 
-Now change **pages/index.js** to use the aliased absolute import:
+Now change **src/pages/index.js** to use the aliased absolute import:
 
 ```javascript
 import Callout from '@/components/callout/callout'
@@ -337,7 +368,7 @@ Now that we have a component to test and we can see it’s not working, let’s 
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"]
+      "@/components/*": ["src/components/*"]
     }
   }
 }
@@ -360,8 +391,8 @@ The configuration for ESLint will be added to **.eslintrc**, but first we need t
 "settings": {
   "import/resolver": {
     "alias": [
-        ["@/components", "./components"],
-        ["@/classes", "./classes"]
+        ["@/components", "./src/components"],
+        ["@/classes", "./src/classes"]
     ]
   }
 }
@@ -373,7 +404,7 @@ If you npm run lint now, there shouldn’t be any module import errors (you may 
 
 ### Update Jest
 
-Finally we need to update Jest. In the file **pages/index.test.js** add an import for our Callout component:
+Finally we need to update Jest. In the file **src/pages/index.test.js** add an import for our Callout component:
 
 ```javascript
 import Callout from '@/components/callout/callout'
@@ -384,22 +415,24 @@ import { render } from '@testing-library/react'
 
 … then try npm run test. You should see an error about the module:
 
-![Cannot find module ‘@/components/callout/callout’ from ‘pages/index.test.js’](https://cdn-images-1.medium.com/max/3548/1*sv3BrXwUREHq4qMq5Ku48Q.png)*Cannot find module ‘@/components/callout/callout’ from ‘pages/index.test.js’*
+![Cannot find module ‘@/components/callout/callout’ from ‘src/pages/index.test.js’](https://cdn-images-1.medium.com/max/3548/1*sv3BrXwUREHq4qMq5Ku48Q.png)*Cannot find module ‘@/components/callout/callout’ from ‘src/pages/index.test.js’*
 
 The addition to fix this will go into **jest.config.js**, [a property called moduleNameMapper](https://jestjs.io/docs/en/configuration#modulenamemapper-objectstring-string--arraystring) which uses RegEx syntax, so is a bit more complicated:
 
 ```javascript
-module.exports = {
+const customConfig = {
   // Automatically clear mock calls and instances between every test
-  clearMocks: true,
+  'clearMocks': true,
   // The directory where Jest should output its coverage files
-  coverageDirectory: '.coverage',
+  'coverageDirectory': '.coverage',
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^@/components(.*)$': '<rootDir>/components$1'
+    '^@/components(.*)$': '<rootDir>/src/components$1'
   },
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['./jest.setup.js']
+  'setupFilesAfterEnv': ['./jest.setup.js'],
+  // By default jest will use a node environment, so DOM elements (like document) will be undefined without this
+  'testEnvironment': 'jsdom'
 }
 ```
 
@@ -407,7 +440,7 @@ module.exports = {
 
 …now try npm run test, error should be gone!
 
-Since we only added it for testing, you can remove the import Callout ... line we added to **pages/index.test.js**.
+Since we only added it for testing, you can remove the import Callout ... line we added to **src/pages/index.test.js**.
 
 ### Important to remember
 
