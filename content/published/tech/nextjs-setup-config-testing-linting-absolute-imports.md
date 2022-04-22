@@ -42,15 +42,15 @@ Let’s look at what it takes.
 
 1. [Assumptions](#assumptions)
 
-2. [Final Repository](#final)
+2. [Final Repository](#final-repository)
 
-3. [Next.js: Installing](#install-nextjs)
+3. [Next.js: Installing](#nextjs-installing)
 
-4. [ESLint: Install & Configure](#install-eslint)
+4. [ESLint: Install & Configure](#eslint-install--configure)
 
-5. [Jest & React Testing Library: Install, Configure, Implement](#install-configure-jest-testing-library)
+5. [Jest & React Testing Library: Install, Configure, Implement](#jest--testing-library-install-configure-implement)
 
-6. [Configuring Path Aliases/Absolute Imports](#configure-path-alias)
+6. [Configuring Path Aliases/Absolute Imports](#configuring-path-aliasesabsolute-imports)
 
 ## [Assumptions](#assumptions)
 
@@ -64,11 +64,11 @@ I’m not going to talk about IDE-specific integrations or setup. I’m using VS
 
 Some of the configuration files we create ([jest.config.js](https://jestjs.io/docs/en/configuration) & [.eslintrc](https://eslint.org/docs/user-guide/configuring)) can be included within package.json rather than using separate files, if that feels cleaner to you. That will require additional wrapping syntax, which you can find at their respective links. The jsconfig.json & jest.setup.js files will have to be separate.
 
-## [Final Repository](#final)
+## [Final Repository](#final-repository)
 
 [https://github.com/BenjaminWFox/nextjs-base](https://github.com/BenjaminWFox/nextjs-base)
 
-## [Next.js: Installing](#install-nextjs)
+## [Next.js: Installing](#nextjs-installing)
 
 To start, in your terminal of choice, cd into a folder where you want to install this project. A new subfolder will be created be after you run the setup:
 
@@ -94,7 +94,7 @@ package.json
 README.md
 ```
 
-## [ESLint: Install & Configure](#install-eslint)
+## [ESLint: Install & Configure](#eslint-install--configure)
 
 For configuration, let’s start with eslint — that’ll ensure that any future code we write is linted right away and we don’t need to go back and make edits. This will also include a plugin for specifically linting React, and another for linting import/export statements. You'll already have `eslint` and `eslint-config-next` - so let's add two more:
 
@@ -211,7 +211,7 @@ If you `npm run lint` now, you can also see all the errors in the console. I've 
 
 * Assuming you use this base template in new projects, if you find yourself making updates to the .estlintrc file to accommodate your style preferences, remember to copy those back to the base project!
 
-## [Jest & Testing Library: Install, Configure, Implement](#install-configure-jest-testing-library)
+## [Jest & Testing Library: Install, Configure, Implement](#jest--testing-library-install-configure-implement)
 
 ### Install Dependencies
 
@@ -294,7 +294,7 @@ Then in the project root in the terminal you can npm run test — and should see
 
 ![](https://cdn-images-1.medium.com/max/3548/1*FlTB0Avl89dbpuz19_Hi4g.png)
 
-## [Configuring Path Aliases/Absolute Imports](#configure-path-alias)
+## [Configuring Path Aliases/Absolute Imports](#configuring-path-aliasesabsolute-imports)
 
 I have seen some debate that leads me to believe path aliases are a love-it or hate-it addition to a codebase. I personally hate having to remember which particular file I’m working in and how many levels it is to import some other component or method…so I love aliasing my import paths. The difference is:
 

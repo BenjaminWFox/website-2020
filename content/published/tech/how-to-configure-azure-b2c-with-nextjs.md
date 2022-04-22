@@ -178,7 +178,7 @@ const options = {
       authorizationUrl: `https://${tenantName}.b2clogin.com/${tenantName}.onmicrosoft.com/${userFlow}/oauth2/v2.0/authorize?response_type=code+id_token&response_mode=form_post`,
       profileUrl: 'https://graph.microsoft.com/oidc/userinfo',
       profile: (profile) => {
-        console.log('THE PROFILE', profile)
+        // console.log('THE PROFILE', profile)
 
         return {
           id: profile.oid,
