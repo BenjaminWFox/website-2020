@@ -122,7 +122,7 @@ const useStyles = createUseStyles((theme) => ({
         paddingTop: 0
       },
       [theme.breakpoints.queries.desktopAndUp]: {
-        padding: theme.layout.xl,
+        padding: theme.layout.lg,
         paddingTop: 0
       },
       '& h1 + p': {
